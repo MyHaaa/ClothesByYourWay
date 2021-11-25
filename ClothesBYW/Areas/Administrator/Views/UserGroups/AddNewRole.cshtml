@@ -1,0 +1,62 @@
+﻿@model IEnumerable<Models.ViewModels.RoleWithGroupModel>
+@{
+    ViewBag.Title = "AddNewRole";
+    Layout = "~/Areas/Administrator/Views/Shared/_Layout.cshtml";
+}
+<div class="table-agile-info">
+    <div class="panel panel-default">
+        <div class="panel-heading">
+            Danh sách chức năng
+        </div>
+        <div class="row w3-res-tb">
+            <div class="col-sm-5 m-b-xs">
+            </div>
+            <div class="col-sm-4">
+               <a class="btn btn-success" href="/Administrator/UserGroups/RoleWithGroup">Back</a>
+            </div>
+
+        </div>
+        <div class="table-responsive">
+            <table class="table table-striped b-t b-light">
+                <thead>
+                    <tr>
+                        <th>
+                            Ma chuc nang
+                        </th>
+                        <th>
+                            Ten chuc nang
+                        </th>
+
+                        <th>
+                            Action name
+                        </th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var item in Model)
+                    {
+                        <tr id="row_@item.ID">
+
+                            <td>
+                                @Html.DisplayFor(modelItem => item.ID)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.Name)
+                            </td>
+                            <td>
+                                @*@Html.ActionLink("Add", "AddUserToGroup", new { userID = item.UserID })*@
+                                @Ajax.ActionLink("Add", "AddRole", new { @id = item.ID }, new AjaxOptions
+                                    {
+                                        Confirm = "Ban them nguoi dung nay vao nhom nguoi dung?",
+                                        OnComplete = "$('#row_)" + @item.ID + "').remove()",
+                                        HttpMethod = "AddRole"
+                                    })
+                            </td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+

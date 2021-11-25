@@ -1,0 +1,68 @@
+﻿@model List<Models.ViewModels.UserWithGroupView>
+
+@{
+    ViewBag.Title = "UserWithGroup";
+    Layout = "~/Areas/Administrator/Views/Shared/_Layout.cshtml";
+}
+
+
+<div class="table-agile-info">
+    <div class="panel panel-default">
+        <div class="panel-heading">
+            Danh sách các tài khoản thuộc nhóm @Session["GROUP_SESSION"]
+        </div>
+        <div class="row w3-res-tb">         
+            <div class="col-sm-2 m-b-xs">
+                @Html.ActionLink("Back", "Back")
+            </div>
+
+        </div>
+        <div class="table-responsive">
+            <table class="table table-striped b-t b-light">
+                <thead>
+                    <tr>
+                        <th>
+                            Ma nhan vien
+                        </th>
+                        <th>
+                            Ten nhan vien
+                        </th>
+                        <th>
+                            Nhom nguoi dung
+                        </th>
+                        <th>
+                            Action name
+                        </th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var item in Model)
+                    {
+                        <tr id="row_@item.EmployeeID">
+
+                            <td>
+                                @Html.DisplayFor(modelItem => item.EmployeeID)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.Name)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.GroupID)
+                            </td>
+                            <td>
+                                @*@Html.ActionLink("Delete", "Delete", new { id=item.UserID })*@
+                                @Ajax.ActionLink("Delete", "Delete", new { @id = item.EmployeeID }, new AjaxOptions
+                                   {
+                                       Confirm = "Ban muon xoa nguoi dung nay?",
+                                       OnComplete = "$('#row_)" + @item.EmployeeID + "').remove()",
+                                       HttpMethod = "Delete"
+                                   })
+                            </td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+

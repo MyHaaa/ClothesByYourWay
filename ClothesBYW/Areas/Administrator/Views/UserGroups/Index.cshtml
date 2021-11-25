@@ -1,0 +1,60 @@
+﻿@model IEnumerable<Models.EF.UserGroup>
+
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Areas/Administrator/Views/Shared/_Layout.cshtml";
+}
+<div class="table-agile-info">
+    <div class="panel panel-default">
+        <div class="panel-heading">
+            Danh sách quản lý nhóm người dùng
+        </div>
+        <div class="row w3-res-tb">
+            <div class="col-sm-5 m-b-xs">
+            </div>
+            <div class="col-sm-4">
+            </div>
+
+        </div>
+        <div class="table-responsive">
+            <table class="table table-striped b-t b-light">
+                <thead>
+                    <tr>
+                        <th>
+                            Mã nhóm người dùng
+                        </th>
+                        <th>
+                            Tên nhóm người dùng
+                        </th>
+                        <th>Action name</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var item in Model)
+                    {
+                        <tr>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.UserGroupID)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.Name)
+                            </td>
+                            <td>
+                                <button class="btn btn-success">
+                                    @Html.ActionLink("User", "GetUserGroupID", new { groupID = item.UserGroupID }, null)
+                                </button> |
+                                <button class="btn btn-danger">
+                                    @Html.ActionLink("Role", "GetUserGrouppID", new { groupID = item.UserGroupID }, null)
+                                </button>
+
+                                @*@Html.ActionLink("Edit", "Edit", new { id=item.ID }) |
+                                    @Html.ActionLink("Details", "Details", new { id=item.ID }) |
+                                    @Html.ActionLink("Delete", "Delete", new { id=item.ID })*@
+                            </td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>

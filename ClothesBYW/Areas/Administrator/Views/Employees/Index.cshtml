@@ -1,0 +1,114 @@
+﻿@model IEnumerable<Models.EF.Employee>
+
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Areas/Administrator/Views/Shared/_Layout.cshtml";
+}
+@section jsFooter{
+    <script src="~/Assets/Admin/js/Controller/EmployeesController.js"></script>
+}
+<div class="table-agile-info">
+    <div class="panel panel-default">
+        <div class="panel-heading">
+            Danh sách tài khoản nhân viên
+        </div>
+        <div class="row w3-res-tb">
+            <div class="col-sm-5 m-b-xs">
+                <button class="btn btn-default">@Html.ActionLink("Create", "Create")</button>
+            </div>
+            <div class="col-sm-4">
+            </div>
+            <div class="col-sm-3">
+                @using (Html.BeginForm("Index", "Employees", FormMethod.Get))
+                {
+                    <div class="input-group">
+                        @*<input type="text" class="form-control search" placeholder=" Search" value="@ViewBag.SearchString" name="searchString">*@
+                        <input type="text" class="input-sm form-control search" placeholder="Search" value="@ViewBag.SearchString" name="searchString" />
+
+                        <span class="input-group-btn">
+                            <button type="submit" class="btn btn-sm btn-success">Go!</button>
+                        </span>
+                    </div>
+                }
+            </div>
+        </div>
+        <div class="table-responsive">
+            <table class="table table-striped b-t b-light">
+                <thead>
+                    <tr>
+                        <th>
+                            Mã nhân viên
+                        </th>
+                        <th>
+                            Họ tên
+                        </th>
+
+                        <th>
+                            Căn Cước Công Dân
+                        </th>
+                        <th>
+                            Điện thoại
+                        </th>
+                        <th>
+                            Nhóm người dùng
+                        </th>
+                        <th>
+                            Trạng thái
+                        </th>
+                        <th>
+                            Action Name
+                        </th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var item in Model)
+                    {
+                        <tr>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.EmployeeID)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.Name)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.CitizenID)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.Phone)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.UserGroup.Name)
+                            </td>
+                            <td>
+                                <a href="#" class="btn-active" data-id="@item.EmployeeID">@(item.Status?"Active":"Block")</a>
+                            </td>
+                            <td>
+                                <a href="/Administrator/Employees/Edit/@item.EmployeeID">Sửa</a>
+                                |
+                                <a href="/Administrator/Employees/Details/@item.EmployeeID">Chi tiết</a>
+
+                                @*<a href="/Admin/User/Delete/@item.ID">Xoa</a>*@
+                                @*@Ajax.ActionLink("Xóa", "Delete", new { @id = item.UserID }, new AjaxOptions
+                                    {
+                                        Confirm = "Ban co muon xoa?",
+                                        OnComplete = "$('#row_)" + item.UserID + "').remove()",
+                                        HttpMethod = "Delete"
+                                    })*@
+                            </td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+        </div>
+        <footer class="panel-footer">
+            <div class="row">
+
+
+                <div class="col-sm-12 text-right text-center ">
+                    @*@Html.PagedListPager(Model, page => Url.Action("Index", new { page }))*@
+
+                </div>
+            </div>
+        </footer>
+    </div>
+</div>

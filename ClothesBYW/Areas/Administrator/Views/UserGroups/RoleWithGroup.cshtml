@@ -1,0 +1,67 @@
+﻿@model List<Models.ViewModels.RoleWithGroupModel>
+@{
+    ViewBag.Title = "RoleWithGroup";
+    Layout = "~/Areas/Administrator/Views/Shared/_Layout.cshtml";
+}
+
+
+<div class="table-agile-info">
+    <div class="panel panel-default">
+        <div class="panel-heading">
+            Danh sách các chức năng của @Session["GROUP_SESSION"]
+        </div>
+        <div class="row w3-res-tb">
+            <div class="col-sm-5 m-b-xs">
+                @Html.ActionLink("Add New", "AddNewRole")
+
+            </div>
+            <div class="col-sm-offset-5">
+
+
+            </div>
+            <div class="col-sm-2 m-b-xs">
+                @Html.ActionLink("Back", "Back")
+            </div>
+        </div>
+        <div class="table-responsive">
+            <table class="table table-striped b-t b-light">
+                <thead>
+                    <tr>
+                        <th>
+                            Ma quyen
+                        </th>
+                        <th>
+                            Ten quyen
+                        </th>
+                        <th>
+                            Action name
+                        </th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var item in Model)
+                    {
+                        <tr>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.ID)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.Name)
+                            </td>
+                            <td>
+
+                                @Ajax.ActionLink("Delete", "DeleteRole", new { @id = item.ID }, new AjaxOptions
+                                   {
+                                       Confirm = "Ban muon xoa nguoi dung nay?",
+                                       OnComplete = "$('#row_)" + @item.ID + "').remove()",
+                                       HttpMethod = "DeleteRole"
+                                   })
+                            </td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+
