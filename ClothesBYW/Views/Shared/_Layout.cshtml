@@ -1,4 +1,5 @@
-﻿<!DOCTYPE html>
+﻿@using ClothesBYW.Models.Customer
+<!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="utf-8">
@@ -50,7 +51,7 @@
                 <div class="collapse navbar-collapse justify-content-between" id="navbarCollapse">
                     <div class="navbar-nav mr-auto">
                         <a href="index.html" class="nav-item nav-link active">Home</a>
-                        <a href="product-list.html" class="nav-item nav-link">Products</a>
+                        <a href="/Product/Index" class="nav-item nav-link">Products</a>
                         <a href="product-detail.html" class="nav-item nav-link">Product Detail</a>
                         <a href="cart.html" class="nav-item nav-link">Cart</a>
                         <a href="checkout.html" class="nav-item nav-link">Checkout</a>
@@ -66,11 +67,22 @@
                     </div>
                     <div class="navbar-nav ml-auto">
                         <div class="nav-item dropdown">
-                            <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown">User Account</a>
-                            <div class="dropdown-menu">
-                                <a href="#" class="dropdown-item">Login</a>
-                                <a href="#" class="dropdown-item">Register</a>
-                            </div>
+                            @if (UserLoginSingleton.GetInstance().GetAccount() == null)
+                            {
+                                <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown">User Account</a>
+                                <div class="dropdown-menu">
+                                    <a href="/Home/Login" class="dropdown-item">Login</a>
+                                    <a href="/Home/Register" class="dropdown-item">Register</a>
+                                </div>
+                            }
+                            else
+                            {
+                        <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown">Xin chào bạn</a>
+                                <div class="dropdown-menu">
+                                    <a href="#" class="dropdown-item">My account</a>
+                                    <a href="#" class="dropdown-item">Logout</a>
+                                </div>
+                            }
                         </div>
                     </div>
                 </div>

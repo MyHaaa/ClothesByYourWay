@@ -1,0 +1,54 @@
+﻿@model ClothesBYW.Models.RegisterModel
+
+@{
+    ViewBag.Title = "Register";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+@using (Html.BeginForm("Register", "Home", FormMethod.Post))
+{
+
+
+    <div style="margin-top:20px;margin-bottom:20px">
+        <h2 class="text-center">Register</h2>
+        <div class="register-form" style="margin-left:20%;margin-right:20%">
+            @if (!String.IsNullOrEmpty(ViewBag.Error))
+            {
+                <br />
+                <p class="alert alert-danger">@ViewBag.Error</p>
+                <br />
+            }
+            @if (!String.IsNullOrEmpty(ViewBag.Success))
+            {
+                <br />
+                <p class="alert alert-success">@ViewBag.Success</p>
+                <br />
+            }
+            <div class="row">
+                <div class="col-md-6">
+                    <label>Name</label>
+                    @Html.EditorFor(model => model.Fullname, new { htmlAttributes = new { @class = "form-control" } })
+                </div>
+                <div class="col-md-6">
+                    <label>E-mail</label>
+                    @Html.EditorFor(model => model.Email, new { htmlAttributes = new { @class = "form-control" } })
+                </div>
+                <div class="col-md-6">
+                    <label>Mobile No</label>
+                    @Html.EditorFor(model => model.Phone, new { htmlAttributes = new { @class = "form-control" } })
+                </div>
+                <div class="col-md-6">
+                    <label>Password</label>
+                    @Html.EditorFor(model => model.Password, new { htmlAttributes = new { @class = "form-control" } })
+                </div>
+                <div class="col-md-6">
+                    <label>Retype Password</label>
+                    @Html.EditorFor(model => model.ConfirmPassword, new { htmlAttributes = new { @class = "form-control" } })
+                </div>
+                <div class="col-md-12">
+                    <button class="btn" type="submit">Submit</button>
+                </div>
+            </div>
+        </div>
+    </div>
+}
