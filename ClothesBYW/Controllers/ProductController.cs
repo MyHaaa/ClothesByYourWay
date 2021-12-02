@@ -25,7 +25,7 @@ namespace ClothesBYW.Controllers
         public ActionResult ProductCategoriesPartial()
         {
             var dao = new ProductDao();
-            return View(dao.GetCategories());
+            return PartialView(dao.GetCategories());
         }
         public ActionResult Detail(string id)
         {
