@@ -22,10 +22,10 @@ namespace ClothesBYW.Controllers
                 return View(dao.GetProducts());
             }
         }
-        public PartialViewResult ProductCategoriesPartial()
+        public ActionResult ProductCategoriesPartial()
         {
             var dao = new ProductDao();
-            return PartialView(dao.GetCategories());
+            return View(dao.GetCategories());
         }
         public ActionResult Detail(string id)
         {
