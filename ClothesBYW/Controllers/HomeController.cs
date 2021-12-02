@@ -34,7 +34,7 @@ namespace ClothesBYW.Controllers
                     var user = dao.GetCustomer(model.Email);
 
                     UserLoginSingleton.Init(user.CustomerID, user.Name, user.Username, user.DateOfBirth, user.Phone, user.Address, user.Email);
-                    return RedirectToAction("Index","Home");
+                    return RedirectToAction("Index", "Home");
                 }
                 else if (result == 0)
                 {
@@ -84,6 +84,11 @@ namespace ClothesBYW.Controllers
                     ViewBag.Error = "Đăng nhập không thành công!";
                 }
             }
+            return View();
+        }
+        public ActionResult ProductFeatured()
+        {
+            ViewBag.ProductFeatured = db.Products.OrderByDescending(x => x.ModifiledDate).Take(8).ToList();
             return View();
         }
     }

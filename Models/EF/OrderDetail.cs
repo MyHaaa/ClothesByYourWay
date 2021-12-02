@@ -22,5 +22,17 @@ namespace Models.EF
         public virtual Order Order { get; set; }
 
         public virtual Product Product { get; set; }
+
+        public double Total
+        {
+            get
+            {
+                if (this.QuantitySold != null && Price.StandardPrice != null)
+                {
+                    return (double)(this.QuantitySold * this.DonGia);
+                }
+                return 0;
+            }
+        }
     }
 }
