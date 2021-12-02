@@ -36,7 +36,7 @@ namespace Models.Dao
                 }
             }
         }
-        public Customer GetCustomer(string email)
+        public EF.Customer GetCustomer(string email)
         {
             return db.Customers.SingleOrDefault(x => x.Email == email);
         }
@@ -52,7 +52,7 @@ namespace Models.Dao
             {
                 sampleGuid = Guid.NewGuid().ToString();
             }
-            db.Customers.Add(new Customer()
+            db.Customers.Add(new EF.Customer()
             {
                 CustomerID = sampleGuid,
                 Name = name,

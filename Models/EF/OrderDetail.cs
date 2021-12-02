@@ -27,11 +27,17 @@ namespace Models.EF
         {
             get
             {
-                if (this.QuantitySold != null && Price.StandardPrice != null)
-                {
-                    return (double)(this.QuantitySold * this.DonGia);
-                }
+                //if (this.QuantitySold != null && Price.StandardPrice != null)
+                //{
+                //    return (double)(this.QuantitySold * this.DonGia);
+                //}
+                //return 0;
+                //if (this.QuantitySold != null)
+                //{
+                //    return 0;
+                //}
                 return 0;
+
             }
         }
     }

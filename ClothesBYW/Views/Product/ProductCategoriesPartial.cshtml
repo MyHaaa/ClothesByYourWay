@@ -1,0 +1,6 @@
+﻿@model List<Models.EF.ProductCategory>
+
+@foreach (var item in Model)
+{
+    <a class="nav-link" href="/Product/Index/?cateID=@item.ProductCategoryID"><i class="fa fa-female"></i>@item.Name</a>
+}

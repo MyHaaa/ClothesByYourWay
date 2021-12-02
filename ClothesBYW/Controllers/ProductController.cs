@@ -1,4 +1,5 @@
-﻿using Models.EF;
+﻿using Models.Dao.Customer;
+using Models.EF;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -9,11 +10,27 @@ namespace ClothesBYW.Controllers
 {
     public class ProductController : Controller
     {
-        private ClothesBYWDbContext db = new ClothesBYWDbContext();
-        // GET: Product
-        public ActionResult Index()
+        public ActionResult Index(int? cateID)
         {
-            return View(db.Products.ToList());
+            var dao = new ProductDao();
+            try
+            {
+                return View(dao.GetProducts(int.Parse(cateID.ToString())));
+            }
+            catch (Exception)
+            {
+                return View(dao.GetProducts());
+            }
+        }
+        public PartialViewResult ProductCategoriesPartial()
+        {
+            var dao = new ProductDao();
+            return PartialView(dao.GetCategories());
+        }
+        public ActionResult Detail(string id)
+        {
+            var dao = new ProductDao();
+            return View(dao.GetProductDetail(id));
         }
     }
 }
