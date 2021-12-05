@@ -10,6 +10,8 @@ namespace ClothesBYW.Controllers
 {
     public class ProductController : Controller
     {
+
+        ClothesBYWDbContext db = new ClothesBYWDbContext();
         public ActionResult Index(int? cateID)
         {
             var dao = new ProductDao();
@@ -32,5 +34,6 @@ namespace ClothesBYW.Controllers
             var dao = new ProductDao();
             return View(dao.GetProductDetail(id));
         }
+        
     }
 }

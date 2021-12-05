@@ -15,11 +15,12 @@ namespace ClothesBYW.Controllers
         private ClothesBYWDbContext db = new ClothesBYWDbContext();
         public ActionResult Index()
         {
+            ViewBag.ProductFeatured = db.Products.OrderByDescending(x => x.CreatedDate).Take(4).ToList();
             return View();
         }
         [HttpGet]
         public ActionResult Login()
-        {
+        {       
             return View();
         }
         [HttpPost]
@@ -88,7 +89,7 @@ namespace ClothesBYW.Controllers
         }
         public ActionResult ProductFeatured()
         {
-            ViewBag.ProductFeatured = db.Products.OrderByDescending(x => x.ModifiledDate).Take(8).ToList();
+            ViewBag.PageProductFeatured = db.Products.OrderByDescending(x => x.CreatedDate).Take(4).ToList();
             return View();
         }
     }

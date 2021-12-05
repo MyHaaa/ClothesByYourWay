@@ -212,9 +212,73 @@
         <div class="section-header">
             <h1>Featured Product</h1>
         </div>
+        <div class="row align-items-center product-slider product-slider-4">
+            @foreach (var item in ListProductFeatured)
+            {
+                <div class="col-lg-3">
+                    <div class="product-item">
+                        <div class="product-title">
+                            <a href="@Url.Action("Detail", "Product", new { id = item.ProductID })"></a>
+                            @*<p>@item.ProductName</p>*@
+                            <a href="#">@item.ProductName</a>
+                            <div class="ratting">
+                                <i class="fa fa-star"></i>
+                                <i class="fa fa-star"></i>
+                                <i class="fa fa-star"></i>
+                                <i class="fa fa-star"></i>
+                                <i class="fa fa-star"></i>
+                            </div>
+                        </div>
+                        <div class="product-image">
+                            <a href="product-detail.html">
+                                <img src="~/Assets/Client/img/product-6.jpg" alt="Product Image">
+                            </a>
+                            <div class="product-action">
+                                <a href="#"><i class="fa fa-cart-plus"></i></a>
+                                <a href="#"><i class="fa fa-heart"></i></a>
+                                <a href="#"><i class="fa fa-search"></i></a>
+                            </div>
+                        </div>
+                        <div class="product-price">
+                            <h3>@item.Prices.First().RetailPrice</h3>
+                            @*<h3><span>$</span>99</h3>*@
+                            @if ((item.QuantityInStock) > 0)
+                            {
+
+                                <a href="/ShoppingCart/addtocart/@item.ProductID" class="btn btn-inverse"><i class="fa fa-shopping-cart"></i>Add to cart</a>
+
+                            }
+                            else
+                            {
+                                <div class="w3agile_description">
+
+                                    <form class="form-inline">
+                                        <div class="col-md-offset-2 col-md-10">
+                                            <center>
+                                                <input style=" color:#ffffff; border:#FF6A00;background-color:#FF3E36" type="submit" value=" ĐÃ HẾT HÀNG" class="btn btn-default" />
+                                            </center>
+
+                                            <br />
+
+
+                                        </div>
+
+
+                                    </form>
+
+
+
+
+                                </div>
+                            }
+                        </div>
+                    </div>
+                </div>
+            }
+            </div>
+         </div>
     </div>
-        
-</div>
+
 <!-- Featured Product End -->
 <!-- Newsletter Start -->
 <div class="newsletter">
@@ -243,15 +307,16 @@
             <div class="col-lg-3">
                 <div class="product-item">
                     <div class="product-title">
-                        <a href="#">Product Name</a>
-                        <div class="ratting">
-                            <i class="fa fa-star"></i>
-                            <i class="fa fa-star"></i>
-                            <i class="fa fa-star"></i>
-                            <i class="fa fa-star"></i>
-                            <i class="fa fa-star"></i>
+                        @*<a href="@Url.Action("Detailes","Home",new { id=})"></a>*@
+                            <a href="#">Product Name</a>
+                            <div class="ratting">
+                                <i class="fa fa-star"></i>
+                                <i class="fa fa-star"></i>
+                                <i class="fa fa-star"></i>
+                                <i class="fa fa-star"></i>
+                                <i class="fa fa-star"></i>
+                            </div>
                         </div>
-                    </div>
                     <div class="product-image">
                         <a href="product-detail.html">
                             <img src="~/Assets/Client/img/product-6.jpg" alt="Product Image">

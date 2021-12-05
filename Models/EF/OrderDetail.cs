@@ -27,10 +27,10 @@ namespace Models.EF
         {
             get
             {
-                var price = this.Product.Prices;
+                var price = this.Product.Prices.
                 if (this.QuantitySold != null && price.Count > 0)
                 {
-                    //return (double)(this.QuantitySold * price[0].RetailPrice);
+                    //return (double)(this.QuantitySold * Price.Equals().);
                 }
                 return 0;
                 if (this.QuantitySold != null)

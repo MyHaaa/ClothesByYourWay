@@ -1,4 +1,4 @@
-﻿using Common;
+﻿//using Common;
 using Models.EF;
 using System;
 using System.Collections.Generic;
@@ -128,7 +128,7 @@ namespace Models.Dao
             {
                 if (IsLoginAdmin == true)
                 {
-                    if (result.UserGroupID == CommonConstant.ADMIN || result.UserGroupID == CommonConstant.MANAGER || result.UserGroupID == CommonConstant.SALER || result.UserGroupID == CommonConstant.CUSTOMER_CARE_STAFF || result.UserGroupID == CommonConstant.WAREHOUSE_STAFF)
+                    /*if (result.UserGroupID == CommonConstant.ADMIN || result.UserGroupID == CommonConstant.MANAGER || result.UserGroupID == CommonConstant.SALER || result.UserGroupID == CommonConstant.CUSTOMER_CARE_STAFF || result.UserGroupID == CommonConstant.WAREHOUSE_STAFF)
                     {
                         if (result.Status == false)
                         {
@@ -145,7 +145,8 @@ namespace Models.Dao
                     else
                     {
                         return -3;
-                    }
+                    }*/
+                    return -1;
                 }
                 else
                 {
