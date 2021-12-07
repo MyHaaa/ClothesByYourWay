@@ -189,6 +189,7 @@
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
     <Compile Include="Models\Cart.cs" />
+    <Compile Include="Models\Customer\ProductListRequest.cs" />
     <Compile Include="Models\Customer\ProfieModel.cs" />
     <Compile Include="Models\Customer\UserLoginSingleton.cs" />
     <Compile Include="Models\LoginModel.cs" />
@@ -370,6 +371,7 @@
     <Content Include="Views\ShoppingCart\BagCart.cshtml" />
     <Content Include="Views\Product\ProductCategoriesPartial.cshtml" />
     <Content Include="Views\Product\Detail.cshtml" />
+    <Content Include="Views\Product\ProductFeedbacksPartial.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

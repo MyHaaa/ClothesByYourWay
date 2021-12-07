@@ -1,4 +1,5 @@
 ﻿@model Models.EF.Product
+@using ClothesBYW.Models.Customer
 
 @{
     ViewBag.Title = "Detail";
@@ -97,7 +98,7 @@
                                 <a class="nav-link" data-toggle="pill" href="#specification">Specification</a>
                             </li>
                             <li class="nav-item">
-                                <a class="nav-link" data-toggle="pill" href="#reviews">Reviews (1)</a>
+                                <a class="nav-link" data-toggle="pill" href="#reviews">Reviews (@Model.Feedbacks.Count)</a>
                             </li>
                         </ul>
 
@@ -115,43 +116,40 @@
                                 </ul>
                             </div>
                             <div id="reviews" class="container tab-pane fade">
-                                <div class="reviews-submitted">
-                                    <div class="reviewer">Phasellus Gravida - <span>01 Jan 2020</span></div>
-                                    <div class="ratting">
-                                        <i class="fa fa-star"></i>
-                                        <i class="fa fa-star"></i>
-                                        <i class="fa fa-star"></i>
-                                        <i class="fa fa-star"></i>
-                                        <i class="fa fa-star"></i>
-                                    </div>
-                                    <p>
-                                        Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam.
-                                    </p>
-                                </div>
-                                <div class="reviews-submit">
-                                    <h4>Give your Review:</h4>
-                                    <div class="ratting">
-                                        <i class="far fa-star"></i>
-                                        <i class="far fa-star"></i>
-                                        <i class="far fa-star"></i>
-                                        <i class="far fa-star"></i>
-                                        <i class="far fa-star"></i>
-                                    </div>
-                                    <div class="row form">
-                                        <div class="col-sm-6">
-                                            <input type="text" placeholder="Name">
+                                @Html.Action("ProductFeedbacksPartial")
+                                @if (UserLoginSingleton.GetInstance().GetAccount() != null)
+                                {
+                                    using (Html.BeginForm("UploadFeedback", "Product", FormMethod.Post))
+                                    {
+                                        <input name="productID" value="@Model.ProductID" hidden/>
+                                        <div class="reviews-submit">
+                                            <h4>Give your Review:</h4>
+                                            <div class="ratting">
+                                                <select name="star">
+                                                    <option>1</option>
+                                                    <option>2</option>
+                                                    <option>3</option>
+                                                    <option>4</option>
+                                                    <option>5</option>
+                                                </select>
+                                                <i class="fa fa-star"></i>
+                                            </div>
+                                            <div class="row form">
+                                                <div class="col-sm-12">
+                                                    <input type="text" placeholder="Title" name="title">
+                                                </div>
+                                                <div class="col-sm-12">
+                                                    <textarea placeholder="Content" name="content"></textarea>
+                                                </div>
+                                                <div class="col-sm-12">
+                                                    <button type="submit">Submit</button>
+                                                </div>
+                                            </div>
                                         </div>
-                                        <div class="col-sm-6">
-                                            <input type="email" placeholder="Email">
-                                        </div>
-                                        <div class="col-sm-12">
-                                            <textarea placeholder="Review"></textarea>
-                                        </div>
-                                        <div class="col-sm-12">
-                                            <button>Submit</button>
-                                        </div>
-                                    </div>
-                                </div>
+                                    }
+
+                                }
+
                             </div>
                         </div>
                     </div>
