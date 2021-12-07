@@ -57,7 +57,16 @@
                     {
                         <div class="col-md-4">
                             <div class="product-item">
-                                
+                                <div class="product-title">
+                                    <a href="#">@item.ProductName</a>
+                                    <div class="ratting">
+                                        <i class="fa fa-star"></i>
+                                        <i class="fa fa-star"></i>
+                                        <i class="fa fa-star"></i>
+                                        <i class="fa fa-star"></i>
+                                        <i class="fa fa-star"></i>
+                                    </div>
+                                </div>
                                 <div class="product-image">
                                     <a href="product-detail.html">
                                         <img src="@item.ProductImages.First().ImageLink" alt="Product Image">
@@ -65,18 +74,7 @@
                                     <div class="product-action">
                                         <a href="#"><i class="fa fa-cart-plus"></i></a>
                                         <a href="#"><i class="fa fa-heart"></i></a>
-                                        <a href="/Product/Detail?id=@item.ProductID"><i class="fa fa-search"></i></a>
-                                    </div>
-                                    <div class="product-title">
-                                        <p>@item.ProductName</p>
-                                        @*<a href="#">@item.ProductName</a>*@
-                                        <div class="ratting">
-                                            <i class="fa fa-star"></i>
-                                            <i class="fa fa-star"></i>
-                                            <i class="fa fa-star"></i>
-                                            <i class="fa fa-star"></i>
-                                            <i class="fa fa-star"></i>
-                                        </div>
+                                        <a href="/Product/Detail/@item.ProductID"><i class="fa fa-search"></i></a>
                                     </div>
                                 </div>
                                 <div class="product-price">

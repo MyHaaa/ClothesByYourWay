@@ -90,7 +90,7 @@ namespace ClothesBYW.Controllers
         public ActionResult ProductFeatured()
         {
             ViewBag.PageProductFeatured = db.Products.OrderByDescending(x => x.CreatedDate).Take(4).ToList();
-            return View();
+            return PartialView();
         }
     }
 }
