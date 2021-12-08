@@ -12,7 +12,7 @@ namespace ClothesBYW.Areas.Administrator.Controllers
     {
         protected override void OnActionExecuting(ActionExecutingContext filterContext)
         {
-            var session = (UserLogin)Session[CC.USER_SESSION];
+            var session = (EmployeeLogin)Session[CC.USER_SESSION];
             if (session == null)
             {
                 filterContext.Result = new RedirectToRouteResult(new

@@ -12,7 +12,9 @@ namespace Models.EF
         public Order()
         {
             OrderDetails = new HashSet<OrderDetail>();
+            ShipperOrders = new HashSet<ShipperOrder>();
         }
+
 
         [StringLength(50)]
         public string OrderID { get; set; }
@@ -31,28 +33,16 @@ namespace Models.EF
         public int? Status { get; set; }
 
         [StringLength(50)]
-        public string EmployeeID { get; set; }
-
-        [StringLength(50)]
-        public string ShipperID { get; set; }
-
-        public DateTime? DeliveryDatetime { get; set; }
-
-        [StringLength(500)]
-        public string DeliveryNote { get; set; }
-
-        [StringLength(50)]
         public string VoucherID { get; set; }
 
         public virtual Customer Customer { get; set; }
 
-        public virtual Employee Employee { get; set; }
-
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<OrderDetail> OrderDetails { get; set; }
 
-        public virtual Shipper Shipper { get; set; }
-
         public virtual Voucher Voucher { get; set; }
+
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<ShipperOrder> ShipperOrders { get; set; }
     }
 }

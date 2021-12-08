@@ -25,6 +25,7 @@ namespace ClothesBYW.Areas.Administrator.Controllers
         }
         public ActionResult Login(LoginModel model)
         {
+
             if (ModelState.IsValid) //Nếu vượt qua kiểm tra form rỗng hay không
             {
                 var dao = new EmployeeDao();
@@ -32,7 +33,7 @@ namespace ClothesBYW.Areas.Administrator.Controllers
                 if (result == 1)
                 {
                     var user = dao.GetByID(model.Username);
-                    var userSession = new UserLogin();
+                    var userSession = new EmployeeLogin();
                     userSession.Username = user.Username;
                     userSession.EmployeeID = user.EmployeeID;
                     userSession.UserGroupID = user.UserGroupID;
@@ -41,9 +42,10 @@ namespace ClothesBYW.Areas.Administrator.Controllers
                     Session.Add(CC.SESSION_CREDENTIALS, listCredentials);
                     Session.Add(CC.USER_SESSION, userSession);
                     Session["Username"] = userSession.Username;
-                    Session["UserID"] = userSession.EmployeeID;
+                    Session["EmployeeID"] = userSession.EmployeeID;
+                    Session["UserGroupID"] = userSession.UserGroupID;
 
-                      
+
                     return RedirectToAction("Index", "Dashboard");
                 }
                 else if (result == 0)
@@ -57,10 +59,10 @@ namespace ClothesBYW.Areas.Administrator.Controllers
                 else if (result == -2)
                 {
                     ModelState.AddModelError("", "Mật khẩu không hợp lệ");
-                }              
-                else
+                }
+                else if (result == 2)
                 {
-                    ModelState.AddModelError("", "Đăng nhập không thành công!");
+                    ModelState.AddModelError("", "Tài khoản của bạn chưa xác thực qua Email");
                 }
 
             }
@@ -68,37 +70,5 @@ namespace ClothesBYW.Areas.Administrator.Controllers
         }
 
 
-        //Quên pass
-        [NonAction]
-        public void SendMailResetPass(string emailFor = "VerifyAccount")
-        {
-           
-        }
-
-
-        public ActionResult ForgotPass()
-        {
-            return View();
-        }
-        
-        [HttpPost]
-        public ActionResult ForgotPass(string email)
-        {
-            string message = "";
-            bool status = false;
-
-            var account = db.Employees.Where(a => a.Email == email).FirstOrDefault();
-            if(account != null)
-            {
-                string resetCode = Guid.NewGuid().ToString();
-
-            }
-            else
-            {
-                message = "Xin lỗi, Email bạn vừa nhập không tồn tại trong hệ thống";
-            }
-
-            return View();
-        }
     }
 }

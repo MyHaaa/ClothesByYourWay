@@ -8,10 +8,10 @@ namespace Common
 {
     public class CommonConstant
     {
-        public static string ADMIN = "Admin";
-        public static string SALER = "Nhân viên bán hàng";
-        public static string MANAGER = "Quản Lý";
-        public static string CUSTOMER_CARE_STAFF = "Nhân viên chăm sóc khách hàng";
-        public static string WAREHOUSE_STAFF = "Nhân viên kho";
+        public static string ADMIN = "ADMIN";
+        public static string SALER = "SALER";
+        public static string MANAGER = "MANAGER";
+        public static string CUSTOMER_CARE_STAFF = "CUSTOMER_CARE_STAFF";
+        public static string WAREHOUSE_STAFF = "WAREHOUSE_STAFF";
     }
 }

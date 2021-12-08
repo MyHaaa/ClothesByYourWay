@@ -1,0 +1,75 @@
+﻿@model Models.EF.Promotion
+
+@{
+    ViewBag.Title = "AddOrEdit";
+    Layout = null;
+}
+
+<div class="row" style="padding-top: 30px"></div>
+
+@using (Html.BeginForm("AddOrEdit", "PromotionProducts", FormMethod.Post, new { enctype = "multipart/form-data", onSubmit = "return jQueryAjaxPost(this);", data_restUrl = Url.Action("AddOrEdit", "PromotionProducts", new { id = 0 }) }))//data-resetUrl
+{
+    @Html.AntiForgeryToken()
+    <div class="row" style="vertical-align:middle">
+        <div class="form-horizontal">
+            @Html.ValidationSummary(true)
+            @Html.HiddenFor(model => model.PromotionID)
+
+
+            <div class="col-md-12">
+
+                <div class="form-group">
+                    @Html.LabelFor(model => model.Description, htmlAttributes: new { @class = "control-label col-md-4" })
+                    <div class="col-md-8">
+                        @Html.TextAreaFor(model => model.Description, 5, 45, null)
+                        @Html.ValidationMessageFor(model => model.Description, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    @Html.LabelFor(model => model.PercentageDiscountSupplier, htmlAttributes: new { @class = "control-label col-md-4" })
+                    <div class="col-md-2">
+                        @Html.EditorFor(model => model.PercentageDiscountSupplier, new { htmlAttributes = new { @class = "form-control" } })
+                        @Html.ValidationMessageFor(model => model.PercentageDiscountSupplier, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    @Html.LabelFor(model => model.PercentageDiscountApproval, htmlAttributes: new { @class = "control-label col-md-4" })
+                    <div class="col-md-2">
+                        @Html.EditorFor(model => model.PercentageDiscountApproval, new { htmlAttributes = new { @class = "form-control" } })
+                        @Html.ValidationMessageFor(model => model.PercentageDiscountApproval, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    @Html.LabelFor(model => model.DateStart, htmlAttributes: new { @class = "control-label col-md-4" })
+                    <div class="col-md-2">
+                        @Html.EditorFor(model => model.DateStart, new { htmlAttributes = new { @class = "form-control" } })
+                        @Html.ValidationMessageFor(model => model.DateStart, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    @Html.LabelFor(model => model.DateEnd, htmlAttributes: new { @class = "control-label col-md-4" })
+                    <div class="col-md-2">
+                        @Html.EditorFor(model => model.DateEnd, new { htmlAttributes = new { @class = "form-control" } })
+                        @Html.ValidationMessageFor(model => model.DateEnd, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+                <div class="form-group">
+                    <div class="col-md-offset-5 col-md-7">
+                        <input type="submit" value="Submit" class="btn btn-default" />
+                        @if (Model.PromotionID != 0)
+                        {
+                            <a class="btn btn-success" onclick="refreshAddNewTab('@Url.Action("AddOrEdit","PromotionProducts",new{id=0})',false)"><i class="fa fa-plus"></i> Thêm mới</a>
+                        }
+                        <button class="btn btn-warning"> @Html.ActionLink("Cancel", "Index")</button>
+                    </div>
+                </div>
+            </div>
+
+
+        </div>
+    </div>
+}

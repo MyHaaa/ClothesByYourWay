@@ -25,12 +25,13 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
     <link rel="stylesheet" href="/Assets/Admin/css/morris.css" type="text/css" />
     <!-- calendar -->
     <link rel="stylesheet" href="/Assets/Admin/css/monthly.css">
+    <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/v/dt/dt-1.11.3/datatables.min.css" />
     @RenderSection("cssHeader", required: false)
     <!-- //calendar -->
     <!-- //font-awesome icons -->
 
 
-   
+
     @RenderSection("jsHeader", required: false)
 
 
@@ -236,7 +237,7 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
                     <li class="dropdown">
                         <a data-toggle="dropdown" class="dropdown-toggle" href="#" style="padding : 10px;">
                             <i class="fas fa-user" style="padding-right: 5px;"></i>
-                            <span class="username">Username</span>
+                            <span class="username">@Session["Username"]</span>
                             <b class="caret"></b>
                         </a>
                         <ul class="dropdown-menu extended logout">
@@ -283,22 +284,15 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
                         <li class="sub-menu">
                             <a href="javascript:;">
                                 <i class="fa fa-bookmark"></i>
-                                <span>Quản lý nội vụ</span>
-                            </a>
-                            <ul class="sub">
-                                <li><a href="/Administrator/Titles/Index">Chức vụ</a></li>
-                                <li><a href="/Administrator/Department/Index">Phòng ban</a></li>
-                                <li><a href="/Administrator/Shifts/Index">Ca làm việc</a></li>
-                                <li><a href="/Administrator/CoefficientSalaries/Index">Hệ số lương</a></li>
-                            </ul>
-                        </li>
-
-
-                        <li>
-                            <a href="/Administrator/TimeSheets/Index">
-                                <i class="fa fa-tachometer"></i>
                                 <span>Quản lý sản phẩm</span>
                             </a>
+                            <ul class="sub">
+                                <li><a href="/Administrator/ProductCategories/Index">Loại sản phẩm</a></li>
+                                <li><a href="/Administrator/Brands/Index">Thương hiệu</a></li>
+                                <li><a href="/Administrator/Promotions/Index">Loại khuyến mãi</a></li>
+                                <li><a href="/Administrator/Suppliers/Index">Nhà Phân Phối</a></li>
+                                <li><a href="/Administrator/Products/Index">Sản phẩm</a></li>
+                            </ul>
                         </li>
 
                         <li class="sub-menu">
@@ -337,11 +331,11 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
     <script src="/Assets/Admin/js/bootstrap.js"></script>
     <script src="/Assets/Admin/js/jquery.dcjqaccordion.2.7.js"></script>
     <script src="/Assets/Admin/js/scripts.js"></script>
+    <script src="/Assets/Admin/js/plugins/ckfinder/ckfinder.js"></script>
     <script src="/Assets/Admin/js/jquery.slimscroll.js"></script>
     <script src="/Assets/Admin/js/jquery.nicescroll.js"></script>
     <!--[if lte IE 8]><script language="javascript" type="text/javascript" src="js/flot-chart/excanvas.min.js"></script><![endif]-->
     <script src="/Assets/Admin/js/jquery.scrollTo.js"></script>
-
     <!-- morris JavaScript -->
     <script>
         $(document).ready(function () {
@@ -361,9 +355,19 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
         });
     </script>
     <!-- calendar -->
-
     @RenderSection("jsFooter", required: false)
+    <script src="~/Assets/Admin/js/Controller/csController.js"></script>
 
+    <script>
+        $('#btnSelectImage').on('click', function (e) {
+            e.preventDefault();
+            var finder = new CKFinder();
+            finder.selectActionFunction = function (url) {
+                $('#txtImage').val(url);
+            };
+            finder.popup();
+        })
+    </script>
 </body>
 </html>
 

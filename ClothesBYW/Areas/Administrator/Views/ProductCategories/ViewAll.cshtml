@@ -1,0 +1,44 @@
+﻿@model IEnumerable<Models.EF.ProductCategory>
+
+@{
+    Layout = null;
+}
+<div class="table-responsive" id="deTable">
+    <table class="table table-striped b-t b-light">
+        <thead>
+            <tr>
+                <th style="text-align: center; color: black">
+                    Tên Loại Sản Phẩm
+                </th>
+                <th style="text-align: center; color: black">
+                    Meta keyword
+                </th>
+                <th style="text-align: center; color: black">
+                    Trạng thái
+                </th>
+                <th style="text-align: center; color: black">Action Name</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in Model)
+            {
+                <tr>
+                    <td style="text-align: center; color: black">
+                        @Html.DisplayFor(modelItem => item.Name)
+                    </td>
+                    <td style="text-align: center; color: black">
+                        @Html.DisplayFor(modelItem => item.MeteKeyword)
+                    </td>
+                    <td style="text-align: center; color: black">
+                        @Html.DisplayFor(modelItem => item.Status)
+                    </td>
+                    <td style="text-align: center; color: black">
+                        <a class="btn btn-primary btn-sm" onclick="Edit('@Url.Action("AddOrEdit", "ProductCategories", new { id=@item.ProductCategoryID})')"><i class="fa fa-pencil"></i></a>
+                        <a class="btn btn-danger btn-sm" onclick="Delete('@Url.Action("Delete", "ProductCategories", new { id=@item.ProductCategoryID})')"><i class="fa fa-trash"></i></a>
+
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+</div>

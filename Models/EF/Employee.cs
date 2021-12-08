@@ -25,7 +25,7 @@
 
         [Display(Name = "Password")]
         [DataType(DataType.Password)]
-        [StringLength(25)]  
+        [StringLength(25)]
         public string Password { get; set; }
 
         [Column(TypeName = "smalldatetime")]
@@ -49,6 +49,9 @@
         [StringLength(150)]
         [DataType(DataType.EmailAddress)]
         public string Email { get; set; }
+
+        [StringLength(500)]
+        public string Image { get; set; }
 
         public DateTime? CreateDated { get; set; }
 

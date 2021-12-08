@@ -36,10 +36,10 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 
                 @Html.TextBoxFor(model => model.Username, new { @class = "form-control", placeholder = "Username", @autofocus = "autofocus" })
                 <br />
-                @Html.TextBoxFor(model => model.Password, new { @class = "form-control", placeholder  = "Pasword", @type = "password" })
+                @Html.TextBoxFor(model => model.Password, new { @class = "form-control", placeholder = "Pasword", @type = "password" })
                 <br />
                 <span> @Html.CheckBoxFor(model => model.RememberMe) Remember Me?</span>
-                <h6><a href="/Administrator/Login/ForgotPass">Forgot Password?</a></h6>
+                <h6>@Html.ActionLink("Forgot Password?", "ForgotPass", "Employees")</h6>
                 <div class="clearfix"></div>
                 <input type="submit" value="Sign In" name="login">
             }

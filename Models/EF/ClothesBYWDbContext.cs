@@ -11,7 +11,8 @@ namespace Models.EF
             : base("name=ClothesBYW")
         {
         }
-
+        public virtual DbSet<Brand> Brands { get; set; }
+        public virtual DbSet<Color> Colors { get; set; }
         public virtual DbSet<Credential> Credentials { get; set; }
         public virtual DbSet<CustomerCategory> CustomerCategories { get; set; }
         public virtual DbSet<Customer> Customers { get; set; }
@@ -24,10 +25,12 @@ namespace Models.EF
         public virtual DbSet<ProductCategory> ProductCategories { get; set; }
         public virtual DbSet<ProductImage> ProductImages { get; set; }
         public virtual DbSet<Product> Products { get; set; }
+        public virtual DbSet<PromotionProduct> PromotionProducts { get; set; }
         public virtual DbSet<Promotion> Promotions { get; set; }
         public virtual DbSet<PurchaseOrderDetail> PurchaseOrderDetails { get; set; }
         public virtual DbSet<PurchaseOrder> PurchaseOrders { get; set; }
         public virtual DbSet<Role> Roles { get; set; }
+        public virtual DbSet<ShipperOrder> ShipperOrders { get; set; }
         public virtual DbSet<Shipper> Shippers { get; set; }
         public virtual DbSet<Supplier> Suppliers { get; set; }
         public virtual DbSet<UserGroup> UserGroups { get; set; }
@@ -35,6 +38,10 @@ namespace Models.EF
 
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
         {
+            modelBuilder.Entity<Brand>()
+                .Property(e => e.ImageBrand)
+                .IsUnicode(false);
+
             modelBuilder.Entity<Credential>()
                 .Property(e => e.UserGroupID)
                 .IsUnicode(false);
@@ -86,6 +93,10 @@ namespace Models.EF
                 .IsUnicode(false);
 
             modelBuilder.Entity<Employee>()
+                .Property(e => e.Username)
+                .IsUnicode(false);
+
+            modelBuilder.Entity<Employee>()
                 .Property(e => e.Password)
                 .IsUnicode(false);
 
@@ -103,6 +114,10 @@ namespace Models.EF
 
             modelBuilder.Entity<Employee>()
                 .Property(e => e.Email)
+                .IsUnicode(false);
+
+            modelBuilder.Entity<Employee>()
+                .Property(e => e.Image)
                 .IsUnicode(false);
 
             modelBuilder.Entity<Feedback>()
@@ -131,14 +146,6 @@ namespace Models.EF
 
             modelBuilder.Entity<Order>()
                 .Property(e => e.CustomerID)
-                .IsUnicode(false);
-
-            modelBuilder.Entity<Order>()
-                .Property(e => e.EmployeeID)
-                .IsUnicode(false);
-
-            modelBuilder.Entity<Order>()
-                .Property(e => e.ShipperID)
                 .IsUnicode(false);
 
             modelBuilder.Entity<Order>()
@@ -194,6 +201,24 @@ namespace Models.EF
                 .Property(e => e.ModifiledBy)
                 .IsUnicode(false);
 
+            modelBuilder.Entity<Product>()
+                .Property(e => e.Size)
+                .IsUnicode(false);
+
+            modelBuilder.Entity<Product>()
+                .HasMany(e => e.PromotionProducts)
+                .WithRequired(e => e.Product)
+                .WillCascadeOnDelete(false);
+
+            modelBuilder.Entity<PromotionProduct>()
+                .Property(e => e.ProductID)
+                .IsUnicode(false);
+
+            modelBuilder.Entity<Promotion>()
+                .HasMany(e => e.PromotionProducts)
+                .WithRequired(e => e.Promotion)
+                .WillCascadeOnDelete(false);
+
             modelBuilder.Entity<PurchaseOrderDetail>()
                 .Property(e => e.PurchaseOrderDetailID)
                 .IsUnicode(false);
@@ -225,6 +250,18 @@ namespace Models.EF
 
             modelBuilder.Entity<Role>()
                 .Property(e => e.RoleID)
+                .IsUnicode(false);
+
+            modelBuilder.Entity<ShipperOrder>()
+                .Property(e => e.OrderID)
+                .IsUnicode(false);
+
+            modelBuilder.Entity<ShipperOrder>()
+                .Property(e => e.EmployeeID)
+                .IsUnicode(false);
+
+            modelBuilder.Entity<ShipperOrder>()
+                .Property(e => e.ShipperID)
                 .IsUnicode(false);
 
             modelBuilder.Entity<Shipper>()

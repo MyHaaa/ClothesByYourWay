@@ -14,6 +14,8 @@ namespace Models.EF
         [StringLength(50)]
         public string OrderID { get; set; }
 
+        public decimal? PriceEach { get; set; }
+
         [StringLength(50)]
         public string ProductID { get; set; }
 

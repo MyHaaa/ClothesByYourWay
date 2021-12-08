@@ -1,4 +1,5 @@
 ﻿//using Common;
+using Common;
 using Models.EF;
 using System;
 using System.Collections.Generic;
@@ -56,7 +57,7 @@ namespace Models.Dao
                 db.SaveChanges();
                 return true;
             }
-            catch (Exception)
+            catch (Exception e)
             {
                 return false;
             }
@@ -80,15 +81,20 @@ namespace Models.Dao
             }
             else
             {
-                if (result.Status == false) // Status bằng false, tức là tài khoản này ko đc active => bị khóa
-                    return -1;
-                else
+                if (result.IsEmailVerified)
                 {
-                    if (result.Password == password) // mật khẩu hợp lệ
-                        return 1;
-                    else //Ngược lại, mật khẩu không hợp lệ
-                        return -2;
+                    if (result.Status == false) // Status bằng false, tức là tài khoản này ko đc active => bị khóa
+                        return -1;
+                    else
+                    {
+                        if (result.Password == password) // mật khẩu hợp lệ
+                            return 1;
+                        else //Ngược lại, mật khẩu không hợp lệ
+                            return -2;
+                    }
                 }
+                else
+                    return 2;
             }
         }
 
@@ -128,7 +134,7 @@ namespace Models.Dao
             {
                 if (IsLoginAdmin == true)
                 {
-                    /*if (result.UserGroupID == CommonConstant.ADMIN || result.UserGroupID == CommonConstant.MANAGER || result.UserGroupID == CommonConstant.SALER || result.UserGroupID == CommonConstant.CUSTOMER_CARE_STAFF || result.UserGroupID == CommonConstant.WAREHOUSE_STAFF)
+                    if (result.UserGroupID == CommonConstant.ADMIN || result.UserGroupID == CommonConstant.MANAGER || result.UserGroupID == CommonConstant.SALER || result.UserGroupID == CommonConstant.CUSTOMER_CARE_STAFF || result.UserGroupID == CommonConstant.WAREHOUSE_STAFF)
                     {
                         if (result.Status == false)
                         {
@@ -145,8 +151,7 @@ namespace Models.Dao
                     else
                     {
                         return -3;
-                    }*/
-                    return -1;
+                    }
                 }
                 else
                 {
@@ -174,7 +179,7 @@ namespace Models.Dao
                 db.SaveChanges();
                 return true;
             }
-            catch (Exception)
+            catch (Exception e)
             {
                 return false;
             }

@@ -15,6 +15,7 @@ namespace Models.EF
             OrderDetails = new HashSet<OrderDetail>();
             Prices = new HashSet<Price>();
             ProductImages = new HashSet<ProductImage>();
+            PromotionProducts = new HashSet<PromotionProduct>();
             PurchaseOrderDetails = new HashSet<PurchaseOrderDetail>();
         }
 
@@ -41,13 +42,24 @@ namespace Models.EF
 
         public int? Status { get; set; }
 
+        [StringLength(5)]
+        public string Size { get; set; }
+
+        public int? ColorID { get; set; }
+
         public int? CategoryID { get; set; }
 
         public long? PromotionID { get; set; }
 
+        public int? BrandID { get; set; }
+
         public long? QuantityInStock { get; set; }
 
         public int? MinimumQuantityAvailable { get; set; }
+
+        public virtual Brand Brand { get; set; }
+
+        public virtual Color Color { get; set; }
 
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Feedback> Feedbacks { get; set; }
@@ -63,7 +75,8 @@ namespace Models.EF
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<ProductImage> ProductImages { get; set; }
 
-        public virtual Promotion Promotion { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<PromotionProduct> PromotionProducts { get; set; }
 
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<PurchaseOrderDetail> PurchaseOrderDetails { get; set; }
