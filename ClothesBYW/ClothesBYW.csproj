@@ -183,7 +183,9 @@
     <Compile Include="Areas\Administrator\Controllers\PromotionProductsController.cs" />
     <Compile Include="Areas\Administrator\Controllers\SuppliersController.cs" />
     <Compile Include="Areas\Administrator\Controllers\UserGroupsController.cs" />
+    <Compile Include="Areas\Administrator\Models\ChangePasswordModel.cs" />
     <Compile Include="Areas\Administrator\Models\LoginModel.cs" />
+    <Compile Include="Areas\Administrator\Models\PictureUpdate.cs" />
     <Compile Include="Common\CC.cs" />
     <Compile Include="Common\EmailService\EmailService.cs" />
     <Compile Include="Common\EmailService\IEmailService.cs" />
@@ -1028,11 +1030,11 @@
     <Content Include="Areas\Administrator\Views\ProductCategories\ViewAll.cshtml" />
     <Content Include="Areas\Administrator\Views\ProductCategories\AddOrEdit.cshtml" />
     <Content Include="Areas\Administrator\Views\Profile\Index.cshtml" />
-    <Content Include="Areas\Administrator\Views\Profile\Edit.cshtml" />
     <Content Include="Areas\Administrator\Views\PromotionProducts\Index.cshtml" />
     <Content Include="Areas\Administrator\Views\PromotionProducts\ViewAll.cshtml" />
     <Content Include="Areas\Administrator\Views\PromotionProducts\AddOrEdit.cshtml" />
     <Content Include="Areas\Administrator\Views\Employees\ForgotPass.cshtml" />
+    <Content Include="Areas\Administrator\Views\Profile\ChangePassword.cshtml" />
     <None Include="Scripts\jquery-3.4.1.intellisense.js" />
     <Content Include="Scripts\jquery-3.4.1.js" />
     <Content Include="Scripts\jquery-3.4.1.min.js" />
