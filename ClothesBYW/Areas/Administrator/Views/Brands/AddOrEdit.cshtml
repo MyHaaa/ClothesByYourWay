@@ -27,9 +27,19 @@
                 <div class="form-group">
                     @Html.LabelFor(model => model.ImageBrand, new { @class = "control-label col-md-3" })
                     <div class="col-md-3">
-                        @Html.TextBoxFor(model => model.ImageBrand, new { htmlAttributes = new { @class = "form-control", @id = "txtImage" } })
+                        @Html.TextBoxFor(model => model.ImageBrand, new { htmlAttributes = new { @class = "form-control", @id = "txtImage" }, id = "txtImage" })
                         <button class="btn btn-default" id="btnSelectImage">Chọn Ảnh</button>
                         @Html.ValidationMessageFor(model => model.ImageBrand)
+                        <script>
+                            $('#btnSelectImage').on('click', function (e) {
+                                e.preventDefault();
+                                var finder = new CKFinder();
+                                finder.selectActionFunction = function (url) {
+                                    $('#txtImage').val(url);
+                                };
+                                finder.popup();
+                            })
+                        </script>
                     </div>
                 </div>
 
