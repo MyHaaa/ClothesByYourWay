@@ -1064,6 +1064,8 @@
     <Content Include="Views\Product\ProductCategoriesPartial.cshtml" />
     <Content Include="Views\Product\Detail.cshtml" />
     <Content Include="Views\Product\ProductFeedbacksPartial.cshtml" />
+    <Content Include="Views\ShoppingCart\FormTTKH.cshtml" />
+    <Content Include="Views\ShoppingCart\Check_out_success.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

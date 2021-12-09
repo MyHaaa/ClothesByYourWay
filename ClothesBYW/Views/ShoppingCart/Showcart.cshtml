@@ -36,29 +36,29 @@
                             <tbody>
                                 @foreach (var pro in Model.Items)
                                 {
-                                <tr>
-                                    <td>@Html.DisplayFor(model => pro.sp.ProductName)</td>
-                                    @*<td><img src="@Url.Content(pro.sp.HinhMinhHoa)" height="50" width="50" /></td>*@
-                                    <td>@Html.DisplayFor(model => pro.sp.Prices.First().RetailPrice)</td>
-                                    <td>
-                                        @using (Html.BeginForm("Update_Cart_Qua", "ShoppingCart"))
-                                        {
-                                            <input type="hidden" value="@pro.sp.ProductID" name="IDPro" />
-                                            <input type="number" value="@pro.SoLuong" name="QualityPro" min="1" max="@pro.sp.QuantityInStock" />
-                                            <input type="submit" style="color:#ffffff; border:#4faaf0;background-color:#4faaf0; border-radius:10px 15px 10px 15px;" value="Update" />
-                                            <p></p>
-                                            <p>Sản phẩm chỉ còn @pro.sp.QuantityInStock</p>
+                                    <tr>
+                                        <td>@Html.DisplayFor(model => pro.sp.ProductName)</td>
+                                        @*<td><img src="@Url.Content(pro.sp.HinhMinhHoa)" height="50" width="50" /></td>*@
+                                        <td>@Html.DisplayFor(model => pro.sp.Prices.First().RetailPrice)</td>
+                                        <td>
+                                            @using (Html.BeginForm("Update_Cart_Qua", "ShoppingCart"))
+                                            {
+                                                <input type="hidden" value="@pro.sp.ProductID" name="IDPro" />
+                                                <input type="number" value="@pro.SoLuong" name="QualityPro" min="1" max="@pro.sp.QuantityInStock" />
+                                                <input type="submit" style="color: #ffffff; border: #4faaf0; background-color: #4faaf0; border-radius: 10px 15px 10px 15px; width: 100px;" value="Update" />
+                                                <p></p>
+                                                <p>Sản phẩm chỉ còn @pro.sp.QuantityInStock</p>
 
 
-                                        }
+                                            }
 
-                                    </td>
-                                    @{ var total = pro.sp.Prices.First().RetailPrice * pro.SoLuong;}
-                                    <td>@total</td>
-                                    <td>
-                                        <a href="/ShoppingCart/Remove/@pro.sp.ProductID/">Xóa</a>
-                                    </td>
-                                </tr>
+                                        </td>
+                                        @{ var total = pro.sp.Prices.First().RetailPrice * pro.SoLuong;}
+                                        <td>@total</td>
+                                        <td>
+                                            <a href="/ShoppingCart/Remove/@pro.sp.ProductID/">Xóa</a>
+                                        </td>
+                                    </tr>
 
                                 }
                             </tbody>
@@ -85,7 +85,9 @@
                                 </div>
                                 <div class="cart-btn">
                                     <button>Update Cart</button>
-                                    <button>Checkout</button>
+                                    <button>
+                                        <a href="/ShoppingCart/FormTTKH/" style="text-emphasis-color : black">Checkout</a>
+                                    </button>
                                 </div>
                             </div>
                         </div>
