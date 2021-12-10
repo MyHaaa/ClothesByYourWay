@@ -45,11 +45,11 @@ namespace Models.EF
         [StringLength(5)]
         public string Size { get; set; }
 
+        public int? SupplierID { get; set; }
+
         public int? ColorID { get; set; }
 
         public int? CategoryID { get; set; }
-
-        public long? PromotionID { get; set; }
 
         public int? BrandID { get; set; }
 
@@ -74,6 +74,8 @@ namespace Models.EF
 
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<ProductImage> ProductImages { get; set; }
+
+        public virtual Supplier Supplier { get; set; }
 
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<PromotionProduct> PromotionProducts { get; set; }
