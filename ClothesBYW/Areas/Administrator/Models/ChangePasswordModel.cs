@@ -28,4 +28,3 @@ namespace ClothesBYW.Areas.Administrator.Models
 
     }
 }
-}

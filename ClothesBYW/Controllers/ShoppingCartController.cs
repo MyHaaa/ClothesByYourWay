@@ -4,7 +4,9 @@ using System.Linq;
 using System.Web;
 using System.Web.Mvc;
 using ClothesBYW.Models;
+using ClothesBYW.Models.Customer;
 using Models.Dao;
+using Models.Dao.Customer;
 using Models.EF;
 
 namespace ClothesBYW.Controllers
@@ -99,16 +101,10 @@ namespace ClothesBYW.Controllers
             try
             {
                 Models.GioHang cart = Session["Models.GioHang"] as Models.GioHang;
-                // Khach hang moi
-                /* IDEA
-                 * Tạo 1 hàm, trong đó đầu vào là 1 chuỗi cũ (gọi là chuỗi x)
-                 * (VD: KH0001 -> Lấy từ db.TAIKHOAN.FindLast)
-                 * x.Subtring (0,2) -> chuỗi tĩnh
-                 * convert.ToInt(x.substring(2,last) -> số i cũ
-                 * Tăng i++
-                 * Convert i mới sang chuỗi 4 ký tự
-                 * kết quả= chuỗi tỉnh + chuỗi i
-                 */
+
+                var dao = new OrderDao();
+                /*
+                var orderID = dao.GenerateOrderID(UserLoginSingleton.GetInstance().GetAccount().ID, form["DiaChiKhachHang"],)
                 Customer kh = new Customer();
                 kh.CustomerCatergoryID = this.GuidId();//
                 kh.DateOfBirth = DateTime.Now;
@@ -147,10 +143,11 @@ namespace ClothesBYW.Controllers
 
                 db.SaveChanges();
                 cart.ClearCart();
+                */
 
                 return RedirectToAction("Check_out_success", "ShoppingCart");
             }
-            catch (Exception e)
+            catch (Exception)
             {
                 return Content("Error checkout. Please check information customer...");
             }

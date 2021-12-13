@@ -62,7 +62,9 @@
   <ItemGroup>
     <Compile Include="Dao\CustomerDao.cs" />
     <Compile Include="Dao\Customer\FeedbackDao.cs" />
+    <Compile Include="Dao\Customer\OrderDao.cs" />
     <Compile Include="Dao\Customer\ProductDao.cs" />
+    <Compile Include="Dao\Customer\UserDao.cs" />
     <Compile Include="Dao\EmployeeDao.cs" />
     <Compile Include="Dao\UserGroupDao.cs" />
     <Compile Include="EF\Brand.cs" />
