@@ -209,6 +209,10 @@ namespace Models.EF
                 .IsUnicode(false);
 
             modelBuilder.Entity<Product>()
+                .Property(e => e.RootKey)
+                .IsFixedLength();
+
+            modelBuilder.Entity<Product>()
                 .HasMany(e => e.ProductModifications)
                 .WithRequired(e => e.Product)
                 .WillCascadeOnDelete(false);

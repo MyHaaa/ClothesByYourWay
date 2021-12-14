@@ -19,6 +19,9 @@ namespace Models.EF
         [StringLength(500)]
         public string ColorName { get; set; }
 
+        [StringLength(500)]
+        public string Texture { get; set; }
+
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Product> Products { get; set; }
     }

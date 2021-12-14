@@ -53,6 +53,9 @@ namespace Models.EF
 
         public int? MinimumQuantityAvailable { get; set; }
 
+        [StringLength(500)]
+        public string RootKey { get; set; }
+
         public virtual Brand Brand { get; set; }
 
         public virtual Color Color { get; set; }
