@@ -21,8 +21,10 @@ namespace ClothesBYW.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult Register([Bind(Exclude = " ActivationCode")] Customer customer)
         {
+            /*
             bool status = false;
             string message = "";
+            */
 
             if (ModelState.IsValid)
             {
@@ -48,7 +50,7 @@ namespace ClothesBYW.Controllers
             }
             else
             {
-                message = " Yêu cầu không hợp lệ";
+                //message = " Yêu cầu không hợp lệ";
             }
 
             return View(customer);

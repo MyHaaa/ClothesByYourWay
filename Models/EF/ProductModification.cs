@@ -6,18 +6,21 @@ namespace Models.EF
     using System.ComponentModel.DataAnnotations.Schema;
     using System.Data.Entity.Spatial;
 
-    public partial class Price
+    public partial class ProductModification
     {
-        public int PriceID { get; set; }
+        [Key]
+        public long PMID { get; set; }
 
+        [Required]
         [StringLength(50)]
         public string ProductID { get; set; }
 
-        public decimal? WholeSalePrice { get; set; }
+        [StringLength(25)]
+        public string ModifiledBy { get; set; }
 
-        public decimal? RetailPrice { get; set; }
+        public DateTime? ModifiledDate { get; set; }
 
-        public decimal? StandardPrice { get; set; }
+        public string Note { get; set; }
 
         public virtual Product Product { get; set; }
     }

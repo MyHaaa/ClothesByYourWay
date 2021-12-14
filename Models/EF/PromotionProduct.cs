@@ -6,19 +6,20 @@ namespace Models.EF
     using System.ComponentModel.DataAnnotations.Schema;
     using System.Data.Entity.Spatial;
 
-    public partial class Price
+    public partial class PromotionProduct
     {
-        public int PriceID { get; set; }
+        public long PromotionProductID { get; set; }
 
+        public long PromotionID { get; set; }
+
+        [Required]
         [StringLength(50)]
         public string ProductID { get; set; }
 
-        public decimal? WholeSalePrice { get; set; }
-
-        public decimal? RetailPrice { get; set; }
-
-        public decimal? StandardPrice { get; set; }
+        public decimal? EachPrice { get; set; }
 
         public virtual Product Product { get; set; }
+
+        public virtual Promotion Promotion { get; set; }
     }
 }

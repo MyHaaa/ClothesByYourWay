@@ -56,7 +56,7 @@ namespace Models.Dao
                 db.SaveChanges();
                 return true;
             }
-            catch (Exception e)
+            catch (Exception)
             {
                 return false;
             }
@@ -173,7 +173,7 @@ namespace Models.Dao
                 db.SaveChanges();
                 return true;
             }
-            catch (Exception e)
+            catch (Exception)
             {
                 return false;
             }

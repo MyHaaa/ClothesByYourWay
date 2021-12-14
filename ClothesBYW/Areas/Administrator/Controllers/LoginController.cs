@@ -84,8 +84,10 @@ namespace ClothesBYW.Areas.Administrator.Controllers
         [HttpPost]
         public ActionResult ForgotPass(string email)
         {
+            /*
             string message = "";
             bool status = false;
+            */
 
             var account = db.Employees.Where(a => a.Email == email).FirstOrDefault();
             if(account != null)
@@ -95,7 +97,7 @@ namespace ClothesBYW.Areas.Administrator.Controllers
             }
             else
             {
-                message = "Xin lỗi, Email bạn vừa nhập không tồn tại trong hệ thống";
+                //message = "Xin lỗi, Email bạn vừa nhập không tồn tại trong hệ thống";
             }
 
             return View();

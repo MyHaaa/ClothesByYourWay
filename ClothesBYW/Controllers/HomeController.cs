@@ -88,7 +88,7 @@ namespace ClothesBYW.Controllers
         }
         public ActionResult ProductFeatured()
         {
-            ViewBag.ProductFeatured = db.Products.OrderByDescending(x => x.ModifiledDate).Take(8).ToList();
+            ViewBag.ProductFeatured = db.Products.OrderByDescending(x => x.CreatedDate).Take(8).ToList();
             return View();
         }
     }

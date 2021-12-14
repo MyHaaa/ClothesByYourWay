@@ -25,6 +25,8 @@ namespace Models.EF
 
         public DateTime? CreateDate { get; set; }
 
+        public bool? Status { get; set; }
+
         public virtual Customer Customer { get; set; }
 
         public virtual Product Product { get; set; }

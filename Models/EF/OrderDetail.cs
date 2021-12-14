@@ -14,6 +14,8 @@ namespace Models.EF
         [StringLength(50)]
         public string OrderID { get; set; }
 
+        public decimal? PriceEach { get; set; }
+
         [StringLength(50)]
         public string ProductID { get; set; }
 
@@ -22,23 +24,5 @@ namespace Models.EF
         public virtual Order Order { get; set; }
 
         public virtual Product Product { get; set; }
-
-        public double Total
-        {
-            get
-            {
-                //if (this.QuantitySold != null && Price.StandardPrice != null)
-                //{
-                //    return (double)(this.QuantitySold * this.DonGia);
-                //}
-                //return 0;
-                //if (this.QuantitySold != null)
-                //{
-                //    return 0;
-                //}
-                return 0;
-
-            }
-        }
     }
 }

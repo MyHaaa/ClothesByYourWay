@@ -28,8 +28,6 @@ namespace Models.EF
         public string Password { get; set; }
 
         [Column(TypeName = "smalldatetime")]
-        [Display(Name = "Ngày sinh")]
-        [DisplayFormat(ApplyFormatInEditMode = true, DataFormatString = "{0:yyyy-MM-ddThh:mm:ss}")]
         public DateTime? DateOfBirth { get; set; }
 
         [StringLength(10)]

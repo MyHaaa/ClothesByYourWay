@@ -63,7 +63,9 @@
     <Compile Include="Dao\Customer\ProductDao.cs" />
     <Compile Include="Dao\EmployeeDao.cs" />
     <Compile Include="Dao\UserGroupDao.cs" />
+    <Compile Include="EF\Brand.cs" />
     <Compile Include="EF\ClothesBYWDbContext.cs" />
+    <Compile Include="EF\Color.cs" />
     <Compile Include="EF\Credential.cs" />
     <Compile Include="EF\Customer.cs" />
     <Compile Include="EF\CustomerCategory.cs" />
@@ -76,12 +78,16 @@
     <Compile Include="EF\Product.cs" />
     <Compile Include="EF\ProductCategory.cs" />
     <Compile Include="EF\ProductImage.cs" />
+    <Compile Include="EF\ProductModification.cs" />
     <Compile Include="EF\Promotion.cs" />
+    <Compile Include="EF\PromotionProduct.cs" />
     <Compile Include="EF\PurchaseOrder.cs" />
     <Compile Include="EF\PurchaseOrderDetail.cs" />
     <Compile Include="EF\Role.cs" />
     <Compile Include="EF\Shipper.cs" />
+    <Compile Include="EF\ShipperOrder.cs" />
     <Compile Include="EF\Supplier.cs" />
+    <Compile Include="EF\sysdiagram.cs" />
     <Compile Include="EF\UserGroup.cs" />
     <Compile Include="EF\Voucher.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
