@@ -16,7 +16,7 @@ namespace Models.Dao
         }
         public int Login(string email, string password)
         {
-            var result = db.Customers.SingleOrDefault(x => x.Email == email);
+            var result = db.Customers.SingleOrDefault(x => x.Email == email || x.Username == email);
             if (result == null)
             {
                 return 0;
@@ -38,7 +38,7 @@ namespace Models.Dao
         }
         public EF.Customer GetCustomer(string email)
         {
-            return db.Customers.SingleOrDefault(x => x.Email == email);
+            return db.Customers.SingleOrDefault(x => x.Email == email || x.Username == email);
         }
         public int Regist(string name, string email, string phone, string password)
         {

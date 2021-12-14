@@ -1,0 +1,18 @@
+﻿
+@model List<Models.EF.Feedback>
+
+@foreach (var item in Model)
+{
+    <div class="reviews-submitted">
+        <div class="reviewer">@item.Customer.Name - @item.Title - <span>@item.CreateDate</span></div>
+        <div class="ratting">
+            @for (int i = 1; i <= item.Star; i++)
+            {
+                <i class="fa fa-star"></i>
+            }
+        </div>
+        <p>
+            @item.Content
+        </p>
+    </div>
+}

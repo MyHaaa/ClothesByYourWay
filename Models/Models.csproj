@@ -60,6 +60,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Dao\CustomerDao.cs" />
+    <Compile Include="Dao\Customer\FeedbackDao.cs" />
     <Compile Include="Dao\Customer\ProductDao.cs" />
     <Compile Include="Dao\EmployeeDao.cs" />
     <Compile Include="Dao\UserGroupDao.cs" />
@@ -91,6 +92,7 @@
     <Compile Include="EF\UserGroup.cs" />
     <Compile Include="EF\Voucher.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="ViewModels\Customer\Product\ProductListRequest.cs" />
     <Compile Include="ViewModels\RoleWithGroupModel.cs" />
     <Compile Include="ViewModels\UserWithGroupView.cs" />
   </ItemGroup>
@@ -107,6 +109,7 @@
     <None Include="App.config" />
     <None Include="packages.config" />
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">
     <PropertyGroup>
