@@ -21,9 +21,7 @@ namespace ClothesBYW.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult Register([Bind(Exclude = " ActivationCode")] Customer customer)
         {
-            bool status = false;
-            string message = "";
-
+            var message = "";
             if (ModelState.IsValid)
             {
                 var isExist = IsEmailExist(customer.Email);

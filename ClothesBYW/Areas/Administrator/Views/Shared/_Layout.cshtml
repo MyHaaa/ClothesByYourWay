@@ -329,6 +329,7 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
     </section>
     <script src="/Assets/Admin/js/jquery2.0.3.min.js"></script>
     <script src="/Assets/Admin/js/bootstrap.js"></script>
+    <script src="/Scripts/bootstrap-notify.js"></script>
     <script src="/Assets/Admin/js/jquery.dcjqaccordion.2.7.js"></script>
     <script src="/Assets/Admin/js/scripts.js"></script>
     <script src="/Assets/Admin/js/plugins/ckfinder/ckfinder.js"></script>
@@ -356,18 +357,8 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
     </script>
     <!-- calendar -->
     @RenderSection("jsFooter", required: false)
-    <script src="~/Assets/Admin/js/Controller/csController.js"></script>
+    <script src="/Assets/Admin/js/Controller/csController.js"></script>
 
-    <script>
-        $('#btnSelectImage').on('click', function (e) {
-            e.preventDefault();
-            var finder = new CKFinder();
-            finder.selectActionFunction = function (url) {
-                $('#txtImage').val(url);
-            };
-            finder.popup();
-        })
-    </script>
 </body>
 </html>
 

@@ -8,8 +8,7 @@ namespace Models.EF
 
     public partial class Price
     {
-        [StringLength(50)]
-        public string PriceID { get; set; }
+        public int PriceID { get; set; }
 
         [StringLength(50)]
         public string ProductID { get; set; }

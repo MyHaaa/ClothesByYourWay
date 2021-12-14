@@ -1,7 +1,9 @@
-﻿using Models.EF;
+﻿using ClothesBYW.Areas.Administrator.Models;
+using Models.EF;
 using System;
 using System.Collections.Generic;
 using System.Data.Entity;
+using System.IO;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
@@ -18,37 +20,59 @@ namespace ClothesBYW.Areas.Administrator.Controllers
             return View(db.Employees.SingleOrDefault(x => x.Username == username));
         }
 
-        [HttpGet]
-        public ActionResult Edit()
+        [HttpPost]
+        public ActionResult UpdateAva(PictureUpdate obj)
         {
             string username = Session["Username"].ToString();
-            return View(db.Employees.SingleOrDefault(x => x.Username == username));
+            var file = obj.Picture;
+            Employee emp = db.Employees.SingleOrDefault(x => x.Username == username);
+            if (file != null)
+            {
+                var extension = Path.GetExtension(file.FileName);
+                string id_and_extension = username + extension;
+                string imgUrl = "/Areas/Administrator/Data" + id_and_extension;
+                emp.Image = imgUrl;
+                db.Entry(emp).State = EntityState.Modified;
+                db.SaveChanges();
+
+                var path = Server.MapPath("/Areas/Administrator/Data");
+                if (!Directory.Exists(path))
+                {
+                    Directory.CreateDirectory(path);
+                }
+                if ((System.IO.File.Exists(path + id_and_extension)))
+                {
+                    System.IO.File.Delete(path + id_and_extension);
+                }
+                file.SaveAs((path + id_and_extension));
+            }
+            return RedirectToAction("Index");
         }
 
-        [HttpPost]
-        public ActionResult Edit(Employee employee)
+        [HttpGet]
+        public ActionResult ChangePassword()
         {
             string username = Session["Username"].ToString();
+            return View();
+        }
 
-            if (ModelState.IsValid)
+        [HttpPost, ValidateAntiForgeryToken]
+        public ActionResult ChangePassword(ChangePasswordModel model)
+        {
+            string username = Session["Username"].ToString();
+            Employee emp = db.Employees.SingleOrDefault(x => x.Username == username);
+            if (emp.Password == model.OldPassword)
             {
-                //db.Entry(customer).State = EntityState.Modified;
-                var cus = db.Employees.SingleOrDefault(x => x.Username == username);
-
-                cus.Name = cus.Name;
-                cus.Username = employee.Username;
-                cus.Password = cus.Password;
-                cus.Address = employee.Address;
-                cus.Email = cus.Email;
-                cus.Phone = employee.Phone;
-                cus.DateOfBirth = cus.DateOfBirth;
-                cus.CitizenID = cus.CitizenID;
-
-                db.Entry(cus).State = EntityState.Modified;
+                emp.Password = model.NewPassword;
+                db.Entry(emp).State = EntityState.Modified;
                 db.SaveChanges();
-                return RedirectToAction("Index", "Profile");
+                return RedirectToAction("Index");
             }
-            return View(employee);
+            else
+            {
+                ModelState.AddModelError("Mật khẩu cũ", "Mật khẩu cũ không trùng khớp");
+            }
+            return View();
         }
     }
 }

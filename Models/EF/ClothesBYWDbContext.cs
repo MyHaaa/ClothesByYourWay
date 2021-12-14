@@ -24,6 +24,7 @@ namespace Models.EF
         public virtual DbSet<Price> Prices { get; set; }
         public virtual DbSet<ProductCategory> ProductCategories { get; set; }
         public virtual DbSet<ProductImage> ProductImages { get; set; }
+        public virtual DbSet<ProductModification> ProductModifications { get; set; }
         public virtual DbSet<Product> Products { get; set; }
         public virtual DbSet<PromotionProduct> PromotionProducts { get; set; }
         public virtual DbSet<Promotion> Promotions { get; set; }
@@ -152,9 +153,6 @@ namespace Models.EF
                 .Property(e => e.VoucherID)
                 .IsUnicode(false);
 
-            modelBuilder.Entity<Price>()
-                .Property(e => e.PriceID)
-                .IsUnicode(false);
 
             modelBuilder.Entity<Price>()
                 .Property(e => e.ProductID)
@@ -185,6 +183,14 @@ namespace Models.EF
                 .Property(e => e.ImageLink)
                 .IsUnicode(false);
 
+            modelBuilder.Entity<ProductModification>()
+                .Property(e => e.ProductID)
+                .IsUnicode(false);
+
+            modelBuilder.Entity<ProductModification>()
+                .Property(e => e.ModifiledBy)
+                .IsUnicode(false);
+
             modelBuilder.Entity<Product>()
                 .Property(e => e.ProductID)
                 .IsUnicode(false);
@@ -198,12 +204,13 @@ namespace Models.EF
                 .IsUnicode(false);
 
             modelBuilder.Entity<Product>()
-                .Property(e => e.ModifiledBy)
+                .Property(e => e.Size)
                 .IsUnicode(false);
 
             modelBuilder.Entity<Product>()
-                .Property(e => e.Size)
-                .IsUnicode(false);
+                .HasMany(e => e.ProductModifications)
+                .WithRequired(e => e.Product)
+                .WillCascadeOnDelete(false);
 
             modelBuilder.Entity<Product>()
                 .HasMany(e => e.PromotionProducts)
