@@ -27,6 +27,7 @@ namespace ClothesBYW.Controllers
                     default: return View(dao.GetProducts());
                 }
             }
+
             if(request.PriceRange != null)
             {
                 return View(dao.GetProducts(double.Parse(request.PriceRange.ToString())));
