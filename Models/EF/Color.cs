@@ -11,7 +11,7 @@ namespace Models.EF
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
         public Color()
         {
-            Products = new HashSet<Product>();
+            ProductLines = new HashSet<ProductLine>();
         }
 
         public int ColorID { get; set; }
@@ -19,10 +19,9 @@ namespace Models.EF
         [StringLength(500)]
         public string ColorName { get; set; }
 
-        [StringLength(500)]
         public string Texture { get; set; }
 
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<Product> Products { get; set; }
+        public virtual ICollection<ProductLine> ProductLines { get; set; }
     }
 }

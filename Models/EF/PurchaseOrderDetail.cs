@@ -16,7 +16,7 @@ namespace Models.EF
         public string PurchaseOrderID { get; set; }
 
         [StringLength(50)]
-        public string ProductID { get; set; }
+        public string ProductLineID { get; set; }
 
         public long? QuantityPurchase { get; set; }
 
@@ -24,7 +24,7 @@ namespace Models.EF
 
         public int? Status { get; set; }
 
-        public virtual Product Product { get; set; }
+        public virtual ProductLine ProductLine { get; set; }
 
         public virtual PurchaseOrder PurchaseOrder { get; set; }
     }

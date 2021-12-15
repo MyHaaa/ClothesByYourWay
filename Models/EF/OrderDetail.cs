@@ -17,12 +17,12 @@ namespace Models.EF
         public decimal? PriceEach { get; set; }
 
         [StringLength(50)]
-        public string ProductID { get; set; }
+        public string ProductLineID { get; set; }
 
         public int? QuantitySold { get; set; }
 
         public virtual Order Order { get; set; }
 
-        public virtual Product Product { get; set; }
+        public virtual ProductLine ProductLine { get; set; }
     }
 }

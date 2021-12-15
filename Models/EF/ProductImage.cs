@@ -11,10 +11,10 @@ namespace Models.EF
         public long ProductImageID { get; set; }
 
         [StringLength(50)]
-        public string ProductID { get; set; }
+        public string ProductLineID { get; set; }
 
         public string ImageLink { get; set; }
 
-        public virtual Product Product { get; set; }
+        public virtual ProductLine ProductLine { get; set; }
     }
 }

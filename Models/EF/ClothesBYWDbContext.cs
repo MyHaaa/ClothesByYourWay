@@ -25,6 +25,7 @@ namespace Models.EF
         public virtual DbSet<Price> Prices { get; set; }
         public virtual DbSet<ProductCategory> ProductCategories { get; set; }
         public virtual DbSet<ProductImage> ProductImages { get; set; }
+        public virtual DbSet<ProductLine> ProductLines { get; set; }
         public virtual DbSet<ProductModification> ProductModifications { get; set; }
         public virtual DbSet<Product> Products { get; set; }
         public virtual DbSet<PromotionProduct> PromotionProducts { get; set; }
@@ -35,7 +36,6 @@ namespace Models.EF
         public virtual DbSet<ShipperOrder> ShipperOrders { get; set; }
         public virtual DbSet<Shipper> Shippers { get; set; }
         public virtual DbSet<Supplier> Suppliers { get; set; }
-        public virtual DbSet<sysdiagram> sysdiagrams { get; set; }
         public virtual DbSet<UserGroup> UserGroups { get; set; }
         public virtual DbSet<Voucher> Vouchers { get; set; }
 
@@ -43,6 +43,10 @@ namespace Models.EF
         {
             modelBuilder.Entity<Brand>()
                 .Property(e => e.ImageBrand)
+                .IsUnicode(false);
+
+            modelBuilder.Entity<Color>()
+                .Property(e => e.Texture)
                 .IsUnicode(false);
 
             modelBuilder.Entity<Credential>()
@@ -140,7 +144,7 @@ namespace Models.EF
                 .IsUnicode(false);
 
             modelBuilder.Entity<OrderDetail>()
-                .Property(e => e.ProductID)
+                .Property(e => e.ProductLineID)
                 .IsUnicode(false);
 
             modelBuilder.Entity<Order>()
@@ -177,11 +181,31 @@ namespace Models.EF
                 .HasForeignKey(e => e.CategoryID);
 
             modelBuilder.Entity<ProductImage>()
-                .Property(e => e.ProductID)
+                .Property(e => e.ProductLineID)
                 .IsUnicode(false);
 
             modelBuilder.Entity<ProductImage>()
                 .Property(e => e.ImageLink)
+                .IsUnicode(false);
+
+            modelBuilder.Entity<ProductLine>()
+                .Property(e => e.ProductLineID)
+                .IsUnicode(false);
+
+            modelBuilder.Entity<ProductLine>()
+                .Property(e => e.ProductID)
+                .IsUnicode(false);
+
+            modelBuilder.Entity<ProductLine>()
+                .Property(e => e.Alias)
+                .IsUnicode(false);
+
+            modelBuilder.Entity<ProductLine>()
+                .Property(e => e.Size)
+                .IsUnicode(false);
+
+            modelBuilder.Entity<ProductLine>()
+                .Property(e => e.CreatedBy)
                 .IsUnicode(false);
 
             modelBuilder.Entity<ProductModification>()
@@ -203,14 +227,6 @@ namespace Models.EF
             modelBuilder.Entity<Product>()
                 .Property(e => e.CreatedBy)
                 .IsUnicode(false);
-
-            modelBuilder.Entity<Product>()
-                .Property(e => e.Size)
-                .IsUnicode(false);
-
-            modelBuilder.Entity<Product>()
-                .Property(e => e.RootKey)
-                .IsFixedLength();
 
             modelBuilder.Entity<Product>()
                 .HasMany(e => e.ProductModifications)
@@ -240,7 +256,7 @@ namespace Models.EF
                 .IsUnicode(false);
 
             modelBuilder.Entity<PurchaseOrderDetail>()
-                .Property(e => e.ProductID)
+                .Property(e => e.ProductLineID)
                 .IsUnicode(false);
 
             modelBuilder.Entity<PurchaseOrder>()
