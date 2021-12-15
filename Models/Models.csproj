@@ -79,6 +79,7 @@
     <Compile Include="EF\Product.cs" />
     <Compile Include="EF\ProductCategory.cs" />
     <Compile Include="EF\ProductImage.cs" />
+    <Compile Include="EF\ProductLine.cs" />
     <Compile Include="EF\ProductModification.cs" />
     <Compile Include="EF\Promotion.cs" />
     <Compile Include="EF\PromotionProduct.cs" />
@@ -88,7 +89,6 @@
     <Compile Include="EF\Shipper.cs" />
     <Compile Include="EF\ShipperOrder.cs" />
     <Compile Include="EF\Supplier.cs" />
-    <Compile Include="EF\sysdiagram.cs" />
     <Compile Include="EF\UserGroup.cs" />
     <Compile Include="EF\Voucher.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
