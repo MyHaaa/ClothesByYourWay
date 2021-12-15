@@ -13,7 +13,6 @@ namespace Models.EF
         {
             ProductLines = new HashSet<ProductLine>();
         }
-
         public int ColorID { get; set; }
 
         [StringLength(500)]

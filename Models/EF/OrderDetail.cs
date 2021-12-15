@@ -22,7 +22,6 @@ namespace Models.EF
         public int? QuantitySold { get; set; }
 
         public virtual Order Order { get; set; }
-
         public virtual ProductLine ProductLine { get; set; }
     }
 }

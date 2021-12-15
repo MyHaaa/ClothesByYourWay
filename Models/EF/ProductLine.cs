@@ -15,7 +15,6 @@ namespace Models.EF
             ProductImages = new HashSet<ProductImage>();
             PurchaseOrderDetails = new HashSet<PurchaseOrderDetail>();
         }
-
         [StringLength(50)]
         public string ProductLineID { get; set; }
 

@@ -14,7 +14,6 @@ namespace Models.EF
         public string ProductLineID { get; set; }
 
         public string ImageLink { get; set; }
-
         public virtual ProductLine ProductLine { get; set; }
     }
 }

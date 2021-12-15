@@ -17,7 +17,6 @@ namespace Models.EF
             ProductModifications = new HashSet<ProductModification>();
             PromotionProducts = new HashSet<PromotionProduct>();
         }
-
         [StringLength(50)]
         public string ProductID { get; set; }
 

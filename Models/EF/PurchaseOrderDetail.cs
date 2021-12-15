@@ -5,7 +5,6 @@ namespace Models.EF
     using System.ComponentModel.DataAnnotations;
     using System.ComponentModel.DataAnnotations.Schema;
     using System.Data.Entity.Spatial;
-
     public partial class PurchaseOrderDetail
     {
         [StringLength(50)]

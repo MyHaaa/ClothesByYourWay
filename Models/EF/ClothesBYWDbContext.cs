@@ -38,7 +38,6 @@ namespace Models.EF
         public virtual DbSet<Supplier> Suppliers { get; set; }
         public virtual DbSet<UserGroup> UserGroups { get; set; }
         public virtual DbSet<Voucher> Vouchers { get; set; }
-
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
         {
             modelBuilder.Entity<Brand>()
