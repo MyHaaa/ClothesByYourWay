@@ -11,8 +11,8 @@ namespace Models.EF
         public string Description { get; set; }
         public DateTime? CreatedDate { get; set; }
         public string CreatedBy { get; set; }
-        public int? CategoryID { get; set; }
-        public int? BrandID { get; set; }
+        public int CategoryID { get; set; }
+        public int BrandID { get; set; }
         public int? Status { get; set; }
         public virtual Brand Brand { get; set; }
         public virtual ProductCategory ProductCategory { get; set; }

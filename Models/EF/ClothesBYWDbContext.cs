@@ -8,7 +8,7 @@ namespace Models.EF
     public class ClothesBYWDbContext : DbContext
     {
         public ClothesBYWDbContext()
-            : base("name=ClothesBYWDbContext")
+            : base("name=ClothesBYW")
         {
             Database.SetInitializer(new ModalSeedData());
         }
@@ -89,7 +89,6 @@ namespace Models.EF
             modelBuilder.Entity<ProductLine>().ToTable("ProductLines").HasKey(x => x.ProductLineID);
             modelBuilder.Entity<ProductLine>().HasRequired(x => x.Color).WithMany(x => x.ProductLines).HasForeignKey(x => x.ColorID);
             modelBuilder.Entity<ProductLine>().HasRequired(x => x.Product).WithMany(x => x.ProductLines).HasForeignKey(x => x.ProductID);
-            modelBuilder.Entity<ProductLine>().HasRequired(x => x.Supplier).WithMany(x => x.ProductLines).HasForeignKey(x => x.SupplierID);
 
             modelBuilder.Entity<ProductModification>().ToTable("ProductModifications").HasKey(x => x.PMID);
             modelBuilder.Entity<ProductModification>().HasRequired(x => x.Product).WithMany(x => x.ProductModifications).HasForeignKey(x => x.ProductID);

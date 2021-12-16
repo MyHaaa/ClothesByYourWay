@@ -6,7 +6,7 @@ namespace Models.EF
     public class PurchaseOrder
     {
         public string PurchaseOrderID { get; set; }
-        public int? SupplierID { get; set; }
+        public int SupplierID { get; set; }
         public decimal? TotalAmountPurchase { get; set; }
         public DateTime? CreatedDate { get; set; }
         public string CreatedBy { get; set; }

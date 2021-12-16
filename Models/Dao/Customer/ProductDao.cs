@@ -20,7 +20,11 @@ namespace Models.Dao.Customer
         public Product GetProductDetail(string id) => db.Products.Where(x => x.ProductID == id).FirstOrDefault();
         public List<Product> GetProducts(string keyword) => db.Products.Where(x => x.ProductName.Contains(keyword) || x.Description.Contains(keyword)).ToList();
         public List<Product> GetProductsSortByNew() => db.Products.OrderBy(x => x.CreatedDate).ToList();
-        public List<Product> GetProductsSortByMostSale() => db.Products.OrderBy(x => x.OrderDetails.Count).ToList();
+        public List<Product> GetProductsSortByMostSale()
+        {
+            return new List<Product>();
+            //db.Products.OrderBy(x => x.OrderDetails.Count).ToList();
+        }
         public List<Product> GetProducts(double range)
         {
             var convertedRange = decimal.Parse(range.ToString());
