@@ -122,7 +122,7 @@ namespace Models.EF
 
             modelBuilder.Entity<Voucher>().ToTable("Voucher").HasKey(x => x.VoucherID);
 
-            ModalSeedData.Seed(this);
+            base.OnModelCreating(modelBuilder);
         }
     }
 }
