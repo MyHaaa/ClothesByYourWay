@@ -10,7 +10,6 @@ namespace Models.EF
         public ClothesBYWDbContext()
             : base("name=ClothesBYW")
         {
-            Database.SetInitializer(new ModalSeedData());
         }
 
         public virtual DbSet<Brand> Brands { get; set; }
@@ -89,6 +88,7 @@ namespace Models.EF
             modelBuilder.Entity<ProductLine>().ToTable("ProductLines").HasKey(x => x.ProductLineID);
             modelBuilder.Entity<ProductLine>().HasRequired(x => x.Color).WithMany(x => x.ProductLines).HasForeignKey(x => x.ColorID);
             modelBuilder.Entity<ProductLine>().HasRequired(x => x.Product).WithMany(x => x.ProductLines).HasForeignKey(x => x.ProductID);
+            modelBuilder.Entity<ProductLine>().HasRequired(x => x.Supplier).WithMany(x => x.ProductLines).HasForeignKey(x => x.SupplierID);
 
             modelBuilder.Entity<ProductModification>().ToTable("ProductModifications").HasKey(x => x.PMID);
             modelBuilder.Entity<ProductModification>().HasRequired(x => x.Product).WithMany(x => x.ProductModifications).HasForeignKey(x => x.ProductID);
@@ -100,7 +100,6 @@ namespace Models.EF
             modelBuilder.Entity<PromotionProduct>().HasRequired(x => x.Promotion).WithMany(x => x.PromotionProducts).HasForeignKey(x => x.PromotionID);
 
             modelBuilder.Entity<PurchaseOrder>().ToTable("PurchaseOrders").HasKey(x => x.PurchaseOrderID);
-            modelBuilder.Entity<PurchaseOrder>().HasRequired(x => x.Supplier).WithMany(x => x.PurchaseOrders).HasForeignKey(x => x.SupplierID);
 
             modelBuilder.Entity<PurchaseOrderDetail>().ToTable("PurchaseOrderDetails").HasKey(x => x.PurchaseOrderDetailID);
             modelBuilder.Entity<PurchaseOrderDetail>().HasRequired(x => x.ProductLine).WithMany(x => x.PurchaseOrderDetails).HasForeignKey(x => x.ProductLineID);
@@ -123,6 +122,7 @@ namespace Models.EF
 
             modelBuilder.Entity<Voucher>().ToTable("Voucher").HasKey(x => x.VoucherID);
 
+            ModalSeedData.Seed(this);
         }
     }
 }

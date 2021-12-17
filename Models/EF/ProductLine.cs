@@ -15,8 +15,10 @@ namespace Models.EF
         public long QuantityInStock { get; set; }
         public string CreatedBy { get; set; }
         public DateTime? CreatedDate { get; set; }
+        public int SupplierID { get; set; }
         public virtual Color Color { get; set; }
         public virtual Product Product { get; set; }
+        public virtual Supplier Supplier { get; set; }
         public virtual List<OrderDetail> OrderDetails { get; set; }
         public virtual List<ProductImage> ProductImages { get; set; }
         public virtual List<PurchaseOrderDetail> PurchaseOrderDetails { get; set; }

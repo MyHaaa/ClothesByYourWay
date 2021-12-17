@@ -12,6 +12,6 @@ namespace Models.EF
         public string ContactPerson { get; set; }
         public string PhoneSupplier { get; set; }
         public string PhoneContactPerson { get; set; }
-        public virtual List<PurchaseOrder> PurchaseOrders { get; set; }
+        public virtual List<ProductLine> ProductLines { get; set; }
     }
 }

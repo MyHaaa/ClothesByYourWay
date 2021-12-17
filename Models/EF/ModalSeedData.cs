@@ -7,17 +7,16 @@ using System.Threading.Tasks;
 
 namespace Models.EF
 {
-    public class ModalSeedData: DropCreateDatabaseAlways<ClothesBYWDbContext>
+    public static class ModalSeedData
     {
-        protected override void Seed(ClothesBYWDbContext context)
+        public static void Seed(ClothesBYWDbContext context)
         {
             context.Colors.Add(new Color()
             {
-                ColorName = "Test",
+                ColorName = "Red",
                 Texture = "xxx"
             });
             context.SaveChanges();
-            base.Seed(context);
         }
     }
 }
