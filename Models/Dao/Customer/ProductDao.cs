@@ -14,7 +14,23 @@ namespace Models.Dao.Customer
         {
             db = new ClothesBYWDbContext();
         }
-        public List<Product> GetProducts() => db.Products.ToList();
+        public List<Product> GetProducts()
+        {
+            var list = db.Products.Where(x => x.ProductLines.Count>0).ToList();
+            foreach (var item in list)
+            {
+                var image = item.ProductLines.FirstOrDefault().ProductImages.FirstOrDefault();
+                if(image != null)
+                {
+                    item.MetaKeyword = image.ImageLink;
+                }
+                else
+                {
+                    item.MetaKeyword = "/Assets/Client/img/Product/12-2.png";
+                }
+            }
+            return list;
+        }
         public List<ProductCategory> GetCategories() => db.ProductCategories.ToList();
         public List<Product> GetProducts(int cateID) => db.Products.Where(x => x.CategoryID == cateID).ToList();
         public Product GetProductDetail(string id) => db.Products.Where(x => x.ProductID == id).FirstOrDefault();
