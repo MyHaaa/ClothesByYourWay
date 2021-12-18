@@ -1,4 +1,6 @@
-﻿@{
+﻿@model ClothesBYW.Models.GioHang
+@{
+    ViewBag.Title = "Showcart";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
@@ -26,102 +28,43 @@
                                 <tr>
                                     <th>Product</th>
                                     <th>Price</th>
+                                    <th>Color</th>
+                                    <th>Size</th>
                                     <th>Quantity</th>
                                     <th>Total</th>
                                     <th>Remove</th>
                                 </tr>
                             </thead>
-                            <tbody class="align-middle">
+                            <tbody>
+                                @foreach (var pro in Model.Items)
+                                {
                                 <tr>
+                                    <td>@Html.DisplayFor(model => pro.sp.Product.ProductName)</td>
+                                    @*<td><img src="@Url.Content(pro.sp.HinhMinhHoa)" height="50" width="50" /></td>*@
+                                    <td>@Html.DisplayFor(model => pro.Price)</td>
+                                    <td>@Html.DisplayFor(model => pro.sp.Color.ColorName)</td>
+                                    <td>@Html.DisplayFor(model => pro.sp.Product.ProductLines.First().Size)</td>
                                     <td>
-                                        <div class="img">
-                                            <a href="#"><img src="img/product-1.jpg" alt="Image"></a>
-                                            <p>Product Name</p>
-                                        </div>
+                                        @using (Html.BeginForm("Update_Cart_Qua", "ShoppingCart"))
+                                        {
+                                            <input type="hidden" value="@pro.sp.ProductLineID" name="IDPro" />
+                                            <input type="number" value="@pro.SoLuong" name="QualityPro" min="1" max="@pro.sp.QuantityInStock" />
+                                            <input type="submit" style="color: #ffffff; border: #4faaf0; background-color: #4faaf0; border-radius: 10px 15px 10px 15px; width: 100px;" value="Update" />
+                                            <p></p>
+                                            <p>Sản phẩm chỉ còn @pro.sp.QuantityInStock</p>
+
+
+                                        }
+
                                     </td>
-                                    <td>$99</td>
+
+                                    <td>@pro.Total()</td>
                                     <td>
-                                        <div class="qty">
-                                            <button class="btn-minus"><i class="fa fa-minus"></i></button>
-                                            <input type="text" value="1">
-                                            <button class="btn-plus"><i class="fa fa-plus"></i></button>
-                                        </div>
+                                        <a href="/ShoppingCart/Remove/@pro.sp.ProductLineID/">Xóa</a>
                                     </td>
-                                    <td>$99</td>
-                                    <td><button><i class="fa fa-trash"></i></button></td>
                                 </tr>
-                                <tr>
-                                    <td>
-                                        <div class="img">
-                                            <a href="#"><img src="img/product-2.jpg" alt="Image"></a>
-                                            <p>Product Name</p>
-                                        </div>
-                                    </td>
-                                    <td>$99</td>
-                                    <td>
-                                        <div class="qty">
-                                            <button class="btn-minus"><i class="fa fa-minus"></i></button>
-                                            <input type="text" value="1">
-                                            <button class="btn-plus"><i class="fa fa-plus"></i></button>
-                                        </div>
-                                    </td>
-                                    <td>$99</td>
-                                    <td><button><i class="fa fa-trash"></i></button></td>
-                                </tr>
-                                <tr>
-                                    <td>
-                                        <div class="img">
-                                            <a href="#"><img src="img/product-3.jpg" alt="Image"></a>
-                                            <p>Product Name</p>
-                                        </div>
-                                    </td>
-                                    <td>$99</td>
-                                    <td>
-                                        <div class="qty">
-                                            <button class="btn-minus"><i class="fa fa-minus"></i></button>
-                                            <input type="text" value="1">
-                                            <button class="btn-plus"><i class="fa fa-plus"></i></button>
-                                        </div>
-                                    </td>
-                                    <td>$99</td>
-                                    <td><button><i class="fa fa-trash"></i></button></td>
-                                </tr>
-                                <tr>
-                                    <td>
-                                        <div class="img">
-                                            <a href="#"><img src="img/product-4.jpg" alt="Image"></a>
-                                            <p>Product Name</p>
-                                        </div>
-                                    </td>
-                                    <td>$99</td>
-                                    <td>
-                                        <div class="qty">
-                                            <button class="btn-minus"><i class="fa fa-minus"></i></button>
-                                            <input type="text" value="1">
-                                            <button class="btn-plus"><i class="fa fa-plus"></i></button>
-                                        </div>
-                                    </td>
-                                    <td>$99</td>
-                                    <td><button><i class="fa fa-trash"></i></button></td>
-                                </tr>
-                                <tr>
-                                    <td>
-                                        <div class="img">
-                                            <a href="#"><img src="img/product-5.jpg" alt="Image"></a>
-                                            <p>Product Name</p>
-                                        </div>
-                                    </td>
-                                    <td>$99</td>
-                                    <td>
-                                        <div class="qty">
-                                            <button class="btn-minus"><i class="fa fa-minus"></i></button>
-                                            <input type="text" value="1">
-                                            <button class="btn-plus"><i class="fa fa-plus"></i></button>
-                                        </div>
-                                    </td>
-                                    <td>$99</td>
-                                    <td><button><i class="fa fa-trash"></i></button></td>
-                                </tr>
+
+                                }
                             </tbody>
                         </table>
                     </div>
@@ -146,7 +89,10 @@
                                 </div>
                                 <div class="cart-btn">
                                     <button>Update Cart</button>
-                                    <button>Checkout</button>
+                                    <button>
+                                        <a href="/ShoppingCart/CheckOut" class="btn btn-inverse"><i class="fa fa-shopping-cart"></i>Đặt hàng</a>
+                                        @*<a href="~/ShoppingCart/FormTTKH/">Đặt hàng</a>*@
+                                    </button>
                                 </div>
                             </div>
                         </div>

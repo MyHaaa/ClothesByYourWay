@@ -10,8 +10,16 @@ namespace ClothesBYW.Models
 {
     public class CartItem
     {
-        public Product sp { get; set; }
+        public ProductLine sp { get; set; }
         public int SoLuong { get; set; }
+
+        public decimal Price => (decimal)(sp.Product.Prices.First().RetailPrice);
+
+        public decimal Total()
+        {
+            return (decimal)(sp.Product.Prices.First().RetailPrice * this.SoLuong);
+        }
+
     }
     public class GioHang
     {
@@ -20,9 +28,9 @@ namespace ClothesBYW.Models
         {
             get { return items; }
         }
-        public void ThemSPVaoGioHang(Product sp, int sl = 1)
+        public void ThemSPVaoGioHang(ProductLine sp, int sl = 1)
         {
-            var item = Items.FirstOrDefault(s => s.sp.ProductID == sp.ProductID);
+            var item = Items.FirstOrDefault(s => s.sp.ProductLineID == sp.ProductLineID);
             if (item == null)
                 items.Add(new CartItem
                 {
@@ -43,12 +51,12 @@ namespace ClothesBYW.Models
         }
         public decimal TongTien()
         {
-            var total = items.Sum(s => s.SoLuong * s.sp.Prices.First().StandardPrice);
+            var total = items.Sum(s => s.SoLuong * s.sp.Product.Prices.First().StandardPrice);
             return (decimal)total;
         }
         public void update_sp(string id, int new_sp)
         {
-            var itm = items.Find(s => s.sp.ProductID == id);
+            var itm = items.Find(s => s.sp.ProductLineID == id);
             if (itm != null && itm.SoLuong > 0)
             {
                 itm.SoLuong = new_sp;
@@ -56,7 +64,7 @@ namespace ClothesBYW.Models
         }
         public void XoaSP(string id)
         {
-            items.RemoveAll(s => s.sp.ProductID == id);
+            items.RemoveAll(s => s.sp.ProductLineID == id);
         }
         public void ClearCart()
         {
