@@ -60,6 +60,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Dao\CustomerDao.cs" />
+    <Compile Include="Dao\Customer\AccountDao.cs" />
     <Compile Include="Dao\Customer\FeedbackDao.cs" />
     <Compile Include="Dao\Customer\ProductDao.cs" />
     <Compile Include="Dao\EmployeeDao.cs" />
@@ -98,6 +99,7 @@
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="ViewModels\Customer\Product\ProductDetailModel.cs" />
     <Compile Include="ViewModels\Customer\Product\ProductListRequest.cs" />
     <Compile Include="ViewModels\RoleWithGroupModel.cs" />
     <Compile Include="ViewModels\UserWithGroupView.cs" />
