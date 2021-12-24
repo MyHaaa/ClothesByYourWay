@@ -43,6 +43,12 @@ namespace ClothesBYW.Controllers
             var dao = new ProductDao();
             return View(dao.GetProductDetail(id));
         }
+        public ActionResult SelectProductLine(string currentLine, string value, bool isSize)
+        {
+            var dao = new ProductDao();
+            var lineID = dao.GetProductLineIDWhenChangeValue(currentLine, value, isSize);
+            return RedirectToAction("Detail", "Product", new { id = lineID });
+        }
         [HttpPost]
         public ActionResult SearchByKeyword(string keyword)
         {

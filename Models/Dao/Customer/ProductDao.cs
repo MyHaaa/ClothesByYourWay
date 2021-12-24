@@ -77,14 +77,12 @@ namespace Models.Dao.Customer
             var line = db.ProductLines.Where(x => x.ProductLineID == id).FirstOrDefault();
             var product = db.Products.Where(x => x.ProductID == line.ProductID).FirstOrDefault();
             var listColors = new List<Color>();
-            var hashIDLine = new List<Tuple<int, string>>();
             foreach (var item in product.ProductLines)
             {
                 if(listColors.Where(x => x.ColorID == item.ColorID).FirstOrDefault() == null)
                 {
                     listColors.Add(item.Color);
                 }
-                hashIDLine.Add(new Tuple<int, string>(item.ColorID, item.ProductLineID));
             }
             return new ProductDetailModel()
             {
@@ -99,12 +97,30 @@ namespace Models.Dao.Customer
                 StandardPrice = product.Prices.FirstOrDefault().StandardPrice,
                 Sizes = product.ProductLines.Select(x => x.Size).Distinct().ToList(),
                 Colors = listColors,
-                ListIDColor_Line = hashIDLine,
                 FeedbackCount = product.Feedbacks.Count,
                 Description = product.Description,
                 CategoryID = product.CategoryID,
                 CategoryName = product.ProductCategory.Name
             };
+        }
+
+        public string GetProductLineIDWhenChangeValue(string currentLine, string value, bool isSize)
+        {
+            var line = db.ProductLines.Where(x => x.ProductLineID == currentLine).FirstOrDefault();
+            ProductLine result = null;
+            if (isSize)
+            {
+                result = db.ProductLines.Where(x => x.ProductID == line.ProductID && x.Size == value && x.ColorID == line.ColorID).FirstOrDefault();
+            }
+            else
+            {
+                result = db.ProductLines.Where(x => x.ProductID == line.ProductID && x.Color.ColorName == value && x.Size == line.Size).FirstOrDefault();
+            }
+            if(result == null)
+            {
+                return currentLine;
+            }
+            return result.ProductLineID;
         }
     }
 }

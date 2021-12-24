@@ -67,7 +67,14 @@
                                     <div class="btn-group btn-group-sm">
                                         @foreach (var item in Model.Sizes)
                                         {
-                                            <button type="button" class="btn">@item</button>
+                                            if (item == Model.Size)
+                                            {
+                                                <a type="button" class="btn" disabled>@item</a>
+                                            }
+                                            else
+                                            {
+                                                <a type="button" class="btn" href="/Product/SelectProductLine?currentLine=@Model.ProductLineID&value=@item&isSize=@true.ToString()">@item</a>
+                                            }
                                         }
                                     </div>
                                 </div>
@@ -85,7 +92,7 @@
                                             }
                                             else
                                             {
-                                                <a type="button" class="btn" href="@Model.ListIDColor_Line.Where(x => x.Item1 == item.ColorID).FirstOrDefault().Item2">
+                                                <a type="button" class="btn" href="/Product/SelectProductLine?currentLine=@Model.ProductLineID&value=@item.ColorName&isSize=@false.ToString()">
                                                     <img src="@item.Texture" />
                                                 </a>
                                             }
@@ -94,7 +101,7 @@
                                 </div>
                                 <div class="action">
                                     @*<a class="btn" href="#"><i class="fa fa-shopping-cart"></i>Add to Cart</a>*@
-                                    <a href="/ShoppingCart/addtocart" class="btn btn-inverse"><i class="fa fa-shopping-cart"></i>Add to cart</a>
+                                    <a href="/ShoppingCart/addtocart/@Model.ProductLineID" class="btn btn-inverse"><i class="fa fa-shopping-cart"></i>Add to cart</a>
                                 </div>
                             </div>
                         </div>
