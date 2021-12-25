@@ -38,31 +38,31 @@
                             <tbody>
                                 @foreach (var pro in Model.Items)
                                 {
-                                <tr>
-                                    <td>@Html.DisplayFor(model => pro.sp.Product.ProductName)</td>
-                                    @*<td><img src="@Url.Content(pro.sp.HinhMinhHoa)" height="50" width="50" /></td>*@
-                                    <td>@Html.DisplayFor(model => pro.Price)</td>
-                                    <td>@Html.DisplayFor(model => pro.sp.Color.ColorName)</td>
-                                    <td>@Html.DisplayFor(model => pro.sp.Product.ProductLines.First().Size)</td>
-                                    <td>
-                                        @using (Html.BeginForm("Update_Cart_Qua", "ShoppingCart"))
-                                        {
-                                            <input type="hidden" value="@pro.sp.ProductLineID" name="IDPro" />
-                                            <input type="number" value="@pro.SoLuong" name="QualityPro" min="1" max="@pro.sp.QuantityInStock" />
-                                            <input type="submit" style="color: #ffffff; border: #4faaf0; background-color: #4faaf0; border-radius: 10px 15px 10px 15px; width: 100px;" value="Update" />
-                                            <p></p>
-                                            <p>Sản phẩm chỉ còn @pro.sp.QuantityInStock</p>
+                                    <tr>
+                                        @*<td>@Html.DisplayFor(model => pro.sp.Product.ProductName)</td>*@
+                                        <td><img src="@pro.sp.ProductImages.FirstOrDefault().ImageLink" height="200" width="150" /></td>
+                                        <td>@Html.DisplayFor(model => pro.Price)</td>
+                                        <td>@Html.DisplayFor(model => pro.sp.Color.ColorName)</td>
+                                        <td>@Html.DisplayFor(model => pro.sp.Product.ProductLines.First().Size)</td>
+                                        <td>
+                                            @using (Html.BeginForm("Update_Cart_Qua", "ShoppingCart"))
+                                            {
+                                                <input type="hidden" value="@pro.sp.ProductLineID" name="IDPro" />
+                                                <input type="number" value="@pro.SoLuong" name="QualityPro" min="1" max="@pro.sp.QuantityInStock" />
+                                                <input type="submit" style="color: #ffffff; border: #4faaf0; background-color: #4faaf0; border-radius: 10px 15px 10px 15px; width: 100px;" value="Update" />
+                                                <p></p>
+                                                <p>Sản phẩm chỉ còn @pro.sp.QuantityInStock</p>
 
 
-                                        }
+                                            }
 
-                                    </td>
+                                        </td>
 
-                                    <td>@pro.Total()</td>
-                                    <td>
-                                        <a href="/ShoppingCart/Remove/@pro.sp.ProductLineID/">Xóa</a>
-                                    </td>
-                                </tr>
+                                        <td>@pro.Total()</td>
+                                        <td>
+                                            <a href="/ShoppingCart/Remove/@pro.sp.ProductLineID">Xóa</a>
+                                        </td>
+                                    </tr>
 
                                 }
                             </tbody>
@@ -83,14 +83,14 @@
                             <div class="cart-summary">
                                 <div class="cart-content">
                                     <h1>Cart Summary</h1>
-                                    <p>Sub Total<span>$99</span></p>
+                                    <p>Sub Total<span>$@Model.TongTien()</span></p>
                                     <p>Shipping Cost<span>$1</span></p>
-                                    <h2>Grand Total<span>$100</span></h2>
+                                    <h2>Grand Total<span>$@(Model.TongTien()+1)</span></h2>
                                 </div>
                                 <div class="cart-btn">
                                     <button>Update Cart</button>
                                     <button>
-                                        <a href="/ShoppingCart/CheckOut" class="btn btn-inverse"><i class="fa fa-shopping-cart"></i>Đặt hàng</a>
+                                        <a href="/ShoppingCart/CheckOut" style="color:white">Đặt hàng</a>
                                         @*<a href="~/ShoppingCart/FormTTKH/">Đặt hàng</a>*@
                                     </button>
                                 </div>

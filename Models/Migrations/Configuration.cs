@@ -28,7 +28,6 @@ namespace Models.Migrations
             AddSupplier(context);
             AddProductLines(context);
             AddPrices(context);
-            AddProductImages(context);
             base.Seed(context);
         }
         private void AddBrands(ClothesBYWDbContext context)
@@ -150,14 +149,8 @@ namespace Models.Migrations
             var item12 = new Color()
             {
                 ColorID = 12,
-                ColorName = "Burgundy",
-                Texture = baseImageUrl + "/texture/burgundy.png",
-            };
-            var item13 = new Color()
-            {
-                ColorID = 13,
-                ColorName = "Green",
-                Texture = baseImageUrl + "/texture/green.png",
+                ColorName = "Hunter Green",
+                Texture = baseImageUrl + "/texture/hunter-green.png",
             };
             context.Colors.Add(item1);
             context.Colors.Add(item2);
@@ -171,7 +164,6 @@ namespace Models.Migrations
             context.Colors.Add(item10);
             context.Colors.Add(item11);
             context.Colors.Add(item12);
-            context.Colors.Add(item13);
         }
         private void AddCustomerCategories(ClothesBYWDbContext context)
         {
@@ -360,10 +352,23 @@ namespace Models.Migrations
                 BrandID = 4,
                 Status = 1
             };
+            var item5 = new Product()
+            {
+                ProductID = "sampleProduct5",
+                ProductName = "Thoughts of Hue Black Surplice Maxi Dress",
+                MetaKeyword = "sample-4",
+                Description = "Take a moment to marvel at the sheer beauty of the Lulus Wondrous Water Lilies Royal Blue Maxi Dress! Royal blue chiffon shapes a surplice bodice framed by sheer long sleeves. A billowing maxi skirt with front slit falls below the elasticized waist for a stunning finish.",
+                CreatedDate = DateTime.Now,
+                CreatedBy = null,
+                CategoryID = 1,
+                BrandID = 4,
+                Status = 1
+            };
             context.Products.Add(item1);
             context.Products.Add(item2);
             context.Products.Add(item3);
             context.Products.Add(item4);
+            context.Products.Add(item5);
         }
         private void AddSupplier(ClothesBYWDbContext context)
         {
@@ -392,53 +397,72 @@ namespace Models.Migrations
         }
         private void AddProductLines(ClothesBYWDbContext context)
         {
+            var listSize = new List<string>() { "S", "M", "L", "XL" };
+            var setImg1 = new List<string>() { "1-0.jpg", "1-1.jpg", "1-2.ipg", "1-3.png", "1-4.png" };
+            var setImg2 = new List<string>() { "2-0.png", "2-1.png", "2-2.png", "2-3.png", "2-4.png" };
+            var product1line = new List<Tuple<int,List<string>>>() { new Tuple<int, List<string>>(1,setImg1), new Tuple<int, List<string>>(12,setImg2) };
+
+            var setImg3 = new List<string>() { "3-0.png", "3-2.png", "3-3.png", "3-4.png", "3-5.jpg", "3-6.jpg", "3-7.jpg", "3-8.jpg" };
+            var setImg4 = new List<string>() { "4-0.jpg", "4-1.jpg", "4-2.jpg", "4-3.jpg", "4-4.jpg", "4-5.png" };
+            var setImg5 = new List<string>() { "5-0.jpg", "5-1.jpg", "5-2.jpg", "5-3.jpg", "5-4.jpg", "5-5.jpg", "5-6.jpg", "5-7.jpg" };
+            var product2line = new List<Tuple<int, List<string>>>() { new Tuple<int, List<string>>(3,setImg3), new Tuple<int, List<string>>(4,setImg4), new Tuple<int, List<string>>(5,setImg5) };
+
+            var setImg6 = new List<string>() { "6-0.png", "6-1.png", "6-2.png", "6-3.png" };
+            var setImg7 = new List<string>() { "7-0.jpg", "7-1.jpg", "7-2.jpg", "7-3.jpg", "7-4.jpg", "7-5.jpg" };
+            var product3line = new List<Tuple<int, List<string>>>() { new Tuple<int, List<string>>(6,setImg6), new Tuple<int, List<string>>(7,setImg7) };
+
+            var setImg8 = new List<string>() { "8-0.png", "8-1.png", "8-2.png", "8-3.png", "8-4.png", "8-5.png", "8-6.png", "8-7.png", "8-8.png", "8-9.png" };
+            var setImg9 = new List<string>() { "9-0.png", "9-1.png", "9-2.png", "9-3.png", "9-4.png" };
+            var setImg10 = new List<string>() { "10-0.png", "10-1.png", "10-2.png", "10-3.png" };
+            var product4line = new List<Tuple<int, List<string>>>() { new Tuple<int, List<string>>(8,setImg8), new Tuple<int, List<string>>(9,setImg9), new Tuple<int, List<string>>(10,setImg10) };
+
+            var setImg11 = new List<string>() { "11-0.png", "11-1.jpg", "11-2.png", "11-3.png", "11-4.png" };
+            var setImg12 = new List<string>() { "12-0.png", "12-1.png", "12-2.png", "12-3.png", "12-4.png" };
+            var setImg13 = new List<string>() { "13-0.png", "13-1.png" };
+            var product5line = new List<Tuple<int, List<string>>>() { new Tuple<int, List<string>>(11,setImg11), new Tuple<int, List<string>>(10,setImg12),new Tuple<int, List<string>>(2,setImg13) };
+            var listproduct = new List<List<Tuple<int, List<string>>>>() { product1line, product2line, product3line, product4line, product5line };
+
             var index = 1;
-            var colorIndex = 1;
             var productIndex = 1;
-            while(productIndex <4)
+            var imageIndex = 1;
+            foreach(var product in listproduct)
             {
-                var listSize = new List<string> { "S", "M", "L", "XL" };
-                foreach(var item in listSize)
+                foreach(var line in product)
                 {
-                    context.ProductLines.Add(new ProductLine()
+                    foreach(var size in listSize)
                     {
-                        ProductLineID = "sampleLine"+index.ToString(),
-                        ProductID = "sampleProduct"+productIndex.ToString(),
-                        Alias = "dress",
-                        Status = 1,
-                        Size = item,
-                        MinimumQuantityAvailable = 1,
-                        ColorID= colorIndex,
-                        QuantityInStock = 10,
-                        CreatedDate = DateTime.Now,
-                        SupplierID = 1
-                    });
-                    index++;
-                }
-                colorIndex++;
-                foreach (var item in listSize)
-                {
-                    context.ProductLines.Add(new ProductLine()
-                    {
-                        ProductLineID = "sampleLine" + index.ToString(),
-                        ProductID = "sampleProduct" + productIndex.ToString(),
-                        Alias = "dress",
-                        Status = 1,
-                        Size = item,
-                        MinimumQuantityAvailable = 1,
-                        ColorID = colorIndex,
-                        QuantityInStock = 10,
-                        CreatedDate = DateTime.Now,
-                        SupplierID = 1
-                    });
-                    index++;
+                        var lineID = "sampleLine" + index.ToString();
+                        context.ProductLines.Add(new ProductLine()
+                        {
+                            ProductLineID = lineID,
+                            ProductID = "sampleProduct" + productIndex.ToString(),
+                            Alias = "dress",
+                            Status = 1,
+                            Size = size,
+                            MinimumQuantityAvailable = 1,
+                            ColorID = line.Item1,
+                            QuantityInStock = 20,
+                            CreatedDate = DateTime.Now,
+                            SupplierID = 1
+                        });
+                        foreach (var image in line.Item2)
+                        {
+                            context.ProductImages.Add(new ProductImage()
+                            {
+                                ProductImageID = imageIndex,
+                                ProductLineID = lineID,
+                                ImageLink = "/Assets/Client/img/Product/"+image
+                            });
+                        }
+                        index++;
+                    }
                 }
                 productIndex++;
             }
         }
         private void AddPrices(ClothesBYWDbContext context)
         {
-            for(int i = 1; i < 5; i++)
+            for(int i = 1; i <= 5; i++)
             {
                 context.Prices.Add(new Price()
                 {
@@ -448,95 +472,6 @@ namespace Models.Migrations
                     RetailPrice = 45,
                     StandardPrice = 45
                 });
-            }
-        }
-        private void AddProductImages(ClothesBYWDbContext context)
-        {
-            var index = 1;
-            var productIndex = 1;
-            var lineIndex = 1;
-            while (productIndex < 4)
-            {
-                var listSize = new List<string> { "S", "M", "L", "XL" };
-                foreach (var item in listSize)
-                {
-                    context.ProductImages.Add(new ProductImage()
-                    {
-                        ProductImageID = index,
-                        ProductLineID = "sampleLine" + productIndex.ToString(),
-                        ImageLink = "/Assets/Client/img/Product/1-0.jpg"
-                    });
-                    index++;
-                    context.ProductImages.Add(new ProductImage()
-                    {
-                        ProductImageID = index,
-                        ProductLineID = "sampleLine" + productIndex.ToString(),
-                        ImageLink = "/Assets/Client/img/Product/1-1.jpg"
-                    });
-                    index++;
-                    context.ProductImages.Add(new ProductImage()
-                    {
-                        ProductImageID = index,
-                        ProductLineID = "sampleLine" + productIndex.ToString(),
-                        ImageLink = "/Assets/Client/img/Product/1-2.jpg"
-                    });
-                    index++;
-                    context.ProductImages.Add(new ProductImage()
-                    {
-                        ProductImageID = index,
-                        ProductLineID = "sampleLine" + productIndex.ToString(),
-                        ImageLink = "/Assets/Client/img/Product/1-3.png"
-                    });
-                    index++;
-                    context.ProductImages.Add(new ProductImage()
-                    {
-                        ProductImageID = index,
-                        ProductLineID = "sampleLine" + productIndex.ToString(),
-                        ImageLink = "/Assets/Client/img/Product/1-4.png"
-                    });
-                    index++;
-                    lineIndex++;
-                }
-                foreach (var item in listSize)
-                {
-                    context.ProductImages.Add(new ProductImage()
-                    {
-                        ProductImageID = index,
-                        ProductLineID = "sampleLine" + productIndex.ToString(),
-                        ImageLink = "/Assets/Client/img/Product/2-0.png"
-                    });
-                    index++;
-                    context.ProductImages.Add(new ProductImage()
-                    {
-                        ProductImageID = index,
-                        ProductLineID = "sampleLine" + productIndex.ToString(),
-                        ImageLink = "/Assets/Client/img/Product/2-1.png"
-                    });
-                    index++;
-                    context.ProductImages.Add(new ProductImage()
-                    {
-                        ProductImageID = index,
-                        ProductLineID = "sampleLine" + productIndex.ToString(),
-                        ImageLink = "/Assets/Client/img/Product/2-2.png"
-                    });
-                    index++;
-                    context.ProductImages.Add(new ProductImage()
-                    {
-                        ProductImageID = index,
-                        ProductLineID = "sampleLine" + productIndex.ToString(),
-                        ImageLink = "/Assets/Client/img/Product/2-3.png"
-                    });
-                    index++;
-                    context.ProductImages.Add(new ProductImage()
-                    {
-                        ProductImageID = index,
-                        ProductLineID = "sampleLine" + productIndex.ToString(),
-                        ImageLink = "/Assets/Client/img/Product/2-4.png"
-                    });
-                    index++;
-                    lineIndex++;
-                }
-                productIndex++;
             }
         }
     }
