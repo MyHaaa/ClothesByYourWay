@@ -1,16 +1,24 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Threading.Tasks;
 using System.Web;
 using System.Web.Mvc;
 using ClothesBYW.Models;
+using ClothesBYW.Models.Customer;
 using Models.Dao;
+using Models.Dao.Customer;
 using Models.EF;
+using PayPal;
+using PayPalCheckoutSdk.Core;
+using PayPalCheckoutSdk.Orders;
 
 namespace ClothesBYW.Controllers
 {
     public class ShoppingCartController : Controller
     {
+        private readonly string _clientId = "AXbmtas32SI21pgSmikTHZTRq4r47mjOlJiXwNNS4Iavn4IumnmoHDswVEP3sIZdumPz0ytLMdImKBuV";
+        private readonly string _secretKey = "EByhj8dOvI9lxUo5xDfk6rZW4EGHzikoWcPR44XxNCXSL9Hze4jcG2cXibiRx_IUmX3tz0mxmh9j0OjF";
         ClothesBYWDbContext db = new ClothesBYWDbContext();
         // GET: ShoppingCart
         // GET: ShoppingCart
@@ -80,76 +88,92 @@ namespace ClothesBYW.Controllers
             cart.ClearCart();
             return RedirectToAction("Showcart", "ShoppingCart");
         }
-        //public ActionResult CheckOut(FormCollection form)
-        //{
-        //    try
-        //    {
-        //        Models.GioHang cart = Session["Models.GioHang"] as Models.GioHang;
-        //        // Khach hang moi
-        //        /* IDEA
-        //         * Tạo 1 hàm, trong đó đầu vào là 1 chuỗi cũ (gọi là chuỗi x)
-        //         * (VD: KH0001 -> Lấy từ db.TAIKHOAN.FindLast)
-        //         * x.Subtring (0,2) -> chuỗi tĩnh
-        //         * convert.ToInt(x.substring(2,last) -> số i cũ
-        //         * Tăng i++
-        //         * Convert i mới sang chuỗi 4 ký tự
-        //         * kết quả= chuỗi tỉnh + chuỗi i
-        //         */
-        //        Customer kh = new Customer();
-        //        kh.CustomerCatergoryID = this.GuidId();//
-        //        kh.DateOfBirth = DateTime.Now;
-
-        //        kh.Name = form["TenKhachHang"];
-        //        kh.Phone = form["DienThoaiKhach"];
-        //        kh.Email = form["Email"];
-        //        Order order = new Order();
-        //        order.CustomerID = kh.CustomerID;
-        //        db.Customers.Add(kh);
-
-        //        order.OrderID = this.GuidId();//
-        //        order.AddressShip = form["DiaChiKhachHang"];
-        //        order.DeliveryDatetime = DateTime.Now;
-        //        db.Orders.Add(order);
-
-        //        foreach (var item in cart.Items)
-        //        {
-
-        //            OrderDetail order_detail = new OrderDetail();
-        //            //order_detail.ID = i.ToString();
-        //            order_detail.OrderID = order.OrderID;
-        //            order_detail.ProductID = item.sp.ProductID;
-        //            order_detail.OrderDetailID = this.GuidId();//
-        //            order_detail.Product.Prices = (float)item.sp.Prices.First().RetailPrice;
-        //            order_detail.QuantitySold = item.SoLuong;
-        //            db.OrderDetails.Add(order_detail);
-        //            foreach (var p in db.Products.Where(s => s.ProductID == order_detail.ProductID))
-        //            {
-        //                var update_quan_pro = p.QuantityInStock - item.SoLuong;
-        //                p.QuantityInStock = update_quan_pro;
-
-        //            }
-
-        //        }
-
-        //        db.SaveChanges();
-        //        cart.ClearCart();
-
-        //        return RedirectToAction("Check_out_success", "ShoppingCart");
-        //    }
-        //    catch (Exception e)
-        //    {
-        //        return Content("Error checkout. Please check information customer...");
-        //    }
-
-
-        //}
-        //public ActionResult FormTTKH()
-        //{
-        //    return View();
-        //}
         public ActionResult Check_out_success()
         {
             return View();
+        }
+        public ActionResult CheckOut()
+        {
+            if(UserLoginSingleton.GetInstance().GetAccount() == null)
+            {
+                return RedirectToAction("Login", "Home");
+            }
+            Models.GioHang gh = Session["Models.GioHang"] as Models.GioHang;
+            return View(gh);
+        }
+        [HttpPost]
+        public ActionResult UpdateAccount(string name, string mobile, string email, string address)
+        {
+            var dao = new AccountDao();
+            var newCus = dao.UpdateInfo(UserLoginSingleton.GetInstance().GetAccount().ID, name, mobile, email, address);
+            UserLoginSingleton.Init(newCus.CustomerID, newCus.Name, newCus.Username, newCus.DateOfBirth, newCus.Phone, newCus.Address, newCus.Email);
+            return RedirectToAction("CheckOut", "ShoppingCart");
+        }
+        public async Task PaypalCheckout()
+        {
+            Models.GioHang gh = Session["Models.GioHang"] as Models.GioHang;
+            var environment = new SandboxEnvironment(_clientId, _secretKey);
+            var client = new PayPalHttpClient(environment);
+
+            var listItems = new List<PurchaseUnitRequest>();
+            listItems.Add(new PurchaseUnitRequest()
+            {
+                Description = "ClothesBYW",
+                Items = new List<Item>()
+            });
+            foreach (var item in gh.Items)
+            {
+                listItems.FirstOrDefault().Items.Add(new Item()
+                {
+                    Name = item.sp.Product.ProductName,
+                    UnitAmount = new Money()
+                    {
+                        CurrencyCode = "USD",
+                        Value = item.Total().ToString()
+                    },
+                    Quantity = item.SoLuong.ToString(),
+                    Sku = "sku",
+                    Tax = new Money()
+                    {
+                        CurrencyCode = "USD",
+                        Value = 0.ToString()
+                    }
+                }); 
+            }
+
+            var order = new OrderRequest()
+            {
+                CheckoutPaymentIntent = "CAPTURE",
+                PurchaseUnits = listItems,
+                ApplicationContext = new ApplicationContext()
+                {
+                    ReturnUrl = "https://localhost:44366/ShoppingCart/CreateOrder",
+                    CancelUrl = "https://localhost:44366/ShoppingCart/CheckOut"
+                }
+            };
+            var request = new OrdersCreateRequest();
+            request.Prefer("return=representation");
+            request.RequestBody(order);
+            PayPalHttp.HttpResponse response = await client.Execute(request);
+            var statusCode = response.StatusCode;
+        }
+        public ActionResult CreateOrder()
+        {
+            Models.GioHang gh = Session["Models.GioHang"] as Models.GioHang;
+            var dao = new OrderDao();
+            var listOrderDetail = new List<OrderDetail>();
+            foreach(var item in gh.Items)
+            {
+                listOrderDetail.Add(new OrderDetail()
+                {
+                    PriceEach = item.Price,
+                    ProductLineID = item.sp.ProductLineID,
+                    QuantitySold = item.SoLuong
+                });
+            }
+            var result = dao.CreateOrder(UserLoginSingleton.GetInstance().GetAccount().ID,listOrderDetail);
+            gh.ClearCart();
+            return RedirectToAction("Index", "Home");
         }
     }
 }

@@ -69,13 +69,33 @@
                                         {
                                             if (item == Model.Size)
                                             {
-                                                <a type="button" class="btn" disabled>@item</a>
+                                                <a type="button" class="btn bg-danger" style="color: white">@item</a>
                                             }
                                             else
                                             {
                                                 <a type="button" class="btn" href="/Product/SelectProductLine?currentLine=@Model.ProductLineID&value=@item&isSize=@true.ToString()">@item</a>
                                             }
                                         }
+                                        <button type="button" class="text-primary" data-toggle="modal" data-target="#exampleModal" style="background-color:transparent;border:none">
+                                            Size Chart
+                                        </button>
+                                    </div>
+                                    <div>
+                                        <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                            <div class="modal-dialog" role="document">
+                                                <div class="modal-content">
+                                                    <div class="modal-header">
+                                                        <h5 class="modal-title" id="exampleModalLabel">Size chart</h5>
+                                                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                                            <span aria-hidden="true">&times;</span>
+                                                        </button>
+                                                    </div>
+                                                    <div class="modal-body">
+                                                        <img src="~/Assets/Client/img/sizechart.jpg" width="450" height="400"/>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
                                     </div>
                                 </div>
                                 <div class="p-color">
@@ -86,7 +106,7 @@
                                         {
                                             if (item.ColorID == Model.ColorID)
                                             {
-                                                <a type="button" class="btn" disabled>
+                                                <a type="button" class="btn bg-danger">
                                                     <img src="@item.Texture" />
                                                 </a>
                                             }

@@ -1,0 +1,124 @@
+﻿@model ClothesBYW.Models.GioHang
+@using ClothesBYW.Models.Customer
+@{
+    ViewBag.Title = "CheckOut";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<!-- Breadcrumb Start -->
+<div class="breadcrumb-wrap">
+    <div class="container-fluid">
+        <ul class="breadcrumb">
+            <li class="breadcrumb-item"><a href="#">Home</a></li>
+            <li class="breadcrumb-item"><a href="#">Products</a></li>
+            <li class="breadcrumb-item active">Checkout</li>
+        </ul>
+    </div>
+</div>
+<!-- Breadcrumb End -->
+<!-- Checkout Start -->
+<div class="checkout">
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-lg-8">
+                <div class="checkout-inner">
+                    <div class="billing-address">
+                        <h2>Billing Address</h2>
+                        @{var user = UserLoginSingleton.GetInstance().GetAccount(); }
+                        @using (Html.BeginForm("UpdateAccount", "ShoppingCart", FormMethod.Post))
+                        {
+                            <div class="row">
+                                <div class="col-md-12">
+                                    <input class="form-control" type="text" placeholder="Name" value="@user.Name" name="name">
+                                </div>
+                                <div class="col-md-6">
+                                    <input class="form-control" type="text" placeholder="Mobile" value="@user.Phone" name="mobile">
+                                </div>
+                                <div class="col-md-6">
+                                    <input class="form-control" type="text" placeholder="Email" value="@user.Email" name="email">
+                                </div>
+                                <div class="col-md-12">
+                                    <input class="form-control" type="text" placeholder="Address" value="@user.Address" name="address">
+                                </div>
+                                <div class="col-md-12">
+                                    <button class="btn" type="submit">Save</button>
+                                    <br><br>
+                                </div>
+                            </div>
+                        }
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-4">
+                <div class="checkout-inner">
+                    <div class="checkout-summary">
+                        <h1>Cart Total</h1>
+                        @foreach (var item in Model.Items)
+                        {
+                            <p>@item.sp.Product.ProductName x @item.SoLuong<span>$@item.Total()</span></p>
+                        }
+                        <p class="sub-total">Sub Total<span>$@Model.TongTien()</span></p>
+                        <p class="ship-cost">Shipping Cost<span>$1</span></p>
+                        <h2>Grand Total<span>$@(Model.TongTien()+1)</span></h2>
+                    </div>
+
+                    <div class="checkout-payment">
+                        <div class="payment-methods">
+                            <h1>Payment Methods</h1>
+                            <div class="payment-method">
+                                <div class="custom-control custom-radio">
+                                    <input type="radio" class="custom-control-input" id="payment-1" name="payment">
+                                    <label class="custom-control-label" for="payment-1">Paypal</label>
+                                </div>
+                                <div class="payment-content" id="payment-1-show">
+                                    <p>
+                                        PayPal is an electronic commerce company that facilitates payments between parties through online transfers. PayPal allows customers to establish an account on its platform, which is connected to a user's credit card or checking account.
+                                    </p>
+                                    @*<a href="/ShoppingCart/PaypalCheckout">Payment</a>*@
+                                    <div id="paypal-button-container"></div>
+                                    <script>
+                                        paypal.Buttons({
+                                            createOrder: function (data, actions) {
+                                                return actions.order.create({
+                                                    purchase_units: [{
+                                                        amount: {
+                                                            value: '77.44'
+                                                        }
+                                                    }]
+                                                });
+                                            },
+                                            onApprove: function (data, actions) {
+                                                return actions.order.capture().then(function (orderData) {
+                                                    console.log('Capture result', orderData, JSON.stringify(orderData, null, 2));
+                                                    var transaction = orderData.purchase_units[0].payments.captures[0];
+                                                    alert('Transaction ' + transaction.status + ': ' + transaction.id + '\n\nSee console for all available details');
+                                                });
+                                            }
+                                        }).render('#paypal-button-container');
+
+                                    </script>
+                                </div>
+                            </div>
+                            <div class="payment-method">
+                                <div class="custom-control custom-radio">
+                                    <input type="radio" class="custom-control-input" id="payment-5" name="payment">
+                                    <label class="custom-control-label" for="payment-5">Cash on Delivery</label>
+                                </div>
+                                <div class="payment-content" id="payment-5-show">
+                                    <p>
+                                        Cash on delivery (COD) is when a recipient pays for a good or service at the time of delivery.
+                                    </p>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="checkout-btn">
+                            <a href="/ShoppingCart/CreateOrder">
+                                <button>Place Order</button>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- Checkout End -->
