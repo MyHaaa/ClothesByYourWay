@@ -172,6 +172,7 @@ namespace ClothesBYW.Controllers
                 });
             }
             var result = dao.CreateOrder(UserLoginSingleton.GetInstance().GetAccount().ID,listOrderDetail);
+            dao.AddOrderItems(result, listOrderDetail);
             gh.ClearCart();
             return RedirectToAction("Index", "Home");
         }

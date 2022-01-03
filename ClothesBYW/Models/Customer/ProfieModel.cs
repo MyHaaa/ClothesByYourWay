@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Models.EF;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
@@ -14,5 +15,6 @@ namespace ClothesBYW.Models.Customer
         public string Phone { get; set; }
         public string Address { get; set; }
         public string Email { get; set; }
+        public List<Order> Orders { get; set; }
     }
 }

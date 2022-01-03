@@ -27,5 +27,9 @@ namespace Models.Dao.Customer
             }
             return customer;
         }
+        public List<EF.Order> GetOrders(string userID)
+        {
+            return db.Orders.Where(x => x.CustomerID == userID).ToList();
+        }
     }
 }

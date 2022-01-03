@@ -13,7 +13,10 @@ namespace ClothesBYW.Controllers
         // GET: MyAccount
         public ActionResult Index()
         {
-            return View(UserLoginSingleton.GetInstance().GetAccount());
+            var user = UserLoginSingleton.GetInstance().GetAccount();
+            var dao = new AccountDao();
+            user.Orders = dao.GetOrders(user.ID);
+            return View(user);
         }
         public ActionResult Logout()
         {
@@ -28,5 +31,6 @@ namespace ClothesBYW.Controllers
             UserLoginSingleton.Init(newCus.CustomerID, newCus.Name, newCus.Username, newCus.DateOfBirth, newCus.Phone, newCus.Address, newCus.Email);
             return RedirectToAction("Index", "MyAccount");
         }
+
     }
 }

@@ -14,25 +14,42 @@ namespace Models.Dao.Customer
         {
             db = new ClothesBYWDbContext();
         }
-        public bool CreateOrder(string customerID, List<OrderDetail> items)
+        public string CreateOrder(string customerID, List<OrderDetail> items)
         {
             var cus = db.Customers.Where(x => x.CustomerID == customerID).FirstOrDefault();
+            var orderID = (Guid.NewGuid()).ToString();
+            while(db.Orders.Where(x => x.OrderID == orderID).FirstOrDefault()!= null)
+            {
+                orderID = (Guid.NewGuid()).ToString();
+            }
             var order = new Order()
             {
+                OrderID = orderID,
                 CustomerID = customerID,
                 AddressShip = cus.Address,
                 CreateDate = DateTime.Now,
                 Status = 1, // COD
-                Total = items.Sum(x => x.PriceEach * x.QuantitySold)
+                Total = items.Sum(x => x.PriceEach * x.QuantitySold),
+                VoucherID = "VOUCHERD"
             };
             db.Orders.Add(order);
-            foreach(var item in items)
+            db.SaveChanges();
+            return order.OrderID;
+        }
+        public void AddOrderItems(string orderID, List<OrderDetail> items)
+        {
+            foreach (var item in items)
             {
-                item.OrderID = order.OrderID;
+                var detailID = (Guid.NewGuid()).ToString();
+                while (db.OrderDetails.Where(x => x.OrderDetailID == detailID).FirstOrDefault() != null)
+                {
+                    detailID = (Guid.NewGuid()).ToString();
+                }
+                item.OrderID = orderID;
+                item.OrderDetailID = detailID;
                 db.OrderDetails.Add(item);
             }
             db.SaveChanges();
-            return true;
         }
     }
 }
