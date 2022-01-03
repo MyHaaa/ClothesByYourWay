@@ -3,7 +3,7 @@
     using System;
     using System.Data.Entity.Migrations;
     
-    public partial class initdb : DbMigration
+    public partial class initdb2 : DbMigration
     {
         public override void Up()
         {
@@ -181,6 +181,7 @@
                         QuantityPurchase = c.Long(),
                         QuantityReceived = c.Long(),
                         Status = c.Int(),
+                        PricePurchase = c.Decimal(precision: 18, scale: 2),
                     })
                 .PrimaryKey(t => t.PurchaseOrderDetailID)
                 .ForeignKey("dbo.ProductLines", t => t.ProductLineID, cascadeDelete: true)
@@ -200,6 +201,7 @@
                         ModifiledBy = c.String(),
                         ReceivedDate = c.DateTime(),
                         Status = c.Int(),
+                        SupplierID = c.Int(nullable: false),
                     })
                 .PrimaryKey(t => t.PurchaseOrderID);
             

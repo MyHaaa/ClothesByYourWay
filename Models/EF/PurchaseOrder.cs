@@ -13,6 +13,7 @@ namespace Models.EF
         public string ModifiledBy { get; set; }
         public DateTime? ReceivedDate { get; set; }
         public int? Status { get; set; }
+        public int SupplierID { get; set; }
         public virtual List<PurchaseOrderDetail> PurchaseOrderDetails { get; set; }
     }
 }

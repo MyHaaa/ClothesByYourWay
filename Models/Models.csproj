@@ -94,9 +94,9 @@
     <Compile Include="EF\sysdiagram.cs" />
     <Compile Include="EF\UserGroup.cs" />
     <Compile Include="EF\Voucher.cs" />
-    <Compile Include="Migrations\202112171512446_initdb.cs" />
-    <Compile Include="Migrations\202112171512446_initdb.designer.cs">
-      <DependentUpon>202112171512446_initdb.cs</DependentUpon>
+    <Compile Include="Migrations\202201031201099_init-db-2.cs" />
+    <Compile Include="Migrations\202201031201099_init-db-2.designer.cs">
+      <DependentUpon>202201031201099_init-db-2.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -119,8 +119,8 @@
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Migrations\202112171512446_initdb.resx">
-      <DependentUpon>202112171512446_initdb.cs</DependentUpon>
+    <EmbeddedResource Include="Migrations\202201031201099_init-db-2.resx">
+      <DependentUpon>202201031201099_init-db-2.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

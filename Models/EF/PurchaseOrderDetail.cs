@@ -11,6 +11,7 @@ namespace Models.EF
         public long? QuantityPurchase { get; set; }
         public long? QuantityReceived { get; set; }
         public int? Status { get; set; }
+        public decimal? PricePurchase { get; set; }
         public virtual ProductLine ProductLine { get; set; }
         public virtual PurchaseOrder PurchaseOrder { get; set; }
     }
