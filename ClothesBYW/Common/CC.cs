@@ -12,5 +12,13 @@ namespace ClothesBYW.Common
         public static string SESSION_CREDENTIALS = "SESSION_CREDENTIALS";
 
         public static string GROUP_SESSION = "GROUP_SESSION";
+
+        public static string PRODUCT_SESSION = "PRODUCT_SESSION";
+
+        public static string PRODUCT_LINE_SESSION = "PRODUCT_LINE_SESSION";
+
+        public static string PURCHASE_ORDER_SESSION = "PURCHASE_ORDER_SESSION";
+
+        public static string PO_CART_SESSION = "PO_CART_SESSION";
     }
 }

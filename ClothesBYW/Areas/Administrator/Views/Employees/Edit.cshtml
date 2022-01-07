@@ -14,7 +14,7 @@
     <div class="card">
         <div class="card-header d-flex justify-content-between">
             <div class="header-title">
-                <h4 class="card-title">Chỉnh sửa hồ sơ nhân viên</h4>
+                <h4 class="card-title">Chi tiết hồ sơ nhân viên</h4>
             </div>
         </div>
 
@@ -41,7 +41,7 @@
                     </div>
                     <div class="col-md-12">
                         <div class="form-group">
-                            <label>Email *</label>
+                            <label>Email </label>
                             @Html.EditorFor(model => model.Email, new { htmlAttributes = new { @class = "form-control" } })
                             @Html.ValidationMessageFor(model => model.Email, "", new { @class = "text-danger" })
                             @Html.ValidationMessage("Email đã tồn tại", new { @class = "text-danger" })
@@ -71,7 +71,7 @@
                     </div>
                     <div class="col-md-6">
                         <div class="form-group">
-                            <label>Nhóm người dùng *</label>
+                            <label>Nhóm người dùng </label>
                             <div class="checkbox selectpicker">
                                 @Html.DropDownList("UserGroupID", null, htmlAttributes: new { @class = "form-control" })
                                 @Html.ValidationMessageFor(model => model.UserGroupID, "", new { @class = "text-danger" })
@@ -81,7 +81,7 @@
 
                     <div class="col-md-6">
                         <div class="form-group">
-                            <label>Status *</label>
+                            <label>Trạng thái</label>
                             <div class="checkbox selectpicker">
                                 @Html.EditorFor(model => model.Status)
                                 @Html.ValidationMessageFor(model => model.Status, "", new { @class = "text-danger" })

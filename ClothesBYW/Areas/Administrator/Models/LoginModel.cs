@@ -8,11 +8,16 @@ namespace ClothesBYW.Areas.Administrator.Models
 {
     public class LoginModel
     {
-        [Required(ErrorMessage = "Please enter username!")]
+        [Display(Name = "Username")]
+        [Required(AllowEmptyStrings = false, ErrorMessage = "Bạn chưa nhập username!")]
         public string Username { get; set; }
-        [Required(ErrorMessage = "Please enter password!")]
+
+        [Display(Name = "Password")]
+        [Required(ErrorMessage = "Bạn chưa nhập mật khẩu!")]
+        [DataType(DataType.Password)]
         public string Password { get; set; }
 
+        [Display(Name = "Remember Me")]
         public bool RememberMe { get; set; }
     }
 }

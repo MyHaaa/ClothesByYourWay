@@ -13,7 +13,7 @@ namespace ClothesBYW.Common
         public string RoleID { set; get; }
         protected override bool AuthorizeCore(HttpContextBase httpContext)
         {
-            var session = (UserLogin)HttpContext.Current.Session[CC.USER_SESSION];
+            var session = (EmployeeLogin)HttpContext.Current.Session[CC.USER_SESSION];
             if (session == null)
             {
                 return false;

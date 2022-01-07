@@ -6,7 +6,7 @@ using System.Web;
 namespace ClothesBYW.Common
 {
     [Serializable]
-    public class UserLogin
+    public class EmployeeLogin
     {
         public string EmployeeID { get; set; }
         public string Username { get; set; }

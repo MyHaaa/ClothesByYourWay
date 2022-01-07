@@ -17,10 +17,10 @@ namespace ClothesBYW.Areas.Administrator.Controllers
 {
     public class EmployeesController : Controller
     {
-        private ClothesBYWDbContext db  = new ClothesBYWDbContext();
+        private ClothesBYWDbContext db = new ClothesBYWDbContext();
 
         // GET: Administrator/Employees
-        //[HasCredentialAtrribute(RoleID = "VIEW_EMPLOYEE")]
+        [HasCredentialAtrribute(RoleID = "VIEW_EMPLOYEE")]
         public ActionResult Index()
         {
             var employees = db.Employees.Include(e => e.UserGroup);
@@ -94,7 +94,7 @@ namespace ClothesBYW.Areas.Administrator.Controllers
                     message = "Đăng ký tài khoản thành công. Link kích hoạt tài khoản" +
                         "đã được gửi vào " + emp.Email;
                     Status = true;
-                }              
+                }
             }
             else
             {
@@ -184,7 +184,7 @@ namespace ClothesBYW.Areas.Administrator.Controllers
                 ViewBag.message = "Yêu cầu hợp lệ";
             }
             ViewBag.Status = Status;
-            return View(emp);
+            return RedirectToAction("Login", "Login", new { area = "Administrator" });
         }
 
         [HttpPost]
@@ -205,18 +205,32 @@ namespace ClothesBYW.Areas.Administrator.Controllers
         }
 
         [NonAction]
-        public void SendVerificationLinkEmail(string email, string acticationCode)
+        public void SendVerificationLinkEmail(string email, string acticationCode, string emailFor = "VerifyAccount")
         {
-            var verifyUrl = "/Employees/VerifyAccount/" + acticationCode;
+            var verifyUrl = "/Employees/" + emailFor + "/" + acticationCode;
             var link = Request.Url.AbsoluteUri.Replace(Request.Url.PathAndQuery, verifyUrl);
 
             var fromEmail = new MailAddress("clothingbyw@gmail.com", "Clothing By Your Way");
             var toEmail = new MailAddress(email);
-            var fromEmailPassword = "hnxwefgpqkqyylsf";
-            string subject = "Tài khoản của bạn đã đăng ký thành công!";
-            string body = "<br/><br/> Chúng tôi vui mừng thông báo cho bạn biết rằng tài khoản Clothing BYW của bạn đã được đăng ký thành công" +
-                "Xin hãy click vào link dưới đây để xác thực tài khoản " +
-                "<br/><br/><a href='" + link + "'>" + link + "</a>";
+            var fromEmailPassword = "efqpdrmrzytmwywi";
+
+            string subject = "";
+            string body = "";
+
+            if (emailFor == "VerifyAccount")
+            {
+                subject = "Tài khoản của bạn đã đăng ký thành công!";
+                body = "<br/><br/> Chúng tôi vui mừng thông báo cho bạn biết rằng tài khoản Clothing BYW của bạn đã được đăng ký thành công" +
+                   " Xin hãy click vào link dưới đây để xác thực tài khoản " +
+                   "<br/><br/><a href='" + link + "'>" + link + "</a>";
+            }
+            else if (emailFor == "ResetPassword")
+            {
+                subject = "Reset Password";
+                body = "<br/><br/> Chúng tôi đã nhận được lời yêu cầu về việc reset lại mật khẩu tài khoản của bạn" +
+                   " Xin hãy click vào link dưới đây để xác nhận bạn là chủ tài khoản này và mật khẩu mới là mã nhân viên của bạn" +
+                   "<br/><br/><a href='" + link + "'>" + link + "</a>";
+            }
 
             //var sendEmail = new EmailService();
             //sendEmail.Send(fromEmail.Address, toEmail.ToString(), subject, body);
@@ -240,6 +254,75 @@ namespace ClothesBYW.Areas.Administrator.Controllers
         }
 
 
+        //Quên pass
+        public ActionResult ForgotPass()
+        {
+            return View();
+        }
+
+        [HttpPost]
+        public ActionResult ForgotPass(string Email)
+        {
+            string message = "";
+            bool status = false;
+
+            var account = db.Employees.Where(a => a.Email == Email).FirstOrDefault();
+            if (account != null)
+            {
+                string resetCode = Guid.NewGuid().ToString();
+                SendVerificationLinkEmail(account.Email, resetCode, "ResetPassword");
+                account.ResetPasswordCode = resetCode;
+
+                db.SaveChanges();
+                message = "Link reset mật khẩu đã được gửi vào email bạn vừa nhập";
+            }
+            else
+            {
+                message = "Xin lỗi, Email bạn vừa nhập không tồn tại trong hệ thống";
+            }
+            ViewBag.Message = message;
+            return View();
+        }
+
+        [HttpGet]
+        public ActionResult ResetPassword(string id)
+        {
+            var emp = db.Employees.Where(e => e.ResetPasswordCode == id).FirstOrDefault();
+            if (emp != null)
+            {
+                emp.Password = emp.EmployeeID;
+                emp.ResetPasswordCode = "";
+                db.SaveChanges();
+                return RedirectToAction("Login", "Login", new { area = "Administrator" });
+            }
+            else
+            {
+                return HttpNotFound();
+            }
+        }
+
+        //[HttpPost]
+        //public ActionResult ResetPassword(ResetPasswordModel model)
+        //{
+        //    var message = "";
+        //    if (ModelState.IsValid)
+        //    {
+        //        var emp = db.Employees.Where(e => e.ResetPasswordCode == model.ResetCode).FirstOrDefault();
+        //        if(User!= null)
+        //        {
+        //            emp.Password = model.NewPassword;
+        //            emp.ResetPasswordCode = "";
+        //            db.SaveChanges();
+        //            message = "Mật khẩu mới đã được cập nhật thành công";
+        //        }
+        //    }
+        //    else
+        //    {
+        //        message = "Đã xảy ra lôi";
+        //    }
+        //    ViewBag.Message = message;
+        //    return View(model);
+        //}
 
         protected override void Dispose(bool disposing)
         {
