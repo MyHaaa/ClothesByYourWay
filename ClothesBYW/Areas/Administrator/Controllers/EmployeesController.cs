@@ -20,7 +20,7 @@ namespace ClothesBYW.Areas.Administrator.Controllers
         private ClothesBYWDbContext db  = new ClothesBYWDbContext();
 
         // GET: Administrator/Employees
-        [HasCredentialAtrribute(RoleID = "VIEW_EMPLOYEE")]
+        //[HasCredentialAtrribute(RoleID = "VIEW_EMPLOYEE")]
         public ActionResult Index()
         {
             var employees = db.Employees.Include(e => e.UserGroup);
