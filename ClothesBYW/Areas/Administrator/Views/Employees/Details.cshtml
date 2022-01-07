@@ -16,94 +16,79 @@
         </div>
     </div>
     <hr />
-    <dl class="dl-horizontal">
-        <dt>
-            @Html.DisplayNameFor(model => model.UserGroup.Name)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.UserGroup.Name)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.Name)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.Name)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.Username)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.Username)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.Password)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.Password)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.DateOfBirth)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.DateOfBirth)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.CitizenID)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.CitizenID)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.Phone)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.Phone)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.Address)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.Address)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.Email)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.Email)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.CreateDated)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.CreateDated)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.Status)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.Status)
-        </dd>
-
-    </dl>
+    <div class="card">
+        <div class="card-header d-flex justify-content-between">
+            <div class="header-title">
+                <h4 class="card-title">Add Users</h4>
+            </div>
+        </div>
+        <div class="card-body">
+            <form >
+                <div class="row">
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            <label>Mã nhân viên</label>
+                            @Html.DisplayFor(model => model.EmployeeID)
+                            <div class="help-block with-errors"></div>
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            <label>Nhóm người dùng</label>
+                            @Html.DisplayFor(model => model.UserGroup.Name)
+                            <div class="help-block with-errors"></div>
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            <label>Họ và tên *</label>
+                            @Html.DisplayFor(model => model.Name)
+                            <div class="help-block with-errors"></div>
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            <label>Sôd điện thoại *</label>
+                            @Html.DisplayFor(model => model.Phone)
+                            <div class="help-block with-errors"></div>
+                        </div>
+                    </div>
+                    <div class="col-md-12">
+                        <div class="form-group">
+                            <label>Email *</label>
+                            @Html.DisplayNameFor(model => model.Email)
+                            <div class="help-block with-errors"></div>
+                        </div>
+                    </div>
+                    <div class="col-md-12">
+                        <div class="form-group">
+                            <label>Địa chỉ *</label>
+                            @Html.DisplayFor(model => model.Address)
+                            <div class="help-block with-errors"></div>
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            <label>CCCD/CMND</label>
+                            @Html.DisplayFor(model => model.CitizenID)
+                            <div class="help-block with-errors"></div>
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            <label>Ngày tháng năm sinh</label>
+                            @Html.DisplayFor(model => model.DateOfBirth)
+                            <div class="help-block with-errors"></div>
+                        </div>
+                    </div>
+                    <div class="col-md-12">
+                        <div class="form-group">
+                            <label>Trạng thái *</label>
+                            @Html.DisplayFor(model => model.Status)
+                        </div>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
 </div> 
