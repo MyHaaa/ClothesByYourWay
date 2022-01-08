@@ -5349,13 +5349,14 @@
     <Content Include="Views\Home\Register.cshtml" />
     <Content Include="Views\ShoppingCart\Showcart.cshtml" />
     <Content Include="Views\ShoppingCart\EmptyCart.cshtml" />
-    <Content Include="Views\Home\ProductFeatured.cshtml" />
     <Content Include="Views\ShoppingCart\BagCart.cshtml" />
     <Content Include="Views\Product\ProductCategoriesPartial.cshtml" />
     <Content Include="Views\Product\Detail.cshtml" />
     <Content Include="Views\Product\ProductFeedbacksPartial.cshtml" />
     <Content Include="Views\MyAccount\Index.cshtml" />
     <Content Include="Views\ShoppingCart\CheckOut.cshtml" />
+    <Content Include="Views\Product\ProductFeatured.cshtml" />
+    <Content Include="Views\Product\ProductRecent.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

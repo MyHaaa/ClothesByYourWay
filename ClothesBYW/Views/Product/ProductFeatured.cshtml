@@ -1,0 +1,43 @@
+﻿@model IEnumerable<Models.EF.Product>
+<!-- Featured Product Start -->
+<div class="featured-product product">
+    <div class="container-fluid">
+        <div class="section-header">
+            <h1>Featured Product</h1>
+        </div>
+        <div class="row align-items-center product-slider product-slider-4">
+            @foreach (var item in Model)
+            {
+                <div class="col-lg-3">
+                    <div class="product-item">
+                        <div class="product-title">
+                            <a href="#">@item.ProductName</a>
+                            <div class="ratting">
+                                <i class="fa fa-star"></i>
+                                <i class="fa fa-star"></i>
+                                <i class="fa fa-star"></i>
+                                <i class="fa fa-star"></i>
+                                <i class="fa fa-star"></i>
+                            </div>
+                        </div>
+                        <div class="product-image">
+                            <a href="product-detail.html">
+                                <img src="@item.MetaKeyword" alt="Product Image">
+                            </a>
+                            <div class="product-action">
+                                <a href="/ShoppingCart/addtocart/@item.ProductLines.First().ProductLineID"><i class="fa fa-cart-plus"></i></a>
+                                <a href="#"><i class="fa fa-heart"></i></a>
+                                <a href="/Product/Detail/@item.ProductLines.FirstOrDefault().ProductLineID"><i class="fa fa-search"></i></a>
+                            </div>
+                        </div>
+                        <div class="product-price">
+                            <h3><span>$</span>@item.Prices.First().RetailPrice</h3>
+                            <a href="/ShoppingCart/addtocart/@item.ProductLines.First().ProductLineID" class="btn btn-inverse"><i class="fa fa-shopping-cart"></i>Add to cart</a>
+                        </div>
+                    </div>
+                </div>
+            }
+        </div>
+    </div>
+</div>
+<!-- Featured Product End -->

@@ -70,5 +70,15 @@ namespace ClothesBYW.Controllers
             dao.UploadFeedback(UserLoginSingleton.GetInstance().GetAccount().ID, productID, star, title, content);
             return RedirectToAction("Detail", "Product", new { id = productID });
         }
+        public ActionResult ProductFeatured()
+        {
+            var dao = new ProductDao();
+            return PartialView(dao.GetProductsSortByMostSale().Take(4));
+        }
+        public ActionResult ProductRecent()
+        {
+            var dao = new ProductDao();
+            return PartialView(dao.GetProductsSortByNew().Take(4));
+        }
     }
 }

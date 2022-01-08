@@ -70,5 +70,6 @@ namespace ClothesBYW.Models
         {
             items.Clear();
         }
+        public Voucher Voucher { get; set; }
     }
 }
