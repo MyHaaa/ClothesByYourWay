@@ -4,7 +4,16 @@
     Layout = null;
 }
 @section jsFooter{
-
+    <script>
+        $('#btnSelectImage').on('click', function (e) {
+            e.preventDefault();
+            var finder = new CKFinder();
+            finder.selectActionFunction = function (url) {
+                $('#txtImage').val(url);
+            };
+            finder.popup();
+        })
+    </script>
 }
 
 <div class="row" style="padding-top: 30px"></div>
@@ -12,52 +21,42 @@
 @using (Html.BeginForm("AddOrEdit", "Brands", FormMethod.Post, new { enctype = "multipart/form-data", onSubmit = "return jQueryAjaxPost(this);", data_restUrl = Url.Action("AddOrEdit", "Brands", new { id = 0 }) }))//data-resetUrl
 {
     @Html.AntiForgeryToken()
-    <div class="row" style="vertical-align:middle">
-        <div class="form-horizontal">
-            @Html.ValidationSummary(true)
-            @Html.HiddenFor(model => model.BrandID)
+    <div class="col-sm-12" style="margin-bottom: 10px">
+        <div class="">
+            <form action="page-list-suppliers.html" data-toggle="validator">
+                @Html.ValidationSummary(true)
+                @Html.HiddenFor(model => model.BrandID)
 
 
-            <div class="col-md-12">
-                <div class="form-group">
-                    @Html.LabelFor(model => model.BrandName, new { @class = "control-label col-md-3" })
-                    <div class="col-md-3">
-                        @Html.EditorFor(model => model.BrandName, new { htmlAttributes = new { @class = "form-control" } })
-                        @Html.ValidationMessageFor(model => model.BrandName)
+                <div class="row">
+                    <div class="col-md-12">
+                        <div class="form-group">
+                            <label>Tên thương hiệu </label>
+                            @Html.EditorFor(model => model.BrandName, new { htmlAttributes = new { @class = "form-control" } })
+                            @Html.ValidationMessageFor(model => model.BrandName)
+                        </div>
                     </div>
-                </div>
-                <div class="form-group">
-                    @Html.LabelFor(model => model.ImageBrand, new { @class = "control-label col-md-3" })
-                    <div class="col-md-3">
-                        @Html.TextBoxFor(model => model.ImageBrand, new { htmlAttributes = new { @class = "form-control", @id = "txtImage" }, id = "txtImage" })
-                        <button class="btn btn-default" id="btnSelectImage">Chọn Ảnh</button>
-                        @Html.ValidationMessageFor(model => model.ImageBrand)
-                        <script>
-                            $('#btnSelectImage').on('click', function (e) {
-                                e.preventDefault();
-                                var finder = new CKFinder();
-                                finder.selectActionFunction = function (url) {
-                                    $('#txtImage').val(url);
-                                };
-                                finder.popup();
-                            })
-                        </script>
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            <label>Logo thương hiệu</label>
+                            @Html.TextBoxFor(model => model.ImageBrand, new { htmlAttributes = new { @class = "form-control", @id = "txtImage" }, id = "txtImage" })
+                            <button class="btn btn-default" id="btnSelectImage">Chọn Ảnh</button>
+                            @Html.ValidationMessageFor(model => model.ImageBrand)
+
+                        </div>
                     </div>
+
                 </div>
+                <input type="submit" value="Submit" class="btn btn-primary mr-2" />
+                @if (Model.BrandID != 0)
+                {
+                    <a class="btn btn-success" onclick="refreshAddNewTab('@Url.Action("AddOrEdit","Brands",new{id=0})',false)"><i class="fa fa-plus"></i> Thêm mới</a>
+                }
+                <button class="btn btn-warning mr-2"> @Html.ActionLink("Cancel", "Index")</button>
 
-                <div class="form-group">
-                    <div class="col-md-offset-5 col-md-7">
-                        <input type="submit" value="Submit" class="btn btn-default" />
-                        @if (Model.BrandID != 0)
-                        {
-                            <a class="btn btn-success" onclick="refreshAddNewTab('@Url.Action("AddOrEdit","Brands",new{id=0})',false)"><i class="fa fa-plus"></i> Thêm mới</a>
-                        }
-                        <button class="btn btn-warning"> @Html.ActionLink("Cancel", "Index")</button>
-                    </div>
-                </div>
-            </div>
-
-
+                <button type="reset" class="btn btn-danger">Reset</button>
+            </form>
         </div>
     </div>
+
 }

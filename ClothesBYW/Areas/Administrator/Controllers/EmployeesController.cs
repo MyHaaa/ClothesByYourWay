@@ -84,6 +84,7 @@ namespace ClothesBYW.Areas.Administrator.Controllers
                     emp.IsEmailVerified = false;
                     emp.UserGroupID = employee.UserGroupID;
                     emp.Status = true;
+                    emp.Image = "/Assets/Admin/images/login/01.png";
 
                     emp.ActivationCode = Guid.NewGuid();
 

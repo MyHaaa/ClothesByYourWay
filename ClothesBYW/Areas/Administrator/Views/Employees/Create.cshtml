@@ -71,7 +71,15 @@ else
                             @Html.ValidationMessageFor(model => model.DateOfBirth, "", new { @class = "text-danger" })
                         </div>
                     </div>
-
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            <label>Nhóm người dùng *</label>
+                            <div class="">
+                                @Html.DropDownList("UserGroupID", null, htmlAttributes: new { @class = "form-control" })
+                                @Html.ValidationMessageFor(model => model.UserGroupID, "", new { @class = "text-danger" })
+                            </div>
+                        </div>
+                    </div>
                     <div class="col-md-6">
                         <div class="form-group">
                             <label>CCCD/CMND</label>
@@ -79,15 +87,7 @@ else
                             @Html.ValidationMessageFor(model => model.CitizenID, "", new { @class = "text-danger" })
                         </div>
                     </div>
-                    <div class="col-md-6">
-                        <div class="form-group">
-                            <label>Nhóm người dùng *</label>
-                            <div class="checkbox selectpicker">
-                                @Html.DropDownList("UserGroupID", null, htmlAttributes: new { @class = "form-control" })
-                                @Html.ValidationMessageFor(model => model.UserGroupID, "", new { @class = "text-danger" })
-                            </div>
-                        </div>
-                    </div>
+
 
                     <div class="col-md-6">
                         <div class="form-group">

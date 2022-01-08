@@ -52,6 +52,7 @@ namespace ClothesBYW.Areas.Administrator.Controllers
                 {
                     if (emp.BrandID == 0)
                     {
+                        emp.BrandID = db.Brands.Count() + 1;
 
                         db.Brands.Add(emp);
                         db.SaveChanges();
