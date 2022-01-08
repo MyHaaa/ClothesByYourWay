@@ -58,7 +58,16 @@
                         }
                         <p class="sub-total">Sub Total<span>$@Model.TongTien()</span></p>
                         <p class="ship-cost">Shipping Cost<span>$1</span></p>
-                        <h2>Grand Total<span>$@(Model.TongTien()+1)</span></h2>
+                        @if (Model.Voucher == null)
+                        {
+                            <h2>Grand Total<span>$@(Model.TongTien()+1)</span></h2>
+                        }
+                        else
+                        {
+                            var incre = (Model.TongTien() + 1) * Model.Voucher.PercentageDiscount;
+                            if (incre > Model.Voucher.AmountDiscount) { incre = Model.Voucher.AmountDiscount; }
+                            <h2>Grand Total<del>$@(Model.TongTien()+1)</del> <span>@(Model.TongTien()-incre)</span></h2>
+                        }
                     </div>
 
                     <div class="checkout-payment">

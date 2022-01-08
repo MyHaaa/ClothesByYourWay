@@ -1,6 +1,7 @@
 ﻿using ClothesBYW.Models;
 using ClothesBYW.Models.Customer;
 using Models.Dao;
+using Models.Dao.Customer;
 using Models.EF;
 using System;
 using System.Collections.Generic;
@@ -86,10 +87,6 @@ namespace ClothesBYW.Controllers
             }
             return View();
         }
-        public ActionResult ProductFeatured()
-        {
-            ViewBag.ProductFeatured = db.Products.OrderByDescending(x => x.CreatedDate).Take(8).ToList();
-            return View();
-        }
+        
     }
 }

@@ -35,8 +35,19 @@ namespace Models.Dao.Customer
         }
         public List<Product> GetProductsSortByMostSale()
         {
-            return new List<Product>();
-            //db.Products.OrderBy(x => x.OrderDetails.Count).ToList();
+            var lsProduct = db.Products.ToList();
+            var lsLine = db.ProductLines.OrderBy(x => x.OrderDetails.Count).ToList();
+            var result = new List<Product>();
+            foreach(var item in lsLine)
+            {
+                var prd = lsProduct.Where(x => x.ProductID == item.ProductID).FirstOrDefault();
+                if (prd != null)
+                {
+                    result.Add(prd);
+                    lsProduct.Remove(prd);
+                }
+            }
+            return _FomatList(result);
         }
         public List<Product> GetProducts(double range)
         {

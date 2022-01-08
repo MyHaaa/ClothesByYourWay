@@ -28,6 +28,7 @@ namespace Models.Migrations
             AddSupplier(context);
             AddProductLines(context);
             AddPrices(context);
+            AddVoucher(context);
             base.Seed(context);
         }
         private void AddBrands(ClothesBYWDbContext context)
@@ -473,6 +474,29 @@ namespace Models.Migrations
                     StandardPrice = 45
                 });
             }
+        }
+        private void AddVoucher(ClothesBYWDbContext context)
+        {
+            var item1 = new Voucher()
+            {
+                VoucherID = "",
+                PercentageDiscount = 0,
+                AmountDiscount = 0,
+                CreatedDate = DateTime.Now,
+                EndDate = DateTime.MaxValue,
+                Status = 1
+            };
+            var item2 = new Voucher()
+            {
+                VoucherID = "VOUCET",
+                PercentageDiscount = 10,
+                AmountDiscount = 5,
+                CreatedDate = DateTime.Now,
+                EndDate = DateTime.MaxValue,
+                Status = 1
+            };
+            context.Vouchers.Add(item1);
+            context.Vouchers.Add(item2);
         }
     }
 }

@@ -29,7 +29,18 @@ namespace Models.Dao.Customer
         }
         public List<EF.Order> GetOrders(string userID)
         {
-            return db.Orders.Where(x => x.CustomerID == userID).ToList();
+            return db.Orders.Where(x => x.CustomerID == userID).OrderByDescending(x => x.CreateDate).ToList();
+        }
+        public bool ChangePassword(string id, string oldPass, string newPass)
+        {
+            var customer = db.Customers.Where(x => x.CustomerID == id).FirstOrDefault();
+            if (customer.Password != oldPass) return false;
+            if (customer != null)
+            {
+                customer.Password = newPass;
+                db.SaveChanges();
+            }
+            return true;
         }
     }
 }

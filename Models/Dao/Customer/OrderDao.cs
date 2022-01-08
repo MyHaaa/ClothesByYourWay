@@ -14,7 +14,7 @@ namespace Models.Dao.Customer
         {
             db = new ClothesBYWDbContext();
         }
-        public string CreateOrder(string customerID, List<OrderDetail> items)
+        public string CreateOrder(string customerID, List<OrderDetail> items, decimal? total, string voucher)
         {
             var cus = db.Customers.Where(x => x.CustomerID == customerID).FirstOrDefault();
             var orderID = (Guid.NewGuid()).ToString();
@@ -29,8 +29,8 @@ namespace Models.Dao.Customer
                 AddressShip = cus.Address,
                 CreateDate = DateTime.Now,
                 Status = 1, // COD
-                Total = items.Sum(x => x.PriceEach * x.QuantitySold),
-                VoucherID = "VOUCHERD"
+                Total = total,
+                VoucherID = voucher
             };
             db.Orders.Add(order);
             db.SaveChanges();
@@ -48,8 +48,26 @@ namespace Models.Dao.Customer
                 item.OrderID = orderID;
                 item.OrderDetailID = detailID;
                 db.OrderDetails.Add(item);
+
+                var line = db.ProductLines.Where(x => x.ProductLineID == item.ProductLineID).FirstOrDefault();
+                line.QuantityInStock = line.QuantityInStock - (long)item.QuantitySold;
+            }
+            
+            db.SaveChanges();
+        }
+        public void UpdateQuantity(List<OrderDetail> items)
+        {
+            foreach (var item in items)
+            {
+                var line = db.ProductLines.Where(x => x.ProductLineID == item.ProductLineID).FirstOrDefault();
+                line.QuantityInStock = line.QuantityInStock - (long)item.QuantitySold;
             }
             db.SaveChanges();
+        }
+        public Voucher CheckVoucher(string id)
+        {
+            var check = db.Vouchers.Where(x => x.VoucherID == id && x.EndDate >= DateTime.Now && x.VoucherID != "").FirstOrDefault();
+            return check;
         }
     }
 }

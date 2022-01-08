@@ -171,10 +171,28 @@ namespace ClothesBYW.Controllers
                     QuantitySold = item.SoLuong
                 });
             }
-            var result = dao.CreateOrder(UserLoginSingleton.GetInstance().GetAccount().ID,listOrderDetail);
+            decimal? total = listOrderDetail.Sum(x => x.PriceEach * x.QuantitySold) + 1;
+            string voucher = "";
+            if(gh.Voucher != null)
+            {
+                var incre = (gh.TongTien() + 1) * gh.Voucher.PercentageDiscount;
+                if (incre > gh.Voucher.AmountDiscount) { incre = gh.Voucher.AmountDiscount; }
+                total = total - incre;
+                voucher = gh.Voucher.VoucherID;
+            }
+            var result = dao.CreateOrder(UserLoginSingleton.GetInstance().GetAccount().ID,listOrderDetail,total,voucher);
             dao.AddOrderItems(result, listOrderDetail);
+            dao.UpdateQuantity(listOrderDetail);
             gh.ClearCart();
             return RedirectToAction("Index", "Home");
+        }
+        [HttpPost]
+        public ActionResult AddVoucher(string voucher)
+        {
+            Models.GioHang gh = Session["Models.GioHang"] as Models.GioHang;
+            var dao = new OrderDao();
+            gh.Voucher = dao.CheckVoucher(voucher);
+            return RedirectToAction("Showcart", "ShoppingCart");
         }
     }
 }
