@@ -5317,6 +5317,15 @@
     <Content Include="Areas\Administrator\Views\PromotionProducts\AddOrEdit.cshtml" />
     <Content Include="Areas\Administrator\Views\Profile\Index.cshtml" />
     <Content Include="Areas\Administrator\Views\Profile\ChangePassword.cshtml" />
+    <Content Include="Areas\Administrator\Views\PurchaseOrders\Index.cshtml" />
+    <Content Include="Areas\Administrator\Views\PurchaseOrders\Create.cshtml" />
+    <Content Include="Areas\Administrator\Views\PurchaseOrders\AddProductIntoPO.cshtml" />
+    <Content Include="Areas\Administrator\Views\PurchaseOrders\AddToPO.cshtml" />
+    <Content Include="Areas\Administrator\Views\PurchaseOrders\ViewPOCart.cshtml" />
+    <Content Include="Areas\Administrator\Views\PurchaseOrders\POCart.cshtml" />
+    <Content Include="Areas\Administrator\Views\PurchaseOrders\Save.cshtml" />
+    <Content Include="Areas\Administrator\Views\PurchaseOrders\PODetails.cshtml" />
+    <Content Include="Areas\Administrator\Views\PurchaseOrders\ChangeStatus.cshtml" />
     <None Include="Scripts\jquery-3.4.1.intellisense.js" />
     <Content Include="Scripts\jquery-3.4.1.js" />
     <Content Include="Scripts\jquery-3.4.1.min.js" />
@@ -5361,7 +5370,6 @@
     <Folder Include="App_Data\" />
     <Folder Include="Areas\Administrator\Data\ProductLine\" />
     <Folder Include="Areas\Administrator\Data\ProfileEmp\" />
-    <Folder Include="Areas\Administrator\Views\PurchaseOrders\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="fonts\glyphicons-halflings-regular.woff2" />

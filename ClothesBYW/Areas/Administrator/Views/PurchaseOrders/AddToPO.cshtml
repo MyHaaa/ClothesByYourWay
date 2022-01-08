@@ -1,0 +1,46 @@
+﻿@model ClothesBYW.Areas.Administrator.Models.AddPLToPO
+
+<script>
+    $(function () {
+            $("#@Html.IdFor(s => s.PurchaseQuantity)")
+            .on("input",function () {
+
+                if ($(this).val() < 0) {
+                    alert("Số lượng đặt mua không được nhỏ hơn 0!");
+                    $(this).val("");
+                }
+            });
+        });
+
+</script>
+<div class="modal-header">
+    <button type="button" class="close" data-dismiss="modal">&times;</button>
+    <h4 class="modal-title" style="text-align: center; font-weight: bold; text-transform:uppercase">Số lượng sản phẩm  @Session["ProductLineID"] muốn đặt trong đơn hàng này</h4>
+</div>
+<div class="modal-body">
+    @using (Html.BeginForm())
+    {
+        @Html.AntiForgeryToken()
+
+        <div class="form-horizontal">
+            @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+            @Html.HiddenFor(model => model.ProductLineID)
+            <div class="form-group">
+                @Html.LabelFor(model => model.PurchaseQuantity, htmlAttributes: new { @class = "control-label col-md-7" })
+                <div class="col-md-5">
+                    @Html.EditorFor(model => model.PurchaseQuantity, new { htmlAttributes = new { @class = "form-control" } })
+                    @Html.ValidationMessageFor(model => model.PurchaseQuantity, "", new { @class = "text-danger" })
+                </div>
+            </div>
+
+            <div class="form-group">
+                <div class="col-md-offset-2 col-md-10">
+                    <input type="submit" value="Thêm" class="btn btn-default" />
+                </div>
+            </div>
+        </div>
+    }
+</div>
+<div class="modal-footer">
+    <button type="button" class="btn btn-default" data-dismiss="modal">Đóng</button>
+</div>

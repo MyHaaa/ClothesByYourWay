@@ -1,0 +1,130 @@
+﻿@model IEnumerable<Models.EF.ProductLine>
+
+@{
+    ViewBag.Title = "AddProductIntoPO";
+    Layout = "~/Areas/Administrator/Views/Shared/_Layout.cshtml";
+}
+
+<div class="row" style="margin-left: 2px">
+
+    <div class="col-md-8 alert alert-success" role="alert">
+        <h4>Mã đơn nhập hàng @Session["PurchaseOrderID"]</h4>
+    </div>
+    <div class="col-md-4" style="padding-top: 10px ">
+        <button style="background-color: whitesmoke;
+                                    backdrop-filter: blur(6px);
+                                    -webkit-backdrop-filter: blur(6px);
+                                    border: 1px solid black;
+                                    box-shadow: rgba(142, 142, 142, 0.19) 0px 6px 15px 0px;
+                                    -webkit-box-shadow: rgba(142, 142, 142, 0.19) 0px 6px 15px 0px;
+                                    border-radius: 12px;
+                                    -webkit-border-radius: 12px;
+                                    color: royalblue;
+                                    padding: 5px 10px;"
+                href="@Url.Action("ViewPOCart", "PurchaseOrders")"
+                type="button"
+                data-toggle="modal" data-target="#ViewPOCart">
+            Xem đơn hàng
+        </button>
+    </div>
+</div>
+<div class="row">
+    <div class="col-md-12 stats-info stats-last widget-shadow">
+        <div class="stats-last-agile">
+            <table class="table stats-table ">
+                <thead>
+                    <tr>
+                        <th style="text-align: center">
+                            Mã ProductLine
+                        </th>
+                        <th style="text-align: center">
+                            Mã Product
+                        </th>
+                        <th style="text-align: center">
+                            Size
+                        </th>
+                        <th style="text-align: center">
+                            Màu sắc
+                        </th>
+                        <th style="text-align: center">
+                            Số lượng hiện giờ
+                        </th>
+                        <th style="text-align: center">
+                            Trạng thái
+                        </th>
+
+                        <th style="text-align: center">#</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var item in Model)
+                    {
+                        <tr>
+                            <th scope="row" style="text-align: center">@Html.DisplayFor(modelItem => item.ProductLineID)</th>
+                            <td style="text-align: center">@Html.DisplayFor(modelItem => item.ProductID)</td>
+
+                            <td style="text-align: center">
+                                @Html.DisplayFor(modelItem => item.Size)
+                            </td>
+                            <td style="text-align: center">
+                                @Html.DisplayFor(modelItem => item.Color.ColorName)
+                            </td>
+                            <td style="text-align: center"> @Html.DisplayFor(modelItem => item.QuantityInStock)</td>
+                            @if (item.Status == 1)
+                            {
+                                <td style="text-align: center">
+                                    <span class="label label-success" style="font-size: 0.8rem; font-weight: bolder">Đang bán</span>
+                                </td>
+                            }
+                            else if (item.Status == 2)
+                            {
+                                <td style="text-align: center">
+                                    <span class="label label-warning" style="font-size: 0.8rem; font-weight: bolder">Ngừng bán</span>
+                                </td>
+                            }
+
+                            <td style="text-align: center">
+                                <button style="background-color: whitesmoke;
+                                    backdrop-filter: blur(6px);
+                                    -webkit-backdrop-filter: blur(6px);
+                                    border: 1px solid black;
+                                    box-shadow: rgba(142, 142, 142, 0.19) 0px 6px 15px 0px;
+                                    -webkit-box-shadow: rgba(142, 142, 142, 0.19) 0px 6px 15px 0px;
+                                    border-radius: 12px;
+                                    -webkit-border-radius: 12px;
+                                    color: black;
+                                    padding: 5px 10px;"
+                                        href="@Url.Action("AddToPO", "PurchaseOrders", new { plid = item.ProductLineID})"
+                                        type="button"
+                                        data-toggle="modal" data-target="#AddToPO">
+                                    Thêm vào đơn nhập hàng
+                                </button>
+                            </td>
+                        </tr>
+                    }
+
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+
+
+<!-- Modal Add Product To PO -->
+<div id="AddToPO" class="modal fade" role="dialog">
+    <div class="modal-dialog">
+        <!-- Modal content-->
+        <div class="modal-content">
+        </div>
+    </div>
+</div>
+
+<!-- Modal View PO -->
+<div id="ViewPOCart" class="modal fade" role="dialog">
+    <div class="modal-dialog">
+        <!-- Modal content-->
+        <div class="modal-content">
+        </div>
+    </div>
+</div>
+

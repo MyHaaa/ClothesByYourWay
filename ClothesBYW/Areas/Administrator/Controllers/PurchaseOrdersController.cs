@@ -94,11 +94,11 @@ namespace ClothesBYW.Areas.Administrator.Controllers
             {
                 var po = new PurchaseOrder();
                 int num = purchaseOrderRepository.Count();
-                //string username = Session["Username"].ToString();
+                string username = Session["Username"].ToString();
 
                 po.PurchaseOrderID = DateTime.Now.Day.ToString() + DateTime.Now.Month.ToString() + DateTime.Now.Year.ToString() + num;
                 po.CreatedDate = DateTime.Now;
-                //po.CreatedBy = username;
+                po.CreatedBy = username;
                 po.Status = 1;
                 po.SupplierID = purchaseOrder.SupplierID;
                 po.TotalAmountPurchase = 0;

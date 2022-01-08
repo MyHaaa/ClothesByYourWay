@@ -1,0 +1,47 @@
+﻿@model List<ClothesBYW.Areas.Administrator.Models.POCartItem>
+@{
+    ViewBag.Title = "POCart";
+    Layout = "~/Areas/Administrator/Views/Shared/_Layout.cshtml";
+}
+@section jsFooter{
+    <script src="/Assets/Admin/js/Controller/cartController.js"></script>
+}
+<h4 id="poID">Mã đơn nhập hàng @Session["PurchaseOrderID"]</h4>
+<input type="hidden" id="txtSessionName" value="@Session["PurchaseOrderID"]" />
+<div class="content">
+    <div class="section group">
+        @if (Model.Count > 0)
+        {
+            <table class="table">
+                <thead>
+                    <tr>
+                        <td>Mã dòng SP</td>
+                        <td>Size</td>
+                        <td>Màu sắc</td>
+                        <td>Số lượng đặt mua</td>
+                        <td></td>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var item in Model)
+                    {
+                        <tr>
+                            <td>@item.ProductLine.ProductLineID</td>
+                            <td>@item.ProductLine.Size</td>
+                            <td>@item.ProductLine.Color.ColorName</td>
+                            <td><input type="number" class="txtPurchaseQuantity" data-id="@item.PurchaseQuantity" value="@item.PurchaseQuantity" /></td>
+                            <td><a href="#" data-id="@item.ProductLine.ProductLineID" class="btn-delete">Xoá</a></td>
+                        </tr>
+                    }
+
+                </tbody>
+            </table>
+            <button id="btnContinue" class="btn">Tiếp tục thêm sản phẩm</button>
+            <button id="btnUpdate" class="btn">Cập nhật đơn đơn đặt hàng</button>
+            <button id="btnDeleteAll" class="btn">Xoá đơn đặt hàng</button>
+            <button id="btnSave" class="btn">Xác nhận</button>
+        }
+
+    </div>
+</div>
+

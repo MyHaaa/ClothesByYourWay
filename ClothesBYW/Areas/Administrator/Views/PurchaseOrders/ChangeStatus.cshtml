@@ -1,0 +1,28 @@
+﻿@model ClothesBYW.Areas.Administrator.Models.ChangeStatusPO
+@{
+    List<SelectListItem> Status = new List<SelectListItem>();
+    Status.Add(new SelectListItem() { Text = "Đang giao đơn", Value = "2" });
+    Status.Add(new SelectListItem() { Text = "Đã bị huỷ", Value = "3" });
+    Status.Add(new SelectListItem() { Text = "Đã nhận hàng", Value = "4" });
+    Status.Add(new SelectListItem() { Text = "Lỗi chi tiết đơn", Value = "5" });
+}
+
+<div class="modal-header">
+    <button type="button" class="close" data-dismiss="modal">&times;</button>
+    <h4 class="modal-title" style="text-align: center; font-weight: bold; text-transform:uppercase">Bạn đang xét duyệt đơn đặt hàng @Session["PurchaseOrderID"]</h4>
+</div>
+<div class="modal-body">
+    @using (Html.BeginForm("ChangeStatus", "PurchaseOrders", FormMethod.Post))
+    {
+        <div class="form-group">
+            <label>Trạng thái:</label>
+            @Html.DropDownListFor(model => model.StatusID, Status, "-- Select Status --")
+        </div>
+
+        <button type="submit" class="btn">Xác nhận</button>
+    }
+
+</div>
+<div class="modal-footer">
+    <button type="button" class="btn btn-primary" data-dismiss="modal">Đóng</button>
+</div>

@@ -1,0 +1,141 @@
+﻿@model IEnumerable<Models.EF.PurchaseOrder>
+
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Areas/Administrator/Views/Shared/_Layout.cshtml";
+}
+<button style="background-color: whitesmoke;
+                                    backdrop-filter: blur(6px);
+                                    -webkit-backdrop-filter: blur(6px);
+                                    border: 1px solid black;
+                                    box-shadow: rgba(142, 142, 142, 0.19) 0px 6px 15px 0px;
+                                    -webkit-box-shadow: rgba(142, 142, 142, 0.19) 0px 6px 15px 0px;
+                                    border-radius: 12px;
+                                    -webkit-border-radius: 12px;
+                                    color: black;
+                                    padding: 5px 10px;"
+        href="@Url.Action("Create", "PurchaseOrders")"
+        type="button"
+        data-toggle="modal" data-target="#CreatePO">
+    Thêm đơn nhập hàng mới
+</button>
+
+<div class="market-updates">
+    <div class="col-md-4 market-update-gd">
+        <div class="market-update-block clr-block-3">
+            <div class="col-md-4 market-update-right">
+                <i class="fa fa-usd"></i>
+            </div>
+            <div class="col-md-8 market-update-left">
+                <h4>Sản phẩm</h4>
+                <h3>@TempData["ProductCount"]</h3>
+            </div>
+            <div class="clearfix"> </div>
+        </div>
+    </div>
+    <div class="col-md-4 market-update-gd">
+        <div class="market-update-block clr-block-4">
+            <div class="col-md-4 market-update-right">
+                <i class="fa fa-shopping-cart" aria-hidden="true"></i>
+            </div>
+            <div class="col-md-8 market-update-left">
+                <h4>Đơn nhập hàng</h4>
+                <h3>@TempData["POCount"]</h3>
+            </div>
+            <div class="clearfix"> </div>
+        </div>
+    </div>
+    <div class="clearfix"> </div>
+</div>
+
+<div class="col-md-12 stats-info stats-last widget-shadow">
+    <div class="stats-last-agile">
+        <table class="table stats-table ">
+            <thead>
+                <tr>
+                    <th>
+                        Mã đơn hàng
+                    </th>
+
+                    <th>
+                        Ngày tạo
+                    </th>
+                    <th>
+                        Tạo bởi
+                    </th>
+                    <th>
+                        Tổng Tiền
+                    </th>
+                    <th>
+                        Ngày nhận hàng
+                    </th>
+                    <th>
+                        Trạng thái
+                    </th>
+
+                    <th>#</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var item in Model)
+                {
+                    <tr>
+                        <th scope="row">@Html.DisplayFor(modelItem => item.PurchaseOrderID)</th>
+                        <td>@Html.DisplayFor(modelItem => item.CreatedDate)</td>
+
+                        <td>
+                            @Html.DisplayFor(modelItem => item.CreatedBy)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.TotalAmountPurchase)
+                        </td>
+                        <td> @Html.DisplayFor(modelItem => item.ReceivedDate)</td>
+                        @if (item.Status == 1)
+                        {
+                            <td style="text-align: center">
+                                <span class="label labels-primary" style="font-size: 0.8rem; font-weight: bolder">Chờ phê duyệt</span>
+                            </td>
+                        }
+                        else if (item.Status == 2)
+                        {
+                            <td style="text-align: center">
+                                <span class="label label-warning" style="font-size: 0.8rem; font-weight: bolder">Đang giao đơn</span>
+                            </td>
+                        }
+                        else if (item.Status == 3)
+                        {
+                            <td style="text-align: center">
+                                <span class="label label-danger" style="font-size: 0.8rem; font-weight: bolder">Đã bị huỷ</span>
+                            </td>
+                        }
+                        else if (item.Status == 4)
+                        {
+                            <td style="text-align: center">
+                                <span class="label label-success" style="font-size: 0.8rem; font-weight: bolder">Đã nhận hàng</span>
+                            </td>
+                        }
+                        else if (item.Status == 5)
+                        {
+                            <td style="text-align: center">
+                                <span class="label label-info" style="font-size: 0.8rem; font-weight: bolder">Lỗi chi tiết đơn</span>
+                            </td>
+                        }
+
+                        <td><a href="/Administrator/PurchaseOrders/PODetails/@item.PurchaseOrderID" data-id="@item.PurchaseOrderID" class="btn-delete"><i class="fa fa-eye"></i></a></td>
+                    </tr>
+
+                }
+
+            </tbody>
+        </table>
+    </div>
+</div>
+
+<!-- Modal Add New PO -->
+<div id="CreatePO" class="modal fade" role="dialog">
+    <div class="modal-dialog">
+        <!-- Modal content-->
+        <div class="modal-content">
+        </div>
+    </div>
+</div>
