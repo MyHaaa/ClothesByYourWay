@@ -1,0 +1,358 @@
+﻿@model ClothesBYW.Areas.Administrator.Models.ProductDetails
+
+@{
+    ViewBag.Title = "Details";
+    Layout = "~/Areas/Administrator/Views/Shared/_Layout.cshtml";
+}
+
+<div class="table-agile-info">
+    <div class="panel panel-default">
+        <div class="panel-heading">
+            Chi tiết mã sản phẩm @Model.Product.ProductID
+            <a href="#" data-toggle="modal" data-target="#myModal"><i class="fa fa-eye"></i></a>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-sm-12 btn-product-detail" style="display: flex; justify-content: flex-end">
+            <button style="background-color: whitesmoke;
+                                backdrop-filter: blur(6px);
+                                -webkit-backdrop-filter: blur(6px);
+                                border: 1px solid black;
+                                box-shadow: rgba(142, 142, 142, 0.19) 0px 6px 15px 0px;
+                                -webkit-box-shadow: rgba(142, 142, 142, 0.19) 0px 6px 15px 0px;
+                                border-radius: 12px;
+                                -webkit-border-radius: 12px;
+                                color: black;
+                                    padding: 5px 10px;">
+                @Html.ActionLink("Back to List", "Index")
+            </button>
+        </div>
+    </div>
+    <div class="row w3-res-tb">
+        <!--Thông tin-->
+        <div class="col-sm-5" style="background-color: rgba(255, 255, 255);
+                                           backdrop-filter: blur(13px);
+                                           -webkit-backdrop-filter: blur(13px);
+                                           border: 1px solid rgba(255, 255, 255, 0.18);
+                                           box-shadow: rgba(142, 142, 142, 0.19) 0px 6px 15px 0px;
+                                           -webkit-box-shadow: rgba(142, 142, 142, 0.19) 0px 6px 15px 0px;
+                                           border-radius: 12px;
+                                           -webkit-border-radius: 12px;
+                                           position: relative;
+                                           display: flex;
+                                           margin-left: 10px;
+                                           margin-right: 25px">
+            <h3 style="position: absolute; top: -15px; color: green">Thông tin về sản phẩm</h3>
+            <div class="product-left" style="padding: 30px 0;">
+                <div class="col-sm-12" style="margin-bottom: 5px"><span style="font-weight:bold">Tên sản phẩm: </span>@Model.Product.ProductName</div>
+                <div class="col-sm-12" style="margin-bottom: 5px"><span style="font-weight:bold">Meta Keyword: </span>@Model.Product.MetaKeyword</div>
+                <div class="col-sm-12" style="margin-bottom: 5px"><span style="font-weight:bold">Mô tả: </span>@Model.Product.Description</div>
+                <div class="col-sm-12" style="margin-bottom: 5px"><span style="font-weight:bold">Loại sản phẩm: </span>@Model.Product.ProductCategory.Name</div>
+                <div class="col-sm-12" style="margin-bottom: 5px"><span style="font-weight:bold">Thương hiệu: </span>@Model.Product.Brand.BrandName</div>
+                <div class="col-sm-12" style="margin-bottom: 5px">
+                    <span style="font-weight:bold">Trạng thái: </span>
+                    @if (@Model.Product.Status == 1)
+                    {
+                        <span>Đang bán</span>
+                    }
+                </div>
+                <div class="col-sm-12" style="margin-bottom: 5px"><span style="font-weight:bold">Ngày tạo: </span>@Model.Product.CreatedDate</div>
+                <div class="col-sm-12" style="margin-bottom: 5px"><span style="font-weight:bold">Người tạo: </span>@Model.Product.CreatedBy</div>
+                <div class="col-sm-12 btn-product-detail" style="display: flex; justify-content: flex-end">
+                    <button style="background-color: whitesmoke;
+                                    backdrop-filter: blur(6px);
+                                    -webkit-backdrop-filter: blur(6px);
+                                    border: 1px solid black;
+                                    box-shadow: rgba(142, 142, 142, 0.19) 0px 6px 15px 0px;
+                                    -webkit-box-shadow: rgba(142, 142, 142, 0.19) 0px 6px 15px 0px;
+                                    border-radius: 12px;
+                                    -webkit-border-radius: 12px;
+                                    color: black;
+                                    padding: 5px 10px;"
+                            href="@Url.Action("EditInfor", "Products", new { id = Model.Product.ProductID })"
+                            type="button"
+                            data-toggle="modal" data-target="#EditInfor">
+                        Cập nhật thông tin
+                    </button>
+                </div>
+            </div>
+        </div>
+
+        <!--Khuyến mãi-->
+        <div class="col-sm-6" style="background-color: rgba(255, 255, 255);
+                                           backdrop-filter: blur(13px);
+                                           -webkit-backdrop-filter: blur(13px);
+                                           border: 1px solid rgba(255, 255, 255, 0.18);
+                                           box-shadow: rgba(142, 142, 142, 0.19) 0px 6px 15px 0px;
+                                           -webkit-box-shadow: rgba(142, 142, 142, 0.19) 0px 6px 15px 0px;
+                                           border-radius: 12px;
+                                           -webkit-border-radius: 12px;
+                                           position: relative;
+                                            margin-left: 10px;">
+            <h3 style="position: absolute; top: -15px; color: green">Các khuyến mãi từng áp dụng cho sản phẩm</h3>
+            <div class="product-right" style="padding: 30px 0;">
+                <h4 style="margin-left: 25px">Mã khuyến mãi đang áp dụng</h4>
+                <div style="margin: 30px 0;">
+                    @foreach (var promotionValid in ViewBag.promotionProducts)
+                    {
+                        <div class="col-sm-12" style="margin-bottom: 5px"><span style="font-weight:bold">Mã khuyến mãi: </span>@promotionValid.Promotion.PromotionID</div>
+                        <div class="col-sm-12" style="margin-bottom: 5px"><span style="font-weight:bold">Chủ đề: </span>@promotionValid.Promotion.Description</div>
+                        <div class="col-sm-12" style="margin-bottom: 5px"><span style="font-weight:bold">Ngày bắt đầu: </span>@promotionValid.Promotion.DateStart</div>
+                        <div class="col-sm-12" style="margin-bottom: 5px"><span style="font-weight:bold">Ngày kết thúc: </span>@promotionValid.Promotion.DateEnd</div>
+                        <div class="col-sm-12" style="margin-bottom: 5px"><span style="font-weight:bold">Giá khuyến mãi: </span>@promotionValid.EachPrice</div>
+                    }
+                </div>
+                <h4 style="margin-left: 25px">Mã khuyến mãi từng áp dụng</h4>
+                <table class="table table-striped b-t b-light" id="PromotionTable" style="margin: 30px 0;">
+                    <thead>
+                        <tr>
+                            <th style="text-align: center; color: black">Mã KM</th>
+                            <th style="text-align: center; color: black">Bắt đầu</th>
+                            <th style="text-align: center; color: black">Kết thúc</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @foreach (var promotion in Model.PromotionProducts)
+                        {
+                            <tr title="Chủ đề: @promotion.Promotion.Description &#013; Giá khuyến mãi: @promotion.EachPrice">
+                                <td style="text-align: center; color: black">
+                                    @promotion.Promotion.PromotionID
+                                </td>
+                                <td style="text-align: center; color: black">
+                                    @promotion.Promotion.DateStart
+                                </td>
+                                <td style="text-align: center; color: black">
+                                    @promotion.Promotion.DateStart
+                                </td>
+                            </tr>
+                        }
+                    </tbody>
+                </table>
+                <div class="col-sm-12 btn-product-detail" style="display: flex; justify-content: flex-end; margin-bottom: 30px;">
+                    <button style="background-color: whitesmoke;
+                                backdrop-filter: blur(6px);
+                                -webkit-backdrop-filter: blur(6px);
+                                border: 1px solid black;
+                                box-shadow: rgba(142, 142, 142, 0.19) 0px 6px 15px 0px;
+                                -webkit-box-shadow: rgba(142, 142, 142, 0.19) 0px 6px 15px 0px;
+                                border-radius: 12px;
+                                -webkit-border-radius: 12px;
+                                color: aliceblue;
+                                padding: 5px 10px;">
+                        @Html.ActionLink("Cập nhật khuyến mãi", "Edit", new { id = Model.Product.ProductID })
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="row" style="margin-top: 30px;">
+        <!--Bảng giá-->
+        <div class="col-sm-5" style="background-color: rgba(255, 255, 255);
+                                           backdrop-filter: blur(13px);
+                                           -webkit-backdrop-filter: blur(13px);
+                                           border: 1px solid rgba(255, 255, 255, 0.18);
+                                           box-shadow: rgba(142, 142, 142, 0.19) 0px 6px 15px 0px;
+                                           -webkit-box-shadow: rgba(142, 142, 142, 0.19) 0px 6px 15px 0px;
+                                           border-radius: 12px;
+                                           -webkit-border-radius: 12px;
+                                           position: relative;
+                                           margin-left: 25px;"
+             ">
+            <h3 style="position: absolute; top: -15px; color: green;">Bảng giá sản phẩm</h3>
+            <div style="padding: 30px 0">
+                @foreach (var price in Model.Price)
+                {
+                    <div class="col-sm-12" style="margin-bottom: 5px"><span style="font-weight:bold">Giá bán lẻ: </span>@price.RetailPrice</div>
+                    <div class="col-sm-12" style="margin-bottom: 5px"><span style="font-weight:bold">Giá bán sỉ: </span>@price.WholeSalePrice</div>
+                    <div class="col-sm-12" style="margin-bottom: 5px"><span style="font-weight:bold">Giá sàn: </span>@price.StandardPrice</div>
+                }
+
+            </div>
+            <div class="col-sm-12 btn-product-detail" style="display: flex; justify-content: flex-end; margin-bottom: 30px;">
+                <a style="background-color: whitesmoke;
+                                backdrop-filter: blur(6px);
+                                -webkit-backdrop-filter: blur(6px);
+                                border: 1px solid black;
+                                box-shadow: rgba(142, 142, 142, 0.19) 0px 6px 15px 0px;
+                                -webkit-box-shadow: rgba(142, 142, 142, 0.19) 0px 6px 15px 0px;
+                                border-radius: 12px;
+                                -webkit-border-radius: 12px;
+                                color: black;
+                                padding: 5px 10px;"
+                   class="btn btn-sm"
+                   href="@Url.Action("EditPrice", "Products", new { id = Model.Product.ProductID })"
+                   type="button"
+                   data-toggle="modal" data-target="#EditPrice">
+                    Cập nhật giá sản phẩm
+                </a>
+            </div>
+        </div>
+    </div>
+    <div class="row" style="margin-top: 30px;">
+        <!--Dòng sản phẩm-->
+        <div class="col-sm-11" style="background-color: rgba(255, 255, 255);
+                                           backdrop-filter: blur(13px);
+                                           -webkit-backdrop-filter: blur(13px);
+                                           border: 1px solid rgba(255, 255, 255, 0.18);
+                                           box-shadow: rgba(142, 142, 142, 0.19) 0px 6px 15px 0px;
+                                           -webkit-box-shadow: rgba(142, 142, 142, 0.19) 0px 6px 15px 0px;
+                                           border-radius: 12px;
+                                           -webkit-border-radius: 12px;
+                                           position: relative;
+                                           display: flex;
+                                           margin: 0 25px;">
+            <h3 style="position: absolute; top: -15px; color: green">Các dòng sản phẩm liên quan</h3>
+            <div class="col-sm-12 product-left" style="padding: 30px 0;">
+                <!--Table sản phẩm-->
+                <table class="table table-striped b-t b-light">
+                    <thead>
+                        <tr>
+                            <th style="text-align: center; color: black">Mã dòng sản phẩm</th>
+                            <th style="text-align: center; color: black">Kích thước</th>
+                            <th style="text-align: center; color: black">Màu sắc</th>
+                            <th style="text-align: center; color: black">Nhà cung cấp</th>
+                            <th style="text-align: center; color: black">Số lượng hiện có</th>
+                            <th style="text-align: center; color: black">Trạng thái</th>
+                            <th style="text-align: center; color: black">Action</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @foreach (var modified in Model.ProductLine)
+                        {
+                            <tr>
+                                <td style="text-align: center; color: black">
+                                    @modified.ProductLineID
+                                </td>
+                                <td style="text-align: center; color: black">
+                                    @modified.Size
+                                </td>
+                                <td style="text-align: center; color: black">
+                                    @modified.Color.ColorName
+                                </td>
+                                <td style="text-align: center; color: black">
+                                    @modified.Supplier.Name
+                                </td>
+                                <td style="text-align: center; color: black">
+                                    @modified.QuantityInStock
+                                </td>
+                                <td style="text-align: center; color: black">
+                                    @modified.Status
+                                </td>
+                                <td style="text-align: center; color: black">
+                                    @Html.ActionLink("Details", "DetailsProductLine", new { id = modified.ProductLineID })
+
+                                </td>
+                            </tr>
+                        }
+                    </tbody>
+                </table>
+                <div class="col-sm-12 btn-product-detail" style="display: flex; justify-content: flex-end">
+                    <button style="background-color: whitesmoke;
+                                backdrop-filter: blur(6px);
+                                -webkit-backdrop-filter: blur(6px);
+                                border: 1px solid black;
+                                box-shadow: rgba(142, 142, 142, 0.19) 0px 6px 15px 0px;
+                                -webkit-box-shadow: rgba(142, 142, 142, 0.19) 0px 6px 15px 0px;
+                                border-radius: 12px;
+                                -webkit-border-radius: 12px;
+                                color: black;
+                                    padding: 5px 10px;"
+                            href="@Url.Action("AddProductLine", "Products")"
+                            type="button"
+                            data-toggle="modal" data-target="#AddProductLine">
+                        Thêm dòng sản phẩm mới
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+    <!-- Modal lịch sử chỉnh sửa -->
+    <div id="myModal" class="modal fade" role="dialog">
+        <div class="modal-dialog">
+            <!-- Modal content-->
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal">&times;</button>
+                    <h4 class="modal-title">Lịch sử chỉnh sửa</h4>
+                </div>
+                <div class="modal-body">
+                    <table class="table table-striped b-t b-light">
+                        <thead>
+                            <tr>
+                                <th style="text-align: center; color: black">Ngày chỉnh sửa</th>
+                                <th style="text-align: center; color: black">Account chỉnh sửa</th>
+                                <th style="text-align: center; color: black">Ghi chú</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @foreach (var modified in Model.ProductModification)
+                            {
+                                <tr>
+                                    <td style="text-align: center; color: black">
+                                        @modified.ModifiledDate
+                                    </td>
+                                    <td style="text-align: center; color: black">
+                                        @modified.ModifiledBy
+                                    </td>
+                                    <td style="text-align: center; color: black">
+                                        @modified.Note
+                                    </td>
+                                </tr>
+                            }
+                        </tbody>
+                    </table>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default" data-dismiss="modal">Đóng</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Modal Edit Price -->
+    <div id="EditPrice" class="modal fade" role="dialog">
+        <div class="modal-dialog">
+            <!-- Modal content-->
+            <div class="modal-content">
+            </div>
+        </div>
+    </div>
+
+    <!--Modal Edit Information-->
+    <div id="EditInfor" class="modal fade" role="dialog">
+        <div class="modal-dialog">
+            <!-- Modal content-->
+            <div class="modal-content">
+            </div>
+        </div>
+    </div>
+
+    <!-- Modal Edit khuyến mãi-->
+    <div id="EditPromotion" class="modal fade" role="dialog">
+        <div class="modal-dialog">
+            <!-- Modal content-->
+            <div class="modal-content">
+            </div>
+        </div>
+    </div>
+
+    <!--Modal Add Product Line-->
+    <div id="AddProductLine" class="modal fade" role="dialog">
+        <div class="modal-dialog">
+            <!-- Modal content-->
+            <div class="modal-content">
+            </div>
+        </div>
+    </div>
+
+</div>
+
+@section jsFooter{
+    <script>
+        $(function () {
+            $("#PromotionTable tr").not("tr:first-child").tooltip();
+        })
+    </script>
+}

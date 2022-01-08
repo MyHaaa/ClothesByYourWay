@@ -1,0 +1,38 @@
+﻿@model IEnumerable<Models.EF.Brand>
+
+@{
+    Layout = null;
+}
+<div class="table-responsive" id="deTable">
+    <table class="table table-striped b-t b-light">
+        <thead>
+            <tr>
+                <th style="text-align: center; color: black">
+                    Tên Hãng Thời Trang
+                </th>
+                <th style="text-align: center; color: black">
+                    Logo Brand
+                </th>
+                <th style="text-align: center; color: black">Action Name</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in Model)
+            {
+                <tr>
+                    <td style="text-align: center; color: black">
+                        @Html.DisplayFor(modelItem => item.BrandName)
+                    </td>
+                    <td style="text-align: center; color: black">
+                        <img src="@item.ImageBrand" style="height: 50px; width: 50px" />
+                    </td>
+                    <td style="text-align: center; color: black">
+                        <a class="btn btn-primary btn-sm" onclick="Edit('@Url.Action("AddOrEdit", "Brands", new { id=@item.BrandID})')"><i class="fa fa-pencil"></i></a>
+                        <a class="btn btn-danger btn-sm" onclick="Delete('@Url.Action("Delete", "Brands", new { id=@item.BrandID})')"><i class="fa fa-trash"></i></a>
+
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+</div>

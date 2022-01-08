@@ -189,9 +189,16 @@
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="Areas\Administrator\AdministratorAreaRegistration.cs" />
     <Compile Include="Areas\Administrator\Controllers\BaseController.cs" />
+    <Compile Include="Areas\Administrator\Controllers\BrandsController.cs" />
     <Compile Include="Areas\Administrator\Controllers\DashboardController.cs" />
     <Compile Include="Areas\Administrator\Controllers\EmployeesController.cs" />
     <Compile Include="Areas\Administrator\Controllers\LoginController.cs" />
+    <Compile Include="Areas\Administrator\Controllers\ProductCategoriesController.cs" />
+    <Compile Include="Areas\Administrator\Controllers\ProductsController.cs" />
+    <Compile Include="Areas\Administrator\Controllers\ProfileController.cs" />
+    <Compile Include="Areas\Administrator\Controllers\PromotionProductsController.cs" />
+    <Compile Include="Areas\Administrator\Controllers\PurchaseOrdersController.cs" />
+    <Compile Include="Areas\Administrator\Controllers\SuppliersController.cs" />
     <Compile Include="Areas\Administrator\Controllers\UserGroupsController.cs" />
     <Compile Include="Areas\Administrator\Models\AddPLToPO.cs" />
     <Compile Include="Areas\Administrator\Models\ChangePasswordModel.cs" />
@@ -5287,6 +5294,29 @@
     <Content Include="Assets\Admin\js\plugins\ckfinder\skins\bootstrap\assets\fonts\glyphicons-halflings-regular.woff" />
     <Content Include="Assets\Admin\js\plugins\ckfinder\skins\bootstrap\assets\fonts\glyphicons-halflings-regular.woff2" />
     <Content Include="Assets\Admin\js\plugins\ckfinder\userfiles\.htaccess" />
+    <Content Include="Areas\Administrator\Views\Suppliers\Index.cshtml" />
+    <Content Include="Areas\Administrator\Views\Suppliers\AddOrEdit.cshtml" />
+    <Content Include="Areas\Administrator\Views\Suppliers\ViewAll.cshtml" />
+    <Content Include="Areas\Administrator\Views\Brands\Index.cshtml" />
+    <Content Include="Areas\Administrator\Views\Brands\ViewAll.cshtml" />
+    <Content Include="Areas\Administrator\Views\Brands\AddOrEdit.cshtml" />
+    <Content Include="Areas\Administrator\Views\ProductCategories\Index.cshtml" />
+    <Content Include="Areas\Administrator\Views\ProductCategories\ViewAll.cshtml" />
+    <Content Include="Areas\Administrator\Views\ProductCategories\AddOrEdit.cshtml" />
+    <Content Include="Areas\Administrator\Views\Products\Index.cshtml" />
+    <Content Include="Areas\Administrator\Views\Products\Details.cshtml" />
+    <Content Include="Areas\Administrator\Views\Products\Create.cshtml" />
+    <Content Include="Areas\Administrator\Views\Products\EditInfor.cshtml" />
+    <Content Include="Areas\Administrator\Views\Products\EditPrice.cshtml" />
+    <Content Include="Areas\Administrator\Views\Products\AddProductLine.cshtml" />
+    <Content Include="Areas\Administrator\Views\Products\DetailsProductLine.cshtml" />
+    <Content Include="Areas\Administrator\Views\Products\DeleteImg.cshtml" />
+    <Content Include="Areas\Administrator\Views\Products\EditInforLine.cshtml" />
+    <Content Include="Areas\Administrator\Views\PromotionProducts\Index.cshtml" />
+    <Content Include="Areas\Administrator\Views\PromotionProducts\ViewAll.cshtml" />
+    <Content Include="Areas\Administrator\Views\PromotionProducts\AddOrEdit.cshtml" />
+    <Content Include="Areas\Administrator\Views\Profile\Index.cshtml" />
+    <Content Include="Areas\Administrator\Views\Profile\ChangePassword.cshtml" />
     <None Include="Scripts\jquery-3.4.1.intellisense.js" />
     <Content Include="Scripts\jquery-3.4.1.js" />
     <Content Include="Scripts\jquery-3.4.1.min.js" />
@@ -5331,7 +5361,7 @@
     <Folder Include="App_Data\" />
     <Folder Include="Areas\Administrator\Data\ProductLine\" />
     <Folder Include="Areas\Administrator\Data\ProfileEmp\" />
-    <Folder Include="Areas\Administrator\Views\Base\" />
+    <Folder Include="Areas\Administrator\Views\PurchaseOrders\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="fonts\glyphicons-halflings-regular.woff2" />

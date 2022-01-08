@@ -1,0 +1,173 @@
+﻿@model ClothesBYW.Areas.Administrator.Models.ProductLineDetails
+
+@{
+    ViewBag.Title = "DetailsProductLine";
+    Layout = "~/Areas/Administrator/Views/Shared/_Layout.cshtml";
+}
+
+<div class="table-agile-info">
+    <div class="panel panel-default">
+        <div class="panel-heading">
+            Chi tiết dòng sản phẩm @Model.ProductLine.ProductLineID
+        </div>
+    </div>
+    <div class="row w3-res-tb">
+        <!--Thông tin dòng sản phẩm-->
+        <div class="col-sm-5" style="background-color: rgba(255, 255, 255);
+                                           backdrop-filter: blur(13px);
+                                           -webkit-backdrop-filter: blur(13px);
+                                           border: 1px solid rgba(255, 255, 255, 0.18);
+                                           box-shadow: rgba(142, 142, 142, 0.19) 0px 6px 15px 0px;
+                                           -webkit-box-shadow: rgba(142, 142, 142, 0.19) 0px 6px 15px 0px;
+                                           border-radius: 12px;
+                                           -webkit-border-radius: 12px;
+                                           position: relative;
+                                           display: flex;
+                                           margin-left: 10px;
+                                           margin-right: 25px">
+            <h3 style="position: absolute; top: -15px; color: green">Thông tin về sản phẩm</h3>
+            <div class="product-left" style="padding: 30px 0;">
+                <div class="col-sm-12" style="margin-bottom: 5px"><span style="font-weight:bold">Alias: </span>@Model.ProductLine.Alias</div>
+                <div class="col-sm-12" style="margin-bottom: 5px"><span style="font-weight:bold">Kích cỡ: </span>@Model.ProductLine.Size </div>
+                <div class="col-sm-12" style="margin-bottom: 5px"><span style="font-weight:bold">Màu sắc: </span>@Model.ProductLine.Color.ColorName</div>
+                <div class="col-sm-12" style="margin-bottom: 5px"><span style="font-weight:bold">Nhà cung cấp: </span>@Model.ProductLine.Supplier.Name</div>
+                <div class="col-sm-12" style="margin-bottom: 5px"><span style="font-weight:bold">Số lượng tồn kho nhỏ nhất cho phép: </span>@Model.ProductLine.MinimumQuantityAvailable</div>
+                <div class="col-sm-12" style="margin-bottom: 5px"><span style="font-weight:bold">Số lượng hiện có: </span>@Model.ProductLine.QuantityInStock</div>
+                <div class="col-sm-12" style="margin-bottom: 5px">
+                    <span style="font-weight:bold">Trạng thái: </span>
+                    @if (@Model.ProductLine.Status == 1)
+                    {
+                        <span>Đang bán</span>
+                    }
+                </div>
+                <div class="col-sm-12" style="margin-bottom: 5px"><span style="font-weight:bold">Ngày tạo: </span>@Model.ProductLine.Product.CreatedDate</div>
+                <div class="col-sm-12" style="margin-bottom: 5px"><span style="font-weight:bold">Người tạo: </span>@Model.ProductLine.Product.CreatedBy</div>
+                <div class="col-sm-12 btn-product-detail" style="display: flex; justify-content: flex-end">
+                    <button style="background-color: whitesmoke;
+                                    backdrop-filter: blur(6px);
+                                    -webkit-backdrop-filter: blur(6px);
+                                    border: 1px solid black;
+                                    box-shadow: rgba(142, 142, 142, 0.19) 0px 6px 15px 0px;
+                                    -webkit-box-shadow: rgba(142, 142, 142, 0.19) 0px 6px 15px 0px;
+                                    border-radius: 12px;
+                                    -webkit-border-radius: 12px;
+                                    color: black;
+                                    padding: 5px 10px;"
+                            href="@Url.Action("EditInforLine", "Products", new { id = Model.ProductLine.ProductLineID })"
+                            type="button"
+                            data-toggle="modal" data-target="#EditInforLine">
+                        Cập nhật thông tin
+                    </button>
+                </div>
+            </div>
+        </div>
+
+        <!--Thông tin lịch sử đặt hàng bên nhà cung cấp-->
+        <div class="col-sm-6" style="background-color: rgba(255, 255, 255);
+                                           backdrop-filter: blur(13px);
+                                           -webkit-backdrop-filter: blur(13px);
+                                           border: 1px solid rgba(255, 255, 255, 0.18);
+                                           box-shadow: rgba(142, 142, 142, 0.19) 0px 6px 15px 0px;
+                                           -webkit-box-shadow: rgba(142, 142, 142, 0.19) 0px 6px 15px 0px;
+                                           border-radius: 12px;
+                                           -webkit-border-radius: 12px;
+                                           position: relative;
+                                            margin-left: 10px;">
+            <h3 style="position: absolute; top: -15px; color: green">Các khuyến mãi từng áp dụng cho sản phẩm</h3>
+            <div class="product-right" style="margin: 10px 0;">
+                <table class="table table-striped b-t b-light" id="PromotionTable">
+                    <thead>
+                        <tr>
+                            <th style="text-align: center; color: black">Mã đơn nhập</th>
+                            <th style="text-align: center; color: black">Ngày tạo</th>
+                            <th style="text-align: center; color: black">Ngày nhận</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @foreach (var order in Model.PurchaseOrder)
+                        {
+                            <tr title="Người xử lý: @order.ModifiledBy &#013;Tạo bởi: @order.CreatedBy">
+                                <td style="text-align: center; color: black">
+                                    @order.PurchaseOrderID
+                                </td>
+                                <td style="text-align: center; color: black">
+                                    @order.CreatedDate
+                                </td>
+                                <td style="text-align: center; color: black">
+                                    @order.ReceivedDate
+                                </td>
+                            </tr>
+                        }
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+
+    <div class="row" style="margin-top: 30px;">
+        <!--Dòng sản phẩm-->
+        <div class="col-sm-11" style="background-color: rgba(255, 255, 255);
+                                           backdrop-filter: blur(13px);
+                                           -webkit-backdrop-filter: blur(13px);
+                                           border: 1px solid rgba(255, 255, 255, 0.18);
+                                           box-shadow: rgba(142, 142, 142, 0.19) 0px 6px 15px 0px;
+                                           -webkit-box-shadow: rgba(142, 142, 142, 0.19) 0px 6px 15px 0px;
+                                           border-radius: 12px;
+                                           -webkit-border-radius: 12px;
+                                           position: relative;
+                                           display: flex;
+                                           margin: 0 25px;">
+            <h3 style="position: absolute; top: -15px; color: green">Các hình ảnh về dòng sản phẩm</h3>
+            <div class="col-sm-12 product-left" style="padding: 30px 0;">
+                <!--Table img dòng sản phẩm-->
+                <div style="margin: 10px 0;">
+                    @using (Html.BeginForm("AddNewImg", "Products", FormMethod.Post,
+                                           new { enctype = "multipart/form-data" }))
+                    {
+                        <input type="file" name="Picture" class="col-sm-2 form-control" />
+                        <input type="submit" value="Save" class="btn btn-default" />
+                    }
+                </div>
+                <div class="col-sm-12">
+                    @foreach (var img in Model.ProductImages)
+                    {
+                        <div class="col-sm-3">
+                            <div class="card" style="width: 152px; height: 200px; border: 1px solid black; ">
+                                <img class="card-img-top" style="width: 150px; height: 150px; border-bottom: 1px solid black" src="@img.ImageLink" alt="@img.ProductLineID">
+                                <div class="card-body" style="margin: 10px 0; display: flex; align-items: center; justify-content: center; ">
+                                    <button class="btn btn-warning"
+                                            href="@Url.Action("DeleteImg", "Products", new { id = img.ProductImageID })"
+                                            type="button"
+                                            data-toggle="modal"
+                                            data-target="#DeleteImg">
+                                        Xoá
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                    }
+                </div>
+
+            </div>
+        </div>
+    </div>
+</div>
+
+<!--Xoá ảnh-->
+<div id="DeleteImg" class="modal fade" role="dialog">
+    <div class="modal-dialog">
+        <!-- Modal content-->
+        <div class="modal-content">
+        </div>
+    </div>
+</div>
+
+<!--Thông tin dòng sp-->
+<div id="EditInforLine" class="modal fade" role="dialog">
+    <div class="modal-dialog">
+        <!-- Modal content-->
+        <div class="modal-content">
+        </div>
+    </div>
+</div>
+

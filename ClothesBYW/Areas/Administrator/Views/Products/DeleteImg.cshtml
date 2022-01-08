@@ -1,0 +1,20 @@
+﻿@model Models.EF.ProductImage
+
+<div class="modal-header">
+    <button type="button" class="close" data-dismiss="modal">&times;</button>
+    <h4 class="modal-title" style="text-align: center; font-weight: bold; text-transform:uppercase">Xoá hình ảnh dòng sản phẩm mới</h4>
+</div>
+<div class="modal-body">
+    <h3>Bạn muốn xoá hình ảnh này?</h3>
+</div>
+<div class="modal-footer">
+    @using (Html.BeginForm())
+    {
+        @Html.AntiForgeryToken()
+
+        <div class="form-actions no-color">
+            <input type="submit" value="Delete" class="btn btn-default" />
+        </div>
+    }
+</div>
+

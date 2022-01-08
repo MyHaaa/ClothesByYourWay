@@ -1,0 +1,100 @@
+﻿@model IEnumerable<Models.EF.Product>
+
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Areas/Administrator/Views/Shared/_Layout.cshtml";
+}
+
+<div class="table-agile-info">
+    <div class="panel panel-default">
+        <div class="panel-heading">
+            Danh sách sản phẩm
+        </div>
+        <div class="row w3-res-tb">
+            <div class="col-sm-5 m-b-xs">
+                <button class="btn btn-default">@Html.ActionLink("Thêm mới", "Create")</button>
+            </div>
+            <div class="col-sm-4">
+            </div>
+            <div class="col-sm-3">
+                @using (Html.BeginForm("Index", "Products", FormMethod.Get))
+                {
+                    <div class="input-group">
+                        @*<input type="text" class="form-control search" placeholder=" Search" value="@ViewBag.SearchString" name="searchString">*@
+                        <input type="text" class="input-sm form-control search" placeholder="Search" value="@ViewBag.SearchString" name="searchString" />
+
+                        <span class="input-group-btn">
+                            <button type="submit" class="btn btn-sm btn-success">Go!</button>
+                        </span>
+                    </div>
+                }
+            </div>
+        </div>
+        <div class="row w3-res-tb">
+            <div class="table-responsive" id="deTable">
+                <table class="table table-striped b-t b-light">
+                    <thead>
+                        <tr>
+                            <th style="text-align: center; color: black">
+                                Tên Sản Phẩm
+                            </th>
+                            <th style="text-align: center; color: black">
+                                Loại Sản Phẩm
+                            </th>
+                            <th style="text-align: center; color: black">
+                                Ngày tạo
+                            </th>
+                            <th style="text-align: center; color: black">
+                                Tạo bởi
+                            </th>
+                            <th style="text-align: center; color: black">
+                                Trạng thái
+                            </th>
+                            <th style="text-align: center; color: black">Action Name</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @foreach (var item in Model)
+                        {
+                            <tr>
+                                <td style="text-align: center; color: black">
+                                    @Html.DisplayFor(modelItem => item.ProductName)
+                                </td>
+                                <td style="text-align: center; color: black">
+                                    @Html.DisplayFor(modelItem => item.ProductCategory.Name)
+                                </td>
+                                <td style="text-align: center; color: black">
+                                    @Html.DisplayFor(modelItem => item.CreatedDate)
+                                </td>
+                                <td style="text-align: center; color: black">
+                                    @Html.DisplayFor(modelItem => item.CreatedBy)
+                                </td>
+                                @*<td style="text-align: center; color: black">
+                                        @Html.DisplayFor(modelItem => item.Status)
+                                    </td>*@
+                                @if (item.Status == 1)
+                                {
+                                    <td style="text-align: center; color: black">
+                                        Đang bán
+                                    </td>
+                                }
+                                else if (item.Status == 2)
+                                {
+                                    <td style="text-align: center; color: black">
+                                        Ngừng bán
+                                    </td>
+                                }
+                                <td style="text-align: center; color: black">
+                                    @Html.ActionLink("Details", "Details", new { id = item.ProductID })
+                                </td>
+                            </tr>
+                        }
+                    </tbody>
+                </table>
+            </div>
+        </div>
+
+    </div>
+</div>
+
+
