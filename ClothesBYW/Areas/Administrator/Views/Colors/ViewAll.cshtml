@@ -1,0 +1,39 @@
+﻿@model IEnumerable<Models.EF.Color>
+
+@{
+    Layout = null;
+}
+
+<div class="table-responsive rounded mb-3" id="deTable">
+    <table class="data-table table mb-0 tbl-server-info">
+        <thead class="bg-white text-uppercase">
+            <tr class="ligth ligth-data">
+                <th style="text-align: center; color: black">
+                    Tên màu
+                </th>
+                <th style="text-align: center; color: black">
+                    Texture
+                </th>
+                <th style="text-align: center; color: black">Action Name</th>
+            </tr>
+        </thead>
+        <tbody class="ligth-body">
+            @foreach (var item in Model)
+            {
+                <tr>
+                    <td style="text-align: center; color: black">
+                        @Html.DisplayFor(modelItem => item.ColorName)
+                    </td>
+                    <td style="text-align: center; color: black">
+                        <img src="@item.Texture" style="height: 50px; width: 50px" />
+                    </td>
+                    <td style="text-align: center; color: black">
+                        <a class="badge badge-success mr-2" data-toggle="tooltip" data-placement="top" title="" data-original-title="Edit" onclick="Edit('@Url.Action("AddOrEdit", "Colors", new { id=@item.ColorID})')"><i class="ri-pencil-line mr-0"></i></a>
+                        <a class="btn btn-danger btn-sm" onclick="Delete('@Url.Action("Delete", "Colors", new { id=@item.ColorID})')"><i class="fa fa-trash"></i></a>
+
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+</div>

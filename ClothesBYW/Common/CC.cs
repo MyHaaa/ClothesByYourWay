@@ -20,5 +20,7 @@ namespace ClothesBYW.Common
         public static string PURCHASE_ORDER_SESSION = "PURCHASE_ORDER_SESSION";
 
         public static string PO_CART_SESSION = "PO_CART_SESSION";
+
+        public static string COMMAND_MANAGER = "COMMAND_MANAGER";
     }
 }
