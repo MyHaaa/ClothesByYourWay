@@ -3,102 +3,57 @@
 }
 @model ClothesBYW.Areas.Administrator.Models.LoginModel
 
-<!doctype html>
-<html lang="en">
+<!DOCTYPE html>
 <head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    <title>Clothing By Your Way | Adminstrator</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <meta name="keywords" content="Visitors Responsive web template, Bootstrap Web Templates, Flat Web Templates, Android Compatible web template,
+Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, SonyEricsson, Motorola web design" />
+    <script type="application/x-javascript"> addEventListener("load", function() { setTimeout(hideURLbar, 0); }, false); function hideURLbar(){ window.scrollTo(0,1); } </script>
+    <!-- bootstrap-css -->
+    <link rel="stylesheet" href="/Assets/Admin/css/bootstrap.min.css">
+    <!-- //bootstrap-css -->
+    <!-- Custom CSS -->
+    <link href="/Assets/Admin/css/style.css" rel='stylesheet' type='text/css' />
+    <link href="/Assets/Admin/css/style-responsive.css" rel="stylesheet" />
+    <!-- font CSS -->
+    <link href='//fonts.googleapis.com/css?family=Roboto:400,100,100italic,300,300italic,400italic,500,500italic,700,700italic,900,900italic' rel='stylesheet' type='text/css'>
+    <!-- font-awesome icons -->
+    <link rel="stylesheet" href="/Assets/Admin/css/font.css" type="text/css" />
+    <link href="/Assets/Admin/css/font-awesome.css" rel="stylesheet">
+    <!-- //font-awesome icons -->
+    <script src="/Assets/Admin/js/jquery2.0.3.min.js"></script>
 
-    <!-- Favicon -->
-    <link rel="shortcut icon" href="/Assets/Admin/images/favicon.ico" />
-    <link rel="stylesheet" href="/Assets/Admin/css/backend-plugin.min.css">
-    <link rel="stylesheet" href="/Assets/Admin/css/backend.css?v=1.0.0">
-    <link rel="stylesheet" href="/Assets/Admin/vendor/fortawesome/fontawesome-free/css/all.min.css">
-    <link rel="stylesheet" href="/Assets/Admin/vendor/line-awesome/dist/line-awesome/css/line-awesome.min.css">
-    <link rel="stylesheet" href="/Assets/Admin/vendor/remixicon/fonts/remixicon.css">
 </head>
-<body class=" ">
-    <!-- loader Start -->
-    <div id="loading">
-        <div id="loading-center">
+<body>
+    <div class="log-w3">
+        <div class="w3layouts-main">
+            <h2>Sign In Now</h2>
+            @using (Html.BeginForm("Login", "Login", FormMethod.Post))
+            {
+                @Html.AntiForgeryToken()
+                @Html.ValidationSummary(true, null, new { @class = " alert alert-danger" })
+
+                @Html.TextBoxFor(model => model.Username, new { @class = "form-control", placeholder = "Username", @autofocus = "autofocus" })
+                <br />
+                @Html.TextBoxFor(model => model.Password, new { @class = "form-control", placeholder = "Pasword", @type = "password" })
+                <br />
+                <span> @Html.CheckBoxFor(model => model.RememberMe) Remember Me?</span>
+                <h6>@Html.ActionLink("Forgot Password?", "ForgotPass", "Employees")</h6>
+                <div class="clearfix"></div>
+                <input type="submit" value="Sign In" name="login">
+            }
         </div>
     </div>
-    <!-- loader END -->
-
-    <div class="wrapper">
-        <section class="login-content">
-            <div class="container">
-                <div class="row align-items-center justify-content-center height-self-center">
-                    <div class="col-lg-8">
-                        <div class="card auth-card">
-                            <div class="card-body p-0">
-                                <div class="d-flex align-items-center auth-content">
-                                    <div class="col-lg-7 align-self-center">
-                                        <div class="p-3">
-                                            <h2 class="mb-2">Sign In</h2>
-                                            <p>Login to stay connected.</p>
-                                            @using (Html.BeginForm("Login", "Login", FormMethod.Post))
-                                            {
-                                                @Html.AntiForgeryToken()
-                                                @Html.ValidationSummary(true, null, new { @class = " alert alert-danger" })
-                                                <form>
-                                                    <div class="row">
-                                                        <div class="col-lg-12">
-                                                            <div class="floating-label form-group">
-                                                                Username
-                                                                @Html.TextBoxFor(model => model.Username, new { @class = "form-control", placeholder = "Username", @autofocus = "autofocus" })
-
-                                                            </div>
-                                                        </div>
-                                                        <div class="col-lg-12">
-                                                            <div class="floating-label form-group">
-                                                                Password
-                                                                @Html.TextBoxFor(model => model.Password, new { @class = "form-control", placeholder = "Pasword", @type = "password" })
-
-                                                            </div>
-                                                        </div>
-                                                        <div class="col-lg-6">
-                                                            <div class="custom-control custom-checkbox mb-3">
-                                                                @Html.CheckBoxFor(model => model.RememberMe)
-                                                                Remember Me
-                                                            </div>
-                                                        </div>
-                                                        <div class="col-lg-6">
-                                                            @Html.ActionLink("Forgot Password?", "ForgotPass", "Employees")
-                                                        </div>
-                                                    </div>
-                                                    <input type="submit" class="btn btn-primary" value="Sign In" name="login">
-                                                </form>
-                                            }
-                                        </div>
-                                    </div>
-                                    <div class="col-lg-5 content-right">
-                                        <img src="/Assets/Admin/images/login/01.png" class="img-fluid image-right" alt="">
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </section>
-    </div>
-
-    <!-- Backend Bundle JavaScript -->
-    <script src="/Assets/Admin/js/backend-bundle.min.js"></script>
-
-    <!-- Table Treeview JavaScript -->
-    <script src="/Assets/Admin/js/table-treeview.js"></script>
-
-    <!-- Chart Custom JavaScript -->
-    <script src="/Assets/Admin/js/customizer.js"></script>
-
-    <!-- Chart Custom JavaScript -->
-    <script async src="/Assets/Admin/js/chart-custom.js"></script>
-
-    <!-- app JavaScript -->
-    <script src="/Assets/Admin/js/app.js"></script>
+    <script src="/Assets/Admin/js/bootstrap.js"></script>
+    <script src="/Assets/Admin/js/jquery.dcjqaccordion.2.7.js"></script>
+    <script src="/Assets/Admin/js/scripts.js"></script>
+    <script src="/Assets/Admin/js/jquery.slimscroll.js"></script>
+    <script src="/Assets/Admin/js/jquery.nicescroll.js"></script>
+    <!--[if lte IE 8]><script language="javascript" type="text/javascript" src="js/flot-chart/excanvas.min.js"></script><![endif]-->
+    <script src="/Assets/Admin/js/jquery.scrollTo.js"></script>
 </body>
 </html>
+
+
 

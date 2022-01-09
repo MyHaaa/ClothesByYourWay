@@ -10,30 +10,34 @@
     @Scripts.Render("~/bundles/jqueryval")
 }
 
-<div class="col-lg-12">
-    <div class="d-flex flex-wrap align-items-center justify-content-between mb-4">
-        <div>
-            <h4 class="mb-3">Quản lý các thương hiệu sản phẩm</h4>
-            <p class="mb-0">
-                Create and manage your vendor list, send and receive purchase orders – your online<br>
-                Dashboard is your new back of house.
-            </p>
+
+<div class="table-agile-info">
+    <div class="panel panel-default">
+        <div class="panel-heading">
+            Danh sách các hãng thời trang
+        </div>
+        <div class="row w3-res-tb">
+            <ul class="nav nav-tabs">
+                <li class="active"><a data-toggle="tab" href="#firstTab">Tất cả</a></li>
+                <li><a data-toggle="tab" href="#secondTab">Thêm mới</a></li>
+            </ul>
+            <div class="tab-content">
+                <div id="firstTab" class="tab-pane fade in active">@Html.Action("ViewAll")</div>
+
+                <div id="secondTab" class="tab-pane fade in">@Html.Action("AddOrEdit")</div>
+            </div>
         </div>
     </div>
 </div>
-<div class="col-lg-12">
-    <ul class="nav nav-tabs" role="tablist">
-        <li class="nav-item"><a class="nav-link active" id="home-tab" data-toggle="tab" role="tab" aria-controls="home" aria-selected="true" href="#firstTab">Tất cả</a></li>
-        <li class="nav-item"><a class="nav-link" id="profile-tab" data-toggle="tab" aria-controls="profile" aria-selected="false" href="#secondTab">Thêm mới</a></li>
+<script>
+    function activatejQueryTable() {
+        $("#deTable").DataTable();
+    }
 
+    $(function () {
+        activatejQueryTable();
+    });
 
-    </ul>
-    <div class="tab-content">
-        <div id="firstTab" class="tab-pane active" role="tabpanel">@Html.Action("ViewAll")</div>
-
-        <div id="secondTab" class="tab-pane fade in " role="tabpanel">@Html.Action("AddOrEdit")</div>
-
-    </div>
-</div>
+</script>
 
 

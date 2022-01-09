@@ -78,7 +78,7 @@ namespace ClothesBYW.Areas.Administrator.Controllers
             return View(purchaseOrder);
         }
 
-
+        [HttpGet]
         public ActionResult Create()
         {
             SetViewBag();
