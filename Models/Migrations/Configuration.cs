@@ -29,6 +29,7 @@ namespace Models.Migrations
             AddProductLines(context);
             AddPrices(context);
             AddVoucher(context);
+            AddUserGroup(context);
             base.Seed(context);
         }
         private void AddBrands(ClothesBYWDbContext context)
@@ -497,6 +498,39 @@ namespace Models.Migrations
             };
             context.Vouchers.Add(item1);
             context.Vouchers.Add(item2);
+        }
+        private void AddUserGroup(ClothesBYWDbContext context)
+        {
+            var item1 = new UserGroup()
+            {
+                UserGroupID = "ADMIN",
+                Name = "Admin"
+            };
+            var item2 = new UserGroup()
+            {
+                UserGroupID = "CUSTOMER_CATEGORY",
+                Name = "Nhân viên chăm sóc khách hàng"
+            };
+            var item3 = new UserGroup()
+            {
+                UserGroupID = "MANAGER",
+                Name = "Quản lý"
+            };
+            var item4 = new UserGroup()
+            {
+                UserGroupID = "SALER",
+                Name = "Nhân viên bán hàng"
+            };
+            var item5 = new UserGroup()
+            {
+                UserGroupID = "WAREHOUSE_STAFF",
+                Name = "Nhân viên kho"
+            };
+            context.UserGroups.Add(item1);
+            context.UserGroups.Add(item2);
+            context.UserGroups.Add(item3);
+            context.UserGroups.Add(item4);
+            context.UserGroups.Add(item5);
         }
     }
 }
