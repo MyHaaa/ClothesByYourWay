@@ -5327,7 +5327,6 @@
     <Content Include="Areas\Administrator\Views\Profile\Index.cshtml" />
     <Content Include="Areas\Administrator\Views\Profile\ChangePassword.cshtml" />
     <Content Include="Areas\Administrator\Views\PurchaseOrders\Index.cshtml" />
-    <Content Include="Areas\Administrator\Views\PurchaseOrders\Create.cshtml" />
     <Content Include="Areas\Administrator\Views\PurchaseOrders\AddProductIntoPO.cshtml" />
     <Content Include="Areas\Administrator\Views\PurchaseOrders\AddToPO.cshtml" />
     <Content Include="Areas\Administrator\Views\PurchaseOrders\ViewPOCart.cshtml" />
@@ -5338,6 +5337,7 @@
     <Content Include="Areas\Administrator\Views\Colors\Index.cshtml" />
     <Content Include="Areas\Administrator\Views\Colors\ViewAll.cshtml" />
     <Content Include="Areas\Administrator\Views\Colors\AddOrEdit.cshtml" />
+    <Content Include="Areas\Administrator\Views\PurchaseOrders\Create.cshtml" />
     <None Include="Scripts\jquery-3.4.1.intellisense.js" />
     <Content Include="Scripts\jquery-3.4.1.js" />
     <Content Include="Scripts\jquery-3.4.1.min.js" />

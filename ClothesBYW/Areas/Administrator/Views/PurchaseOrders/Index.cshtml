@@ -4,7 +4,10 @@
     ViewBag.Title = "Index";
     Layout = "~/Areas/Administrator/Views/Shared/_Layout.cshtml";
 }
-<button style="background-color: whitesmoke;
+
+
+<div class="market-updates row">
+    <a style="background-color: whitesmoke;
                                     backdrop-filter: blur(6px);
                                     -webkit-backdrop-filter: blur(6px);
                                     border: 1px solid black;
@@ -14,38 +17,18 @@
                                     -webkit-border-radius: 12px;
                                     color: black;
                                     padding: 5px 10px;"
-        href="@Url.Action("Create", "PurchaseOrders")"
-        type="button"
-        data-toggle="modal" data-target="#CreatePO">
-    Thêm đơn nhập hàng mới
-</button>
+       
+       class="btn-CreateOrder btn border add-btn shadow-none mx-2 d-none d-md-block"
+      >
+        Thêm đơn nhập hàng mới
+    </a>
+    <div id="CreatePO" class="modal fade" tabindex="-1" role="dialog" aria-hidden="true" data-url="@Url.Action("Create", "PurchaseOrders")">
+        <div class="modal-dialog modal-dialog-centered" role="document" >
+            <div class="modal-content" style="padding: 20px">
 
-<div class="market-updates">
-    <div class="col-md-4 market-update-gd">
-        <div class="market-update-block clr-block-3">
-            <div class="col-md-4 market-update-right">
-                <i class="fa fa-usd"></i>
             </div>
-            <div class="col-md-8 market-update-left">
-                <h4>Sản phẩm</h4>
-                <h3>@TempData["ProductCount"]</h3>
-            </div>
-            <div class="clearfix"> </div>
         </div>
     </div>
-    <div class="col-md-4 market-update-gd">
-        <div class="market-update-block clr-block-4">
-            <div class="col-md-4 market-update-right">
-                <i class="fa fa-shopping-cart" aria-hidden="true"></i>
-            </div>
-            <div class="col-md-8 market-update-left">
-                <h4>Đơn nhập hàng</h4>
-                <h3>@TempData["POCount"]</h3>
-            </div>
-            <div class="clearfix"> </div>
-        </div>
-    </div>
-    <div class="clearfix"> </div>
 </div>
 
 <div class="col-md-12 stats-info stats-last widget-shadow">
@@ -131,11 +114,16 @@
     </div>
 </div>
 
-<!-- Modal Add New PO -->
-<div id="CreatePO" class="modal fade" role="dialog">
-    <div class="modal-dialog">
-        <!-- Modal content-->
-        <div class="modal-content">
-        </div>
-    </div>
-</div>
+@section jsFooter{
+    <script>
+        $(document).ready(function () {
+            $('.btn-CreateOrder').click(function () {
+                var url = $('#CreatePO').data('url');
+                $.get(url, function (data) {
+                    $('#CreatePO').html(data);
+                    $('#CreatePO').modal('show');
+                })
+            });
+        });
+    </script>
+}
