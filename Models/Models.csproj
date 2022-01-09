@@ -67,6 +67,7 @@
     <Compile Include="Dao\Customer\ProductDao.cs" />
     <Compile Include="Dao\EmployeeDao.cs" />
     <Compile Include="Dao\ProductDao.cs" />
+    <Compile Include="Dao\SupplierDao.cs" />
     <Compile Include="Dao\UserGroupDao.cs" />
     <Compile Include="EF\Brand.cs" />
     <Compile Include="EF\ClothesBYWDbContext.cs" />

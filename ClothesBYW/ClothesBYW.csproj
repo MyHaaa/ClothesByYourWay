@@ -212,9 +212,12 @@
     <Compile Include="Base\IRepository.cs" />
     <Compile Include="Base\Repository.cs" />
     <Compile Include="Commands\AddColorCommand.cs" />
+    <Compile Include="Commands\AddSupplierCommand.cs" />
     <Compile Include="Commands\CommandManager.cs" />
     <Compile Include="Commands\DeleteColorCommand.cs" />
+    <Compile Include="Commands\DeleteSupplierCommand.cs" />
     <Compile Include="Commands\EditColorCommand.cs" />
+    <Compile Include="Commands\EditSupplierCommand.cs" />
     <Compile Include="Commands\ICommand.cs" />
     <Compile Include="Common\CC.cs" />
     <Compile Include="Common\EmailService\EmailService.cs" />

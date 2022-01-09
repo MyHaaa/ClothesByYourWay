@@ -1,4 +1,6 @@
-﻿using ClothesBYW.Common;
+﻿using ClothesBYW.Commands;
+using ClothesBYW.Common;
+using Models.Dao;
 using Models.EF;
 using System;
 using System.Collections.Generic;
@@ -11,6 +13,19 @@ namespace ClothesBYW.Areas.Administrator.Controllers
 {
     public class SuppliersController : BaseController
     {
+        private CommandManager commandManager = null;
+        private SupplierDao dao = new SupplierDao();
+
+        // GET: Administrator/Colors
+        public SuppliersController()
+        {
+            this.commandManager = new CommandManager();
+        }
+
+        public SuppliersController(CommandManager commandManager)
+        {
+            this.commandManager = commandManager;
+        }
         public ActionResult Index()
         {
             return View();
@@ -52,12 +67,12 @@ namespace ClothesBYW.Areas.Administrator.Controllers
                 {
                     if (emp.SupplierID == 0)
                     {
+                        commandManager.IVoke(new AddSupplierCommand(emp, dao));
 
-                        db.Suppliers.Add(emp);
-                        db.SaveChanges();
                     }
                     else
                     {
+                        //commandManager.IVoke(new EditSupplierCommand(emp, dao));
                         db.Entry(emp).State = EntityState.Modified;
                         db.SaveChanges();
 
@@ -78,9 +93,7 @@ namespace ClothesBYW.Areas.Administrator.Controllers
             {
                 using (ClothesBYWDbContext db = new ClothesBYWDbContext())
                 {
-                    Supplier emp = db.Suppliers.Where(x => x.SupplierID == id).FirstOrDefault<Supplier>();
-                    db.Suppliers.Remove(emp);
-                    db.SaveChanges();
+                    commandManager.IVoke(new DeleteSupplierCommand(id, dao));
                 }
                 return Json(new { success = true, html = GlobalClass.RenderRazorViewToString(this, "ViewAll", GetAllDepartment()), message = "Deleted Successfully" }, JsonRequestBehavior.AllowGet);
             }
