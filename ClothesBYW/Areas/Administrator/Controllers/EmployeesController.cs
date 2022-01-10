@@ -70,7 +70,7 @@ namespace ClothesBYW.Areas.Administrator.Controllers
                 else
                 {
                     var emp = new Employee();
-                    string empNum = db.Employees.Count().ToString();
+                    string empNum = db.Employees.Count().ToString();                   
                     emp.CreateDated = DateTime.Now;
                     emp.EmployeeID = DateTime.Now.Day.ToString() + DateTime.Now.Month.ToString() + DateTime.Now.Year.ToString() + empNum;
                     emp.Password = DateTime.Now.Day.ToString() + DateTime.Now.Month.ToString() + DateTime.Now.Year.ToString();
@@ -84,7 +84,7 @@ namespace ClothesBYW.Areas.Administrator.Controllers
                     emp.IsEmailVerified = false;
                     emp.UserGroupID = employee.UserGroupID;
                     emp.Status = true;
-                    emp.Image = "/Assets/Admin/images/login/01.png";
+                    emp.Image = "/Areas/Administrator/Data/NewUserAva.png";
 
                     emp.ActivationCode = Guid.NewGuid();
 

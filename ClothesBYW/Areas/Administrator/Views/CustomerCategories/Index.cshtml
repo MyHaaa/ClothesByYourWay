@@ -1,4 +1,4 @@
-﻿@model Models.EF.Supplier
+﻿@model Models.EF.CustomerCategory
 @{
     ViewBag.Title = "Index";
     Layout = "~/Areas/Administrator/Views/Shared/_Layout.cshtml";
@@ -10,10 +10,11 @@
     @Scripts.Render("~/bundles/jqueryval")
 }
 
+
 <div class="table-agile-info">
     <div class="panel panel-default">
         <div class="panel-heading">
-            Danh sách các nhà cung cấp
+            Danh sách các hãng thời trang
         </div>
         <div class="row w3-res-tb">
             <ul class="nav nav-tabs">
@@ -28,7 +29,6 @@
         </div>
     </div>
 </div>
-
 <script>
     function activatejQueryTable() {
         $("#deTable").DataTable();

@@ -4,16 +4,7 @@
     Layout = null;
 }
 @section jsFooter{
-    <script>
-        $('#btnSelectImage').on('click', function (e) {
-            e.preventDefault();
-            var finder = new CKFinder();
-            finder.selectActionFunction = function (url) {
-                $('#txtImage').val(url);
-            };
-            finder.popup();
-        })
-    </script>
+
 }
 
 <div class="row" style="padding-top: 30px"></div>
@@ -21,43 +12,52 @@
 @using (Html.BeginForm("AddOrEdit", "Colors", FormMethod.Post, new { enctype = "multipart/form-data", onSubmit = "return jQueryAjaxPost(this);", data_restUrl = Url.Action("AddOrEdit", "Colors", new { id = 0 }) }))//data-resetUrl
 {
     @Html.AntiForgeryToken()
-    <div class="col-sm-12" style="margin-bottom: 10px">
-        <div class="">
-            <form action="page-list-suppliers.html" data-toggle="validator">
-                @Html.ValidationSummary(true)
-                @Html.HiddenFor(model => model.ColorID)
+    <div class="row" style="vertical-align:middle">
+        <div class="form-horizontal">
+            @Html.ValidationSummary(true)
+            @Html.HiddenFor(model => model.ColorID)
 
 
-                <div class="row">
-                    <div class="col-md-12">
-                        <div class="form-group">
-                            <label>Tên màu </label>
-                            @Html.EditorFor(model => model.ColorName, new { htmlAttributes = new { @class = "form-control" } })
-                            @Html.ValidationMessageFor(model => model.ColorName)
-                        </div>
+            <div class="col-md-12">
+                <div class="form-group">
+                    @Html.LabelFor(model => model.ColorName, new { @class = "control-label col-md-3" })
+                    <div class="col-md-3">
+                        @Html.EditorFor(model => model.ColorName, new { htmlAttributes = new { @class = "form-control" } })
+                        @Html.ValidationMessageFor(model => model.ColorName)
                     </div>
-                    <div class="col-md-6">
-                        <div class="form-group">
-                            <label>Bảng màu: </label>
-                            @Html.TextBoxFor(model => model.Texture, new { htmlAttributes = new { @class = "form-control", @id = "txtImage" }, id = "txtImage" })
-                            <button class="btn btn-default" id="btnSelectImage">Chọn Ảnh</button>
-                            @Html.ValidationMessageFor(model => model.Texture)
-
-                        </div>
-                    </div>
-
                 </div>
-                <input type="submit" value="Submit" class="btn btn-primary mr-2" />
-                @if (Model.ColorID != 0)
-                {
-                    <a class="btn btn-success" onclick="refreshAddNewTab('@Url.Action("AddOrEdit","Colors",new{id=0})',false)"><i class="fa fa-plus"></i> Thêm mới</a>
-                }
-                <button class="btn btn-warning mr-2"> @Html.ActionLink("Cancel", "Index")</button>
+                <div class="form-group">
+                    @Html.LabelFor(model => model.Texture, new { @class = "control-label col-md-3" })
+                    <div class="col-md-3">
+                        @Html.TextBoxFor(model => model.Texture, new { htmlAttributes = new { @class = "form-control", @id = "txtImage" }, id = "txtImage" })
+                        <button class="btn btn-default" id="btnSelectImage">Chọn Ảnh</button>
+                        @Html.ValidationMessageFor(model => model.Texture)
+                        <script>
+                            $('#btnSelectImage').on('click', function (e) {
+                                e.preventDefault();
+                                var finder = new CKFinder();
+                                finder.selectActionFunction = function (url) {
+                                    $('#txtImage').val(url);
+                                };
+                                finder.popup();
+                            })
+                        </script>
+                    </div>
+                </div>
 
-                <button type="reset" class="btn btn-danger">Reset</button>
-            </form>
+                <div class="form-group">
+                    <div class="col-md-offset-5 col-md-7">
+                        <input type="submit" value="Submit" class="btn btn-default" />
+                        @if (Model.ColorID != 0)
+                        {
+                            <a class="btn btn-success" onclick="refreshAddNewTab('@Url.Action("AddOrEdit","Colors",new{id=0})',false)"><i class="fa fa-plus"></i> Thêm mới</a>
+                        }
+                        <button class="btn btn-warning"> @Html.ActionLink("Cancel", "Index")</button>
+                    </div>
+                </div>
+            </div>
+
+
         </div>
     </div>
-
 }
-

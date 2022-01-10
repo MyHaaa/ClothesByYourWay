@@ -190,6 +190,7 @@
     <Compile Include="Areas\Administrator\Controllers\BaseController.cs" />
     <Compile Include="Areas\Administrator\Controllers\BrandsController.cs" />
     <Compile Include="Areas\Administrator\Controllers\ColorsController.cs" />
+    <Compile Include="Areas\Administrator\Controllers\CustomerCategoriesController.cs" />
     <Compile Include="Areas\Administrator\Controllers\CustomersController.cs" />
     <Compile Include="Areas\Administrator\Controllers\DashboardController.cs" />
     <Compile Include="Areas\Administrator\Controllers\EmployeesController.cs" />
@@ -213,11 +214,14 @@
     <Compile Include="Base\IRepository.cs" />
     <Compile Include="Base\Repository.cs" />
     <Compile Include="Commands\AddColorCommand.cs" />
+    <Compile Include="Commands\AddCustomerCategoryCommand.cs" />
     <Compile Include="Commands\AddSupplierCommand.cs" />
     <Compile Include="Commands\CommandManager.cs" />
     <Compile Include="Commands\DeleteColorCommand.cs" />
+    <Compile Include="Commands\DeleteCustomerCategoryCommand.cs" />
     <Compile Include="Commands\DeleteSupplierCommand.cs" />
     <Compile Include="Commands\EditColorCommand.cs" />
+    <Compile Include="Commands\EditCustomerCategoryCommand.cs" />
     <Compile Include="Commands\EditSupplierCommand.cs" />
     <Compile Include="Commands\ICommand.cs" />
     <Compile Include="Common\CC.cs" />
@@ -526,6 +530,9 @@
     <Content Include="Assets\Admin\fonts\FontAwesome.otf" />
     <Content Include="Assets\Admin\fonts\glyphicons-halflings-regular.woff" />
     <Content Include="Assets\Admin\fonts\glyphicons-halflings-regular.woff2" />
+    <Content Include="Areas\Administrator\Views\CustomerCategories\Index.cshtml" />
+    <Content Include="Areas\Administrator\Views\CustomerCategories\ViewAll.cshtml" />
+    <Content Include="Areas\Administrator\Views\CustomerCategories\AddOrEdit.cshtml" />
     <None Include="Scripts\jquery-3.4.1.intellisense.js" />
     <Content Include="Scripts\jquery-3.4.1.js" />
     <Content Include="Scripts\jquery-3.4.1.min.js" />

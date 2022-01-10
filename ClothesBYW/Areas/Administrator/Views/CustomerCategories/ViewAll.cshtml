@@ -1,0 +1,39 @@
+﻿@model IEnumerable<Models.EF.CustomerCategory>
+
+@{
+    Layout = null;
+}
+
+<div class="table-responsive rounded mb-3" id="deTable">
+    <table class="data-table table mb-0 tbl-server-info">
+        <thead class="bg-white text-uppercase">
+            <tr class="ligth ligth-data">
+                <th style="text-align: center; color: black">
+                    Loại khách hàng
+                </th>
+                <th style="text-align: center; color: black">
+                    Cấp bậc
+                </th>
+                <th style="text-align: center; color: black">Action Name</th>
+            </tr>
+        </thead>
+        <tbody class="ligth-body">
+            @foreach (var item in Model)
+            {
+                <tr>
+                    <td style="text-align: center; color: black">
+                        @Html.DisplayFor(modelItem => item.Name)
+                    </td>
+                    <td style="text-align: center; color: black">
+                        @Html.DisplayFor(modelItem => item.Description)
+                    </td>
+                    <td style="text-align: center; color: black">
+                        <a class="badge badge-success mr-2" data-toggle="tooltip" data-placement="top" title="" data-original-title="Edit" onclick="Edit('@Url.Action("AddOrEdit", "CustomerCategories", new { id=@item.CustomerCategoryID})')"><i class="ri-pencil-line mr-0"></i></a>
+                        <a class="btn btn-danger btn-sm" onclick="Delete('@Url.Action("Delete", "CustomerCategories", new { id=@item.CustomerCategoryID})')"><i class="fa fa-trash"></i></a>
+
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+</div>

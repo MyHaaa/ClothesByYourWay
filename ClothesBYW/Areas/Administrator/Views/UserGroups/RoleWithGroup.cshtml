@@ -4,69 +4,64 @@
     Layout = "~/Areas/Administrator/Views/Shared/_Layout.cshtml";
 }
 
-<div class="col-lg-12">
-    <div class="d-flex flex-wrap align-items-center justify-content-between mb-4">
-        <div>
-            <h4 class="mb-3">Danh sách các quyền hạn trong nhóm người dùng @Session["GROUP_SESSION"]</h4>
-            <p class="mb-0">
-                Trang tổng quan này cung cấp cho bạn tổng quan về danh sách <b>Quyền thuộc nhóm người dùng @Session["GROUP_SESSION"]</b> <br>
-                Nếu bạn không muốn thay đổi quyền truy cập cho nhóm này, bạn có thể @Html.ActionLink("Trở về", "Back")
-            </p>
+
+<div class="table-agile-info">
+    <div class="panel panel-default">
+        <div class="panel-heading">
+            Danh sách các chức năng của @Session["GROUP_SESSION"]
         </div>
-        <button class="btn btn-info add-list"><i class="las la-plus mr-3"></i> @Html.ActionLink("Thêm quyền hạn mới", "AddNewRole")</button>
-    </div>
-</div>
-<div class="col-lg-12">
-    <div class="table-responsive rounded mb-3">
-        <table class="data-table table mb-0 tbl-server-info">
-            <thead class="bg-white text-uppercase">
-                <tr class="ligth ligth-data">
-                    <th>
-                        Mã quyền
-                    </th>
-                    <th>
-                        Tên quyền
-                    </th>
-                    <th>
-                        Action name
-                    </th>
-                </tr>
-            </thead>
-            <tbody class="ligth-body">
-                @foreach (var item in Model)
-                {
-                    <tr >
-                         <td>
+        <div class="row w3-res-tb">
+            <div class="col-sm-5 m-b-xs">
+                @Html.ActionLink("Add New", "AddNewRole")
+
+            </div>
+            <div class="col-sm-offset-5">
+
+
+            </div>
+            <div class="col-sm-2 m-b-xs">
+                @Html.ActionLink("Back", "Back")
+            </div>
+        </div>
+        <div class="table-responsive">
+            <table class="table table-striped b-t b-light">
+                <thead>
+                    <tr>
+                        <th>
+                            Ma quyen
+                        </th>
+                        <th>
+                            Ten quyen
+                        </th>
+                        <th>
+                            Action name
+                        </th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var item in Model)
+                    {
+                        <tr>
+                            <td>
                                 @Html.DisplayFor(modelItem => item.ID)
                             </td>
                             <td>
                                 @Html.DisplayFor(modelItem => item.Name)
                             </td>
-                        <td>
-                            <div class="d-flex align-items-center list-action">
-                                <button class="badge bg-success mr-2">
+                            <td>
 
-                                    @Ajax.ActionLink("Delete", "DeleteRole", new { @id = item.ID }, new AjaxOptions
-                                       {
-                                           Confirm = "Ban muon xoa nguoi dung nay?",
-                                           OnComplete = "$('#row_)" + @item.ID + "').remove()",
-                                           HttpMethod = "DeleteRole"
-                                       })
-                                </button> 
-                            </div>
-
-                            @*<a href="/Admin/User/Delete/@item.ID">Xoa</a>*@
-                            @*@Ajax.ActionLink("Xóa", "Delete", new { @id = item.UserID }, new AjaxOptions
-                                {
-                                    Confirm = "Ban co muon xoa?",
-                                    OnComplete = "$('#row_)" + item.UserID + "').remove()",
-                                    HttpMethod = "Delete"
-                                })*@
-                        </td>
-                    </tr>
-                }
-            </tbody>
-        </table>
+                                @Ajax.ActionLink("Delete", "DeleteRole", new { @id = item.ID }, new AjaxOptions
+                                   {
+                                       Confirm = "Ban muon xoa nguoi dung nay?",
+                                       OnComplete = "$('#row_)" + @item.ID + "').remove()",
+                                       HttpMethod = "DeleteRole"
+                                   })
+                            </td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+        </div>
     </div>
 </div>
 

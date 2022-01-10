@@ -6,19 +6,17 @@
 
 
 <div class="row" style="padding-top: 30px"></div>
-
-
-
 @using (Html.BeginForm("AddOrEdit", "Suppliers", FormMethod.Post, new { enctype = "multipart/form-data", onSubmit = "return jQueryAjaxPost(this);", data_restUrl = Url.Action("AddOrEdit", "Suppliers", new { id = 0 }) }))//data-resetUrl
 {
     @Html.AntiForgeryToken()
-    <div class="col-sm-12" style="margin-bottom: 10px">
-        <div class="">
-            <form action="page-list-suppliers.html" data-toggle="validator">
-                @Html.ValidationSummary(true)
-                @Html.HiddenFor(model => model.SupplierID)
+    <div class="row" style="vertical-align:middle">
+        <div class="form-horizontal">
+            @Html.ValidationSummary(true)
+            @Html.HiddenFor(model => model.SupplierID)
 
-                <div class="row">
+
+            <div class="col-md-12">            
+                <div class="form-group">                  
                     <div class="col-md-6">
                         <div class="form-group">
                             <label>Name *</label>
@@ -63,16 +61,23 @@
                         </div>
                     </div>
                 </div>
-                <input type="submit" value="Submit"  class="btn btn-primary mr-2" />
-                @if (Model.SupplierID != 0)
-                {
-                    <a class="btn btn-success" onclick="refreshAddNewTab('@Url.Action("AddOrEdit","Suppliers",new{id=0})',false)"><i class="fa fa-plus"></i> Thêm mới</a>
-                }
-                <button class="btn btn-warning mr-2"> @Html.ActionLink("Cancel", "Index")</button>
 
-                <button type="reset" class="btn btn-danger">Reset</button>
-            </form>
+                <div class="form-group">
+                    <div class="col-md-offset-5 col-md-7">
+                        <input type="submit" value="Submit" class="btn btn-default" />
+                        @if (Model.SupplierID != 0)
+                        {
+                            <a class="btn btn-success" onclick="refreshAddNewTab('@Url.Action("AddOrEdit","Suppliers",new{id=0})',false)"><i class="fa fa-plus"></i> Thêm mới</a>
+                        }
+                        <button class="btn btn-warning"> @Html.ActionLink("Cancel", "Index")</button>
+                    </div>
+                </div>
+            </div>
+
+
         </div>
     </div>
-    
 }
+
+
+
