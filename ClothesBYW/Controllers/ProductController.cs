@@ -64,11 +64,11 @@ namespace ClothesBYW.Controllers
             return PartialView(dao.GetFeedbacks());
         }
         [HttpPost]
-        public ActionResult UploadFeedback(string productID, int star, string title, string content)
+        public ActionResult UploadFeedback(string productID, string productLineID, int star, string title, string content)
         {
             var dao = new FeedbackDao();
             dao.UploadFeedback(UserLoginSingleton.GetInstance().GetAccount().ID, productID, star, title, content);
-            return RedirectToAction("Detail", "Product", new { id = productID });
+            return RedirectToAction("Detail", "Product", new { id = productLineID });
         }
         public ActionResult ProductFeatured()
         {

@@ -162,6 +162,7 @@
                                     using (Html.BeginForm("UploadFeedback", "Product", FormMethod.Post))
                                     {
                                         <input name="productID" value="@Model.ProductID" hidden />
+                                        <input name="productLineID" value="@Model.ProductLineID" hidden/>
                                         <div class="reviews-submit">
                                             <h4>Give your Review:</h4>
                                             <div class="ratting">
