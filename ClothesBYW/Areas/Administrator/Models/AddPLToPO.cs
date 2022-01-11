@@ -12,6 +12,9 @@ namespace ClothesBYW.Areas.Administrator.Models
         [StringLength(50)]
         public string ProductLineID { get; set; }
 
+        [Display(Name = "Số lượng đặt mua ")]
+        [Required(ErrorMessage = "Nhập số lượng cần đặt mua!")]
+        [Range(1, 100)]
         public long PurchaseQuantity { get; set; }
     }
 }

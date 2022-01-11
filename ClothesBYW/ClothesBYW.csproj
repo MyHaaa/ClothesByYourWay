@@ -203,7 +203,6 @@
     <Compile Include="Areas\Administrator\Controllers\PromotionProductsController.cs" />
     <Compile Include="Areas\Administrator\Controllers\PurchaseOrdersController.cs" />
     <Compile Include="Areas\Administrator\Controllers\ReturnPOController.cs" />
-    <Compile Include="Areas\Administrator\Controllers\ShipperOrdersController.cs" />
     <Compile Include="Areas\Administrator\Controllers\ShippersController.cs" />
     <Compile Include="Areas\Administrator\Controllers\SuppliersController.cs" />
     <Compile Include="Areas\Administrator\Controllers\UserGroupsController.cs" />
@@ -610,7 +609,6 @@
     <Folder Include="App_Data\" />
     <Folder Include="Areas\Administrator\Data\ProductLine\" />
     <Folder Include="Areas\Administrator\Data\ProfileEmp\" />
-    <Folder Include="Areas\Administrator\Views\ShipperOrders\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="fonts\glyphicons-halflings-regular.woff2" />

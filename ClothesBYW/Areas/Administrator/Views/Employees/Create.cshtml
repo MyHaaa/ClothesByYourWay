@@ -21,13 +21,12 @@ else
     {
         @Html.AntiForgeryToken()
 
-        <div class="form-horizontal">
-            <div class="form-group">
-                <div class=" col-md-10">
-                    <h2>Thêm mới hồ sơ nhân viên</h2>
+        <div class="form-horizontal" style="background-color: white; padding: 10px 0">
+            <div class="form-group alert alert-success">
+                <div class=" col-md-10 " >
+                    <h2 style="padding: 10px 0">Thêm mới hồ sơ nhân viên</h2>
                 </div>
                 <div class=" col-md-2">
-                    <input type="submit" value="Create" class="btn btn-default" />
                     <button class="btn btn-default">@Html.ActionLink("Cancel", "Index")</button>
                 </div>
             </div>

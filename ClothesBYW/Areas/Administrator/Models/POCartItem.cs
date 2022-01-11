@@ -12,6 +12,8 @@ namespace ClothesBYW.Areas.Administrator.Models
     public class POCartItem
     {
         public ProductLine ProductLine { set; get; }
+
+        [Required(ErrorMessage = "Nhập số lượng cần đặt mua!")]
         public long PurchaseQuantity { set; get; }
     }
 }
