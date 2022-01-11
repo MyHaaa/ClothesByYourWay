@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Models.EF;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
@@ -8,9 +9,23 @@ namespace ClothesBYW.Areas.Administrator.Controllers
 {
     public class DashboardController : BaseController
     {
+        private ClothesBYWDbContext db = new ClothesBYWDbContext();
+
         // GET: Administrator/Dashboard
         public ActionResult Index()
         {
+            int countCustomer = db.Customers.Count();
+            int countOrder = db.Orders.Count();
+            int countPurchase = db.PurchaseOrders.Count();
+            int countProduct = db.Products.Count();
+
+            
+
+            TempData["Customer"] = countCustomer;
+            TempData["Order"] = countOrder;
+            TempData["Purchase"] = countPurchase;
+            TempData["Product"] = countProduct;
+
             return View();
         }
 

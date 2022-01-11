@@ -1,0 +1,120 @@
+﻿@model IEnumerable<Models.EF.Feedback>
+
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Areas/Administrator/Views/Shared/_Layout.cshtml";
+}
+
+@section jsFooter{
+    <script src="~/Assets/Admin/js/Controller/feedbackController.js"></script>
+}
+<div class="table-agile-info">
+    <div class="panel panel-default">
+        <div class="panel-heading">
+            Quản lý luồng Feedback sản phẩm
+        </div>
+        <div class="row w3-res-tb">
+            <div class="col-sm-5 m-b-xs">
+            </div>
+            <div class="col-sm-4">
+            </div>
+            <div class="col-sm-3">
+
+            </div>
+        </div>
+        <div class="table-responsive">
+            <table class="table table-striped b-t b-light">
+                <thead>
+                    <tr>
+                        <th>
+                            @Html.DisplayNameFor(model => model.Customer.Name)
+                        </th>
+                        <th>
+                            @Html.DisplayNameFor(model => model.Product.ProductName)
+                        </th>
+                        <th>
+                            @Html.DisplayNameFor(model => model.Star)
+                        </th>
+                        <th>
+                            @Html.DisplayNameFor(model => model.Title)
+                        </th>
+                        <th>
+                            @Html.DisplayNameFor(model => model.Content)
+                        </th>
+                        <th>
+                            @Html.DisplayNameFor(model => model.CreateDate)
+                        </th>
+                        <th>
+                            @Html.DisplayNameFor(model => model.Status)
+                        </th>
+                        <th></th>
+                    </tr>
+
+                </thead>
+                <tbody>
+                    @foreach (var item in Model)
+                    {
+                        <tr>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.Customer.Name)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.Product.ProductName)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.Star)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.Title)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.Content)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.CreateDate)
+                            </td>
+                            <td>
+                                <a href="#" class="btn-active" data-id="@item.FeedBackID">@(item.Status?"Active":"Block")</a>
+                            </td>
+                            <td>
+                                <button style="background-color: whitesmoke;
+                                                backdrop-filter: blur(6px);
+                                                -webkit-backdrop-filter: blur(6px);
+                                                border: 1px solid black;
+                                                box-shadow: rgba(142, 142, 142, 0.19) 0px 6px 15px 0px;
+                                                -webkit-box-shadow: rgba(142, 142, 142, 0.19) 0px 6px 15px 0px;
+                                                border-radius: 12px;
+                                                -webkit-border-radius: 12px;
+                                                color: black;
+                                                padding: 5px 10px;"
+                                        href="@Url.Action("Details", "Feedbacks",new { id = item.FeedBackID })"
+                                        type="button"
+                                        data-toggle="modal" data-target="#Details">
+                                    Chi tiết
+                                </button>
+                            </td>
+                        </tr>
+                    }
+
+                </tbody>
+            </table>
+        </div>
+        <footer class="panel-footer">
+            <div class="row">
+
+
+                <div class="col-sm-12 text-right  ">
+
+                </div>
+            </div>
+        </footer>
+    </div>
+</div>
+
+<div id="Details" class="modal fade" role="dialog">
+    <div class="modal-dialog">
+        <!-- Modal content-->
+        <div class="modal-content">
+        </div>
+    </div>
+</div>

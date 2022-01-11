@@ -28,7 +28,7 @@ namespace Models.EF
         public DateTime? CreateDate { get; set; }
 
         [Display(Name = "Trạng thái ")]
-        public bool? Status { get; set; }
+        public bool Status { get; set; }
         public virtual Customer Customer { get; set; }
         public virtual Product Product { get; set; }
     }

@@ -195,6 +195,7 @@
     <Compile Include="Areas\Administrator\Controllers\DashboardController.cs" />
     <Compile Include="Areas\Administrator\Controllers\DeliveryUnitsController.cs" />
     <Compile Include="Areas\Administrator\Controllers\EmployeesController.cs" />
+    <Compile Include="Areas\Administrator\Controllers\FeedbacksController.cs" />
     <Compile Include="Areas\Administrator\Controllers\LoginController.cs" />
     <Compile Include="Areas\Administrator\Controllers\OrdersController.cs" />
     <Compile Include="Areas\Administrator\Controllers\ProductCategoriesController.cs" />
@@ -206,6 +207,7 @@
     <Compile Include="Areas\Administrator\Controllers\ShippersController.cs" />
     <Compile Include="Areas\Administrator\Controllers\SuppliersController.cs" />
     <Compile Include="Areas\Administrator\Controllers\UserGroupsController.cs" />
+    <Compile Include="Areas\Administrator\Controllers\VouchersController.cs" />
     <Compile Include="Areas\Administrator\Models\AddPLToPO.cs" />
     <Compile Include="Areas\Administrator\Models\ChangePasswordModel.cs" />
     <Compile Include="Areas\Administrator\Models\ChangeStatusPO.cs" />
@@ -306,6 +308,7 @@
     <Content Include="Assets\Admin\js\Controller\csController.js" />
     <Content Include="Assets\Admin\js\Controller\customerController.js" />
     <Content Include="Assets\Admin\js\Controller\employeeController.js" />
+    <Content Include="Assets\Admin\js\Controller\feedbackController.js" />
     <Content Include="Assets\Admin\js\jquery.dcjqaccordion.2.7.js" />
     <Content Include="Assets\Admin\js\jquery.fileupload.js" />
     <Content Include="Assets\Admin\js\jquery.min.js" />
@@ -564,6 +567,11 @@
     <Content Include="Areas\Administrator\Views\Orders\Index.cshtml" />
     <Content Include="Areas\Administrator\Views\Orders\ChangeStatus.cshtml" />
     <Content Include="Areas\Administrator\Views\Orders\DeliveryIden.cshtml" />
+    <Content Include="Areas\Administrator\Views\Vouchers\Index.cshtml" />
+    <Content Include="Areas\Administrator\Views\Vouchers\Create.cshtml" />
+    <Content Include="Areas\Administrator\Views\Vouchers\Edit.cshtml" />
+    <Content Include="Areas\Administrator\Views\Feedbacks\Details.cshtml" />
+    <Content Include="Areas\Administrator\Views\Feedbacks\Index.cshtml" />
     <None Include="Scripts\jquery-3.4.1.intellisense.js" />
     <Content Include="Scripts\jquery-3.4.1.js" />
     <Content Include="Scripts\jquery-3.4.1.min.js" />
