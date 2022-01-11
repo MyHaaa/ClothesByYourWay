@@ -1,0 +1,49 @@
+﻿@model ClothesBYW.Areas.Administrator.Models.ChangStatusOrder
+
+@{
+    List<SelectListItem> Status234 = new List<SelectListItem>();
+    Status234.Add(new SelectListItem() { Text = "Vận đơn", Value = "2" });
+    Status234.Add(new SelectListItem() { Text = "Đã giao hàng", Value = "3" });
+    Status234.Add(new SelectListItem() { Text = "Đã huỷ", Value = "4" });
+}
+
+@{
+    List<SelectListItem> Status34 = new List<SelectListItem>();
+    Status34.Add(new SelectListItem() { Text = "Đã giao hàng", Value = "3" });
+    Status34.Add(new SelectListItem() { Text = "Đã huỷ", Value = "4" });
+}
+
+
+<div class="modal-header">
+    <button type="button" class="close" data-dismiss="modal">&times;</button>
+    <h4 class="modal-title" style="text-align: center; font-weight: bold; text-transform:uppercase">Bạn đang xét duyệt đơn hàng @Model.OrderID</h4>
+</div>
+<div class="modal-body">
+    @using (Html.BeginForm("ChangeStatus", "Orders", FormMethod.Post))
+    {
+        @Html.AntiForgeryToken()
+        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+        @Html.HiddenFor(model => model.OrderID)
+
+        if (Model.StatusID == 1)
+        {
+            <div class="form-group">
+                <label>Trạng thái:</label>
+                @Html.DropDownListFor(model => model.StatusID, Status234, "-- Select Status --")
+            </div>
+        }
+        else if (Model.StatusID == 2)
+        {
+            <div class="form-group">
+                <label>Trạng thái:</label>
+                @Html.DropDownListFor(model => model.StatusID, Status34, "-- Select Status --")
+            </div>
+        }
+
+        <button type="submit" class="btn">Xác nhận</button>
+    }
+
+</div>
+<div class="modal-footer">
+    <button type="button" class="btn btn-primary" data-dismiss="modal">Đóng</button>
+</div>

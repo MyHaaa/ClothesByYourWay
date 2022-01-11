@@ -125,5 +125,6 @@ namespace Models.EF
 
             base.OnModelCreating(modelBuilder);
         }
+
     }
 }

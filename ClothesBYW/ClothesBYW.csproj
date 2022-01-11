@@ -196,20 +196,24 @@
     <Compile Include="Areas\Administrator\Controllers\DeliveryUnitsController.cs" />
     <Compile Include="Areas\Administrator\Controllers\EmployeesController.cs" />
     <Compile Include="Areas\Administrator\Controllers\LoginController.cs" />
+    <Compile Include="Areas\Administrator\Controllers\OrdersController.cs" />
     <Compile Include="Areas\Administrator\Controllers\ProductCategoriesController.cs" />
     <Compile Include="Areas\Administrator\Controllers\ProductsController.cs" />
     <Compile Include="Areas\Administrator\Controllers\ProfileController.cs" />
     <Compile Include="Areas\Administrator\Controllers\PromotionProductsController.cs" />
     <Compile Include="Areas\Administrator\Controllers\PurchaseOrdersController.cs" />
     <Compile Include="Areas\Administrator\Controllers\ReturnPOController.cs" />
+    <Compile Include="Areas\Administrator\Controllers\ShipperOrdersController.cs" />
     <Compile Include="Areas\Administrator\Controllers\ShippersController.cs" />
     <Compile Include="Areas\Administrator\Controllers\SuppliersController.cs" />
     <Compile Include="Areas\Administrator\Controllers\UserGroupsController.cs" />
     <Compile Include="Areas\Administrator\Models\AddPLToPO.cs" />
     <Compile Include="Areas\Administrator\Models\ChangePasswordModel.cs" />
     <Compile Include="Areas\Administrator\Models\ChangeStatusPO.cs" />
+    <Compile Include="Areas\Administrator\Models\ChangStatusOrder.cs" />
     <Compile Include="Areas\Administrator\Models\CustomerDetails.cs" />
     <Compile Include="Areas\Administrator\Models\LoginModel.cs" />
+    <Compile Include="Areas\Administrator\Models\OrderDetailsModel.cs" />
     <Compile Include="Areas\Administrator\Models\PictureUpdate.cs" />
     <Compile Include="Areas\Administrator\Models\POCartItem.cs" />
     <Compile Include="Areas\Administrator\Models\ProductDetails.cs" />
@@ -236,6 +240,7 @@
     <Compile Include="Common\GlobalClass.cs" />
     <Compile Include="Common\GroupIDModel.cs" />
     <Compile Include="Common\HasCredentialAtrribute.cs" />
+    <Compile Include="Common\OrderModel.cs" />
     <Compile Include="Common\ProductLineModel.cs" />
     <Compile Include="Common\ProductModel.cs" />
     <Compile Include="Common\PurchaseOrderModel.cs" />
@@ -553,10 +558,13 @@
     <Content Include="Areas\Administrator\Views\Customers\Index.cshtml" />
     <Content Include="Areas\Administrator\Views\Customers\Details.cshtml" />
     <Content Include="Areas\Administrator\Views\Shippers\Create.cshtml" />
-    <Content Include="Areas\Administrator\Views\Shippers\Delete.cshtml" />
     <Content Include="Areas\Administrator\Views\Shippers\Details.cshtml" />
     <Content Include="Areas\Administrator\Views\Shippers\Edit.cshtml" />
     <Content Include="Areas\Administrator\Views\Shippers\Index.cshtml" />
+    <Content Include="Areas\Administrator\Views\Orders\Details.cshtml" />
+    <Content Include="Areas\Administrator\Views\Orders\Index.cshtml" />
+    <Content Include="Areas\Administrator\Views\Orders\ChangeStatus.cshtml" />
+    <Content Include="Areas\Administrator\Views\Orders\DeliveryIden.cshtml" />
     <None Include="Scripts\jquery-3.4.1.intellisense.js" />
     <Content Include="Scripts\jquery-3.4.1.js" />
     <Content Include="Scripts\jquery-3.4.1.min.js" />
@@ -602,6 +610,7 @@
     <Folder Include="App_Data\" />
     <Folder Include="Areas\Administrator\Data\ProductLine\" />
     <Folder Include="Areas\Administrator\Data\ProfileEmp\" />
+    <Folder Include="Areas\Administrator\Views\ShipperOrders\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="fonts\glyphicons-halflings-regular.woff2" />

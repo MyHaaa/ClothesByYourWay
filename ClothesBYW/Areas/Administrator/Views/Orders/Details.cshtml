@@ -1,0 +1,236 @@
+﻿@model ClothesBYW.Areas.Administrator.Models.OrderDetailsModel
+
+@{
+    ViewBag.Title = "Details";
+    Layout = "~/Areas/Administrator/Views/Shared/_Layout.cshtml";
+}
+
+<div class="table-agile-info">
+    <div class="panel panel-default">
+        <div class="panel-heading">
+            Chi tiết mã đơn @Model.order.OrderID
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-sm-12 btn-product-detail" style="display: flex; justify-content: flex-end">
+            <button style="background-color: whitesmoke;
+                                backdrop-filter: blur(6px);
+                                -webkit-backdrop-filter: blur(6px);
+                                border: 1px solid black;
+                                box-shadow: rgba(142, 142, 142, 0.19) 0px 6px 15px 0px;
+                                -webkit-box-shadow: rgba(142, 142, 142, 0.19) 0px 6px 15px 0px;
+                                border-radius: 12px;
+                                -webkit-border-radius: 12px;
+                                color: black;
+                                    padding: 5px 10px;">
+                @Html.ActionLink("Back to List", "Index")
+            </button>
+        </div>
+    </div>
+    <div class="row w3-res-tb">
+        <!--Thông tin-->
+        <div class="col-sm-5" style="background-color: rgba(255, 255, 255);
+                                           backdrop-filter: blur(13px);
+                                           -webkit-backdrop-filter: blur(13px);
+                                           border: 1px solid rgba(255, 255, 255, 0.18);
+                                           box-shadow: rgba(142, 142, 142, 0.19) 0px 6px 15px 0px;
+                                           -webkit-box-shadow: rgba(142, 142, 142, 0.19) 0px 6px 15px 0px;
+                                           border-radius: 12px;
+                                           -webkit-border-radius: 12px;
+                                           position: relative;
+                                           display: flex;
+                                           margin-left: 10px;
+                                           margin-right: 25px">
+            <h3 style="position: absolute; top: -15px; color: green">Thông tin về sản phẩm</h3>
+            <div class="product-left" style="padding: 30px 0;">
+                <div class="col-sm-12" style="margin-bottom: 5px"><span style="font-weight:bold">Tên khách hàng: </span>@Model.order.Customer.Name</div>
+                <div class="col-sm-12" style="margin-bottom: 5px"><span style="font-weight:bold">Địa chỉ giao hàng: </span>@Model.order.AddressShip</div>
+                <div class="col-sm-12" style="margin-bottom: 5px"><span style="font-weight:bold">Tổng tiền đơn hàng: </span>@Model.order.Total</div>
+                <div class="col-sm-12" style="margin-bottom: 5px"><span style="font-weight:bold">Ngày tạo: </span>@Model.order.CreateDate</div>
+                <div class="col-sm-12" style="margin-bottom: 5px"><span style="font-weight:bold">Mã vouvher áp dụng: </span>@Model.order.VoucherID</div>
+                <div class="col-sm-12" style="margin-bottom: 5px">
+                    <span style="font-weight:bold">Trạng thái: </span>
+                    @if (@Model.order.Status == 1)
+                    {
+                        <span>Chờ xử lý</span>
+                    }
+                    @if (@Model.order.Status == 2)
+                    {
+                        <span>Vận đơn</span>
+                    }
+                    @if (@Model.order.Status == 3)
+                    {
+                        <span>Đã giao hàng</span>
+                    }
+                    @if (@Model.order.Status == 4)
+                    {
+                        <span>Đã huỷ</span>
+                    }
+                </div>
+                <div class="col-sm-12 btn-product-detail" style="display: flex; justify-content: flex-end">
+                    <button style="background-color: whitesmoke;
+                                    backdrop-filter: blur(6px);
+                                    -webkit-backdrop-filter: blur(6px);
+                                    border: 1px solid black;
+                                    box-shadow: rgba(142, 142, 142, 0.19) 0px 6px 15px 0px;
+                                    -webkit-box-shadow: rgba(142, 142, 142, 0.19) 0px 6px 15px 0px;
+                                    border-radius: 12px;
+                                    -webkit-border-radius: 12px;
+                                    color: black;
+                                    padding: 5px 10px;"
+                            href="@Url.Action("ChangeStatus", "Orders", new { id = Model.order.OrderID })"
+                            type="button"
+                            data-toggle="modal" data-target="#ChangeStatus">
+                        Cập nhật thông tin
+                    </button>
+                </div>
+            </div>
+        </div>
+
+        <!--Khuyến mãi-->
+        <div class="col-sm-6" style="background-color: rgba(255, 255, 255);
+                                           backdrop-filter: blur(13px);
+                                           -webkit-backdrop-filter: blur(13px);
+                                           border: 1px solid rgba(255, 255, 255, 0.18);
+                                           box-shadow: rgba(142, 142, 142, 0.19) 0px 6px 15px 0px;
+                                           -webkit-box-shadow: rgba(142, 142, 142, 0.19) 0px 6px 15px 0px;
+                                           border-radius: 12px;
+                                           -webkit-border-radius: 12px;
+                                           position: relative;
+                                            margin-left: 10px;">
+            <h3 style="position: absolute; top: -15px; color: green">Tình trạng vận đơn của đơn hàng</h3>
+            <div class="product-right" style="padding: 30px 0;">
+                <h4 style="margin-left: 25px">Tình trạng vận đơn hiện giờ</h4>
+                <div style="margin: 30px 0;">
+                    @foreach (var so in Model.shipperOrder)
+                    {
+                        <div class="col-sm-12" style="margin-bottom: 5px"><span style="font-weight:bold">Mã vận đơn: </span>@so.ShipperOrderID</div>
+                        <div class="col-sm-12" style="margin-bottom: 5px"><span style="font-weight:bold">Mã shipper phụ trách: </span>@so.Shipper.ShipperID</div>
+                        <div class="col-sm-12" style="margin-bottom: 5px"><span style="font-weight:bold">Tên shipper: </span>@so.Shipper.Name</div>
+                        <div class="col-sm-12" style="margin-bottom: 5px"><span style="font-weight:bold">Ngày giao: </span>@so.DeliveryDatetime</div>
+                        <div class="col-sm-12" style="margin-bottom: 5px"><span style="font-weight:bold">Mã nhân viên chỉ định: </span>@so.EmployeeID</div>
+                    }
+                </div>
+                <h4 style="margin-left: 25px">Trình vận đơn từng áp dụng</h4>
+                <table class="table table-striped b-t b-light" id="PromotionTable" style="margin: 30px 0;">
+                    <thead>
+                        <tr>
+                            <th style="text-align: center; color: black">Mã vận đơn</th>
+                            <th style="text-align: center; color: black">Mã shipper</th>
+                            <th style="text-align: center; color: black">Mã nhân viên</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @foreach (var shipperOrder in Model.shipperOrders)
+                        {
+                            <tr>
+                                <td style="text-align: center; color: black">
+                                    @shipperOrder.ShipperOrderID
+                                </td>
+                                <td style="text-align: center; color: black">
+                                    @shipperOrder.ShipperID
+                                </td>
+                                <td style="text-align: center; color: black">
+                                    @shipperOrder.EmployeeID
+                                </td>
+                            </tr>
+                        }
+                    </tbody>
+                </table>
+                @if (Model.order.Status == 2)
+                {
+                    <div class="col-sm-12 btn-product-detail" style="display: flex; justify-content: flex-end; margin-bottom: 30px;">
+                        <button style="background-color: whitesmoke;
+                                backdrop-filter: blur(6px);
+                                -webkit-backdrop-filter: blur(6px);
+                                border: 1px solid black;
+                                box-shadow: rgba(142, 142, 142, 0.19) 0px 6px 15px 0px;
+                                -webkit-box-shadow: rgba(142, 142, 142, 0.19) 0px 6px 15px 0px;
+                                border-radius: 12px;
+                                -webkit-border-radius: 12px;
+                                color: aliceblue;
+                                padding: 5px 10px;"
+                                type="button"
+                                data-toggle="modal" data-target="#DeliveryIden"
+                                href="@Url.Action("DeliveryIden", "Orders", new { id = Model.order.OrderID })">
+                            Chỉnh sửa shipper vận đơn
+                        </button>
+                    </div>
+                }
+            </div>
+        </div>
+    </div>
+    <div class="row" style="margin-top: 30px;">
+        <!--Dòng sản phẩm-->
+        <div class="col-sm-12" style="background-color: white">
+            <h5 class="mb-3">Tổng quan đơn đặt hàng</h5>
+            <div class="table-responsive-sm">
+                <table class="table">
+                    <thead>
+                        <tr>
+                            <th scope="col" style="color: black">Sản phẩm</th>
+                            <th scope="col" style="color: black">Đơn giá</th>
+                            <th class="text-center" scope="col" style="color: black">Số lượng đặt</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @foreach (var modified in Model.orderDetails)
+                        {
+                            <tr>
+                                <td style="color: black">
+                                    <h6 class="mb-0">
+                                        @modified.ProductLineID
+                                    </h6>
+                                    <p class="mb-0">
+                                        @modified.ProductLine.Product.ProductName size @modified.ProductLine.Size màu @modified.ProductLine.Color.ColorName
+                                    </p>
+                                </td>
+                                <td style="text-align: center; color: black">
+                                    @modified.PriceEach
+                                </td>
+                                <td style="text-align: center; color: black">
+                                    @modified.QuantitySold
+                                </td>
+                            </tr>
+                        }
+                    </tbody>
+                </table>
+            </div>
+        </div>
+
+    </div>
+
+
+
+    <!--Modal Change Status-->
+    <div id="ChangeStatus" class="modal fade" role="dialog">
+        <div class="modal-dialog">
+            <!-- Modal content-->
+            <div class="modal-content">
+            </div>
+        </div>
+    </div>
+
+    <!-- Modal Edit khuyến mãi-->
+    <div id="DeliveryIden" class="modal fade" role="dialog">
+        <div class="modal-dialog">
+            <!-- Modal content-->
+            <div class="modal-content">
+            </div>
+        </div>
+    </div>
+
+    <!--Modal Add Product Line-->
+    <div id="AddProductLine" class="modal fade" role="dialog">
+        <div class="modal-dialog">
+            <!-- Modal content-->
+            <div class="modal-content">
+            </div>
+        </div>
+    </div>
+
+</div>
+
+@section jsFooter{
+
+}
