@@ -1,12 +1,11 @@
 ﻿@model ClothesBYW.Areas.Administrator.Models.ChangeStatusPO
-   
-@* vừa tạo xong đơn hàng, chờ xét duyệt *@
+
+@* đã xét duyệt (trạng thái chờ giao đơn), trong lúc chờ giao thì sẽ có 2 trường hợp sau *@
 @{
-    List<SelectListItem> Status2345 = new List<SelectListItem>();
-    Status2345.Add(new SelectListItem() { Text = "Đang giao đơn", Value = "2" });
-    Status2345.Add(new SelectListItem() { Text = "Đã bị huỷ", Value = "3" });
-    Status2345.Add(new SelectListItem() { Text = "Đã nhận hàng", Value = "4" });
-    Status2345.Add(new SelectListItem() { Text = "Lỗi chi tiết đơn", Value = "5" });
+    List<SelectListItem> Status345 = new List<SelectListItem>();
+    Status345.Add(new SelectListItem() { Text = "Đã bị huỷ", Value = "3" });
+    Status345.Add(new SelectListItem() { Text = "Nhận đơn", Value = "4" });
+    Status345.Add(new SelectListItem() { Text = "Lỗi nội dung chi tiết", Value = "5" });
 }
 
 
@@ -15,11 +14,11 @@
     <h4 class="modal-title" style="text-align: center; font-weight: bold; text-transform:uppercase">Bạn đang xét duyệt đơn đặt hàng @Session["PurchaseOrderID"]</h4>
 </div>
 <div class="modal-body">
-    @using (Html.BeginForm("ChangeStatus", "PurchaseOrders", FormMethod.Post))
+    @using (Html.BeginForm("ChangeStatus", "ReturnPO", FormMethod.Post))
     {
         <div class="form-group">
             <label>Trạng thái:</label>
-            @Html.DropDownListFor(model => model.StatusID, Status2345, "-- Select Status --")
+            @Html.DropDownListFor(model => model.StatusID, Status345, "-- Select Status --")
         </div>
 
         <button type="submit" class="btn">Xác nhận</button>
@@ -29,3 +28,4 @@
 <div class="modal-footer">
     <button type="button" class="btn btn-primary" data-dismiss="modal">Đóng</button>
 </div>
+

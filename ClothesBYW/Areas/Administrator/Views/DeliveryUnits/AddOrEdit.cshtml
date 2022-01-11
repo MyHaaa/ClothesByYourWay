@@ -1,0 +1,84 @@
+﻿@model Models.EF.DeliveryUni
+
+@{
+    Layout = null;
+}
+@section jsFooter{
+
+}
+
+<div class="row" style="padding-top: 30px"></div>
+
+@using (Html.BeginForm("AddOrEdit", "DeliveryUnits", FormMethod.Post, new { enctype = "multipart/form-data", onSubmit = "return jQueryAjaxPost(this);", data_restUrl = Url.Action("AddOrEdit", "DeliveryUnits", new { id = 0 }) }))//data-resetUrl
+{
+    @Html.AntiForgeryToken()
+<div class="container-fluid">
+    <div class="row" style="vertical-align:middle">
+        <div class="form-horizontal">
+            @Html.ValidationSummary(true)
+            @Html.HiddenFor(model => model.DeliveryUnitID)
+
+
+            <div class="col-md-12">
+                <div class="form-group">
+                    <div class="col-md-12">
+                        <div class="form-group" style="padding: 0 10px">
+                            <label>Tên đơn vị giao hàng *</label>
+                            @Html.EditorFor(model => model.Name, new { htmlAttributes = new { @class = "form-control" } })
+                            @Html.ValidationMessageFor(model => model.Name)
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="form-group" style="padding: 0 10px">
+                            <label>Email *</label>
+                            @Html.EditorFor(model => model.Email, new { htmlAttributes = new { @class = "form-control" } })
+                            @Html.ValidationMessageFor(model => model.Email)
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="form-group" style="padding: 0 10px">
+                            <label>Người đại diện </label>
+                            @Html.EditorFor(model => model.Name, new { htmlAttributes = new { @class = "form-control" } })
+                            @Html.ValidationMessageFor(model => model.Name)
+                        </div>
+                    </div>
+                    <div class="col-md-12">
+                        <div class="form-group" style="padding: 0 10px">
+                            <label>Address</label>
+                            @Html.EditorFor(model => model.Address, new { htmlAttributes = new { @class = "form-control" } })
+                            @Html.ValidationMessageFor(model => model.Address)
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="form-group" style="padding: 0 10px">
+                            <label>Email người đại diện </label>
+                            @Html.EditorFor(model => model.EmailContactPerson, new { htmlAttributes = new { @class = "form-control" } })
+                            @Html.ValidationMessageFor(model => model.EmailContactPerson)
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="form-group" style="padding: 0 10px">
+                            <label>Số liên lạc người đại diện *</label>
+                            @Html.EditorFor(model => model.PhoneContactPerson, new { htmlAttributes = new { @class = "form-control" } })
+                            @Html.ValidationMessageFor(model => model.PhoneContactPerson)
+                        </div>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <div class="col-md-offset-5 col-md-7">
+                        <input type="submit" value="Submit" class="btn btn-default" />
+                        @if (Model.DeliveryUnitID != 0)
+                        {
+                            <a class="btn btn-success" onclick="refreshAddNewTab('@Url.Action("AddOrEdit","DeliveryUnits",new{id=0})',false)"><i class="fa fa-plus"></i> Thêm mới</a>
+                        }
+                        <button class="btn btn-warning"> @Html.ActionLink("Cancel", "Index")</button>
+                    </div>
+                </div>
+            </div>
+
+
+        </div>
+    </div>
+</div>
+}

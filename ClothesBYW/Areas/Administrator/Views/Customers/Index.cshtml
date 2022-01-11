@@ -1,16 +1,15 @@
-﻿@model IEnumerable<Models.EF.Employee>
-
+﻿@model IEnumerable<Models.EF.Customer>
 @{
     ViewBag.Title = "Index";
     Layout = "~/Areas/Administrator/Views/Shared/_Layout.cshtml";
 }
 @section jsFooter{
-    <script src="~/Assets/Admin/js/Controller/employeeController.js"></script>
+    <script src="~/Assets/Admin/js/Controller/customerController.js"></script>
 }
 <div class="table-agile-info">
     <div class="panel panel-default">
         <div class="panel-heading">
-            Danh sách tài khoản nhân viên
+            Danh sách tài khoản khách hàng
         </div>
         <div class="row w3-res-tb">
             <div class="col-sm-5 m-b-xs">
@@ -26,13 +25,13 @@
                 <thead>
                     <tr>
                         <th style="text-align: center; color: black">
-                            Mã nhân viên
+                            Mã khách hàng
                         </th>
                         <th style="text-align: center; color: black">
-                            Tên nhân viên
+                            Tên khách hàng
                         </th>
                         <th style="text-align: center; color: black">
-                            Nhóm người dùng
+                            Loại khách hàng
                         </th>
                         <th style="text-align: center; color: black">
                             Email
@@ -50,14 +49,14 @@
                     @foreach (var item in Model)
                     {
                         <tr>
-                            <td  style="text-align: center; color: black">
-                                @Html.DisplayFor(modelItem => item.EmployeeID)
+                            <td style="text-align: center; color: black">
+                                @Html.DisplayFor(modelItem => item.CustomerID)
                             </td>
-                            <td  style="text-align: center; color: black">
+                            <td style="text-align: center; color: black">
                                 @Html.DisplayFor(modelItem => item.Name)
                             </td>
                             <td style="text-align: center; color: black">
-                                @Html.DisplayFor(modelItem => item.UserGroup.Name)
+                                @Html.DisplayFor(modelItem => item.CustomerCategory.Name)
                             </td>
                             <td style="text-align: center; color: black">
                                 @Html.DisplayFor(modelItem => item.Email)
@@ -66,14 +65,12 @@
                                 @Html.DisplayFor(modelItem => item.Phone)
                             </td>
                             <td style="text-align: center">
-                                <a href="#" class="btn-active" data-id="@item.EmployeeID">@(item.Status?"Active":"Block")</a>
+                                <a href="#" class="btn-active" data-id="@item.CustomerID">@(item.Status?"Active":"Block")</a>
                             </td>
                             <td style="text-align: center">
                                 <div class="d-flex align-items-center list-action">
                                     <a class="badge badge-info mr-2" data-toggle="tooltip" data-placement="top" title="" data-original-title="View"
-                                       href="/Administrator/Employees/Details/@item.EmployeeID"><i class="fa fa-eye"></i></a>
-                                    <a class="badge bg-success mr-2" data-toggle="tooltip" data-placement="top" title="" data-original-title="Edit"
-                                       href="/Administrator/Employees/Edit/@item.EmployeeID"><i class="fa fa-pencil"></i></a>
+                                       href="/Administrator/Customers/Details/@item.CustomerID"><i class="fa fa-eye"></i></a>
                                 </div>
 
                                 @*<a href="/Admin/User/Delete/@item.ID">Xoa</a>*@
@@ -101,5 +98,3 @@
         </footer>
     </div>
 </div>
-
-

@@ -1,6 +1,6 @@
 ﻿@model ClothesBYW.Areas.Administrator.Models.PurchaseOrderDetails
 @{
-    ViewBag.Title = "PODetails";
+    ViewBag.Title = "ReturnPODetails";
     Layout = "~/Areas/Administrator/Views/Shared/_Layout.cshtml";
 }
 
@@ -49,15 +49,25 @@
                     }
                     else if (Model.PurchaseOrder.Status == 4)
                     {
-                        <span>Đã nhận hàng</span>
+                        <span>Tiếp nhận đơn</span>
                     }
                     else if (Model.PurchaseOrder.Status == 5)
                     {
                         <span>Lỗi chi tiết đơn</span>
                     }
+                    else if (Model.PurchaseOrder.Status == 6)
+                    {
+                        <span>Chưa nhận đủ</span>
+                    }
+                    else if (Model.PurchaseOrder.Status == 7)
+                    {
+                        <span>Đã nhận đủ</span>
+                    }
                 </div>
                 <div class="col-sm-12 btn-product-detail" style="display: flex; justify-content: flex-end">
-                    <button style="background-color: whitesmoke;
+                    @if (Model.PurchaseOrder.Status == 2)
+                    {
+                        <button style="background-color: whitesmoke;
                                     backdrop-filter: blur(6px);
                                     -webkit-backdrop-filter: blur(6px);
                                     border: 1px solid black;
@@ -67,11 +77,30 @@
                                     -webkit-border-radius: 12px;
                                     color: black;
                                     padding: 5px 10px;"
-                            href="@Url.Action("ChangeStatus", "PurchaseOrders", new { id = Model.PurchaseOrder.PurchaseOrderID })"
-                            type="button"
-                            data-toggle="modal" data-target="#ChangeStatus">
-                        Xét duyệt đơn
-                    </button>
+                                href="@Url.Action("ChangeStatus", "ReturnPO", new { id = Model.PurchaseOrder.PurchaseOrderID })"
+                                type="button"
+                                data-toggle="modal" data-target="#ChangeStatus">
+                            Xét duyệt đơn
+                        </button>
+                    }
+                    else if (Model.PurchaseOrder.Status == 4)
+                    {
+                        <button style="background-color: whitesmoke;
+                                    backdrop-filter: blur(6px);
+                                    -webkit-backdrop-filter: blur(6px);
+                                    border: 1px solid black;
+                                    box-shadow: rgba(142, 142, 142, 0.19) 0px 6px 15px 0px;
+                                    -webkit-box-shadow: rgba(142, 142, 142, 0.19) 0px 6px 15px 0px;
+                                    border-radius: 12px;
+                                    -webkit-border-radius: 12px;
+                                    color: black;
+                                    padding: 5px 10px;"
+                                href="@Url.Action("ApproveReturnPO", "ReturnPO", new { id = Model.PurchaseOrder.PurchaseOrderID })"
+                                type="button"
+                                data-toggle="modal" data-target="#ApproveReturnPO">
+                            Xác nhận đơn hàng
+                        </button>
+                    }
                 </div>
             </div>
         </div>
@@ -103,6 +132,7 @@
                             <th style="text-align: center; color: black">Số lượng nhận được</th>
                             <th style="text-align: center; color: black">Giá đặt mua</th>
                             <th style="text-align: center; color: black">Trạng thái</th>
+                            <th>#</th>
                         </tr>
                     </thead>
                     <tbody>
@@ -125,25 +155,65 @@
                                     @modified.PricePurchase
                                 </td>
                                 <td style="text-align: center; color: black">
-                                    @modified.Status
+                                    @if (modified.Status == 1)
+                                    {
+                                        <span>Nhận đủ</span>
+                                    }
+                                    else if (modified.Status == 2)
+                                    {
+                                        <span>Chưa nhận đủ</span>
+                                    }
                                 </td>
-                                
+                                <td>
+                                    @if (Model.PurchaseOrder.Status == 4)
+                                    {
+                                        <button style="background-color: whitesmoke;
+                                                backdrop-filter: blur(6px);
+                                                -webkit-backdrop-filter: blur(6px);
+                                                border: 1px solid black;
+                                                box-shadow: rgba(142, 142, 142, 0.19) 0px 6px 15px 0px;
+                                                -webkit-box-shadow: rgba(142, 142, 142, 0.19) 0px 6px 15px 0px;
+                                                border-radius: 12px;
+                                                -webkit-border-radius: 12px;
+                                                color: black;
+                                                padding: 5px 10px;"
+                                                href="@Url.Action("ReceivedItems", "ReturnPO",new { id = @modified.PurchaseOrderDetailID })"
+                                                type="button"
+                                                data-toggle="modal" data-target="#ReceivedPO">
+                                            Nhập Hàng
+                                        </button>
+                                    }
+                                </td>
                             </tr>
                         }
                     </tbody>
                 </table>
                 <div class="col-sm-12 btn-product-detail" style="display: flex; justify-content: flex-end">
-                    
                 </div>
             </div>
         </div>
     </div>
 
-
-
-
-    <!--Modal Add Product Line-->
+    <!--Modal Change Status-->
     <div id="ChangeStatus" class="modal fade" role="dialog">
+        <div class="modal-dialog">
+            <!-- Modal content-->
+            <div class="modal-content">
+            </div>
+        </div>
+    </div>
+
+    <!--Modal Change Status-->
+    <div id="ReceivedPO" class="modal fade" role="dialog">
+        <div class="modal-dialog">
+            <!-- Modal content-->
+            <div class="modal-content">
+            </div>
+        </div>
+    </div>
+
+    <!--Modal Change Status-->
+    <div id="ApproveReturnPO" class="modal fade" role="dialog">
         <div class="modal-dialog">
             <!-- Modal content-->
             <div class="modal-content">

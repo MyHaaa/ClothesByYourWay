@@ -1,0 +1,130 @@
+﻿@model IEnumerable<Models.EF.PurchaseOrder>
+
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Areas/Administrator/Views/Shared/_Layout.cshtml";
+}
+
+<div class="market-updates">
+    <div class="col-md-4 market-update-gd">
+        <div class="market-update-block clr-block-3">
+            <div class="col-md-4 market-update-right">
+                <i class="fa fa-usd"></i>
+            </div>
+            <div class="col-md-8 market-update-left">
+                <h4>Sản phẩm</h4>
+                <h3>@TempData["ProductCount"]</h3>
+            </div>
+            <div class="clearfix"> </div>
+        </div>
+    </div>
+    <div class="col-md-4 market-update-gd">
+        <div class="market-update-block clr-block-4">
+            <div class="col-md-4 market-update-right">
+                <i class="fa fa-shopping-cart" aria-hidden="true"></i>
+            </div>
+            <div class="col-md-8 market-update-left">
+                <h4>Đơn nhập hàng chờ phản hồi</h4>
+                <h3>@TempData["POCount"]</h3>
+            </div>
+            <div class="clearfix"> </div>
+        </div>
+    </div>
+    <div class="clearfix"> </div>
+</div>
+
+<div class="col-md-12 stats-info stats-last widget-shadow">
+    <div class="stats-last-agile">
+        <table class="table stats-table ">
+            <thead>
+                <tr>
+                    <th>
+                        Mã đơn hàng
+                    </th>
+
+                    <th>
+                        Ngày tạo
+                    </th>
+                    <th>
+                        Tạo bởi
+                    </th>
+                    <th>
+                        Tổng Tiền
+                    </th>
+                    <th>
+                        Ngày nhận hàng
+                    </th>
+                    <th>
+                        Trạng thái
+                    </th>
+
+                    <th>#</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var item in Model)
+                {
+                <tr>
+                    <th scope="row">@Html.DisplayFor(modelItem => item.PurchaseOrderID)</th>
+                    <td>@Html.DisplayFor(modelItem => item.CreatedDate)</td>
+
+                    <td>
+                        @Html.DisplayFor(modelItem => item.CreatedBy)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.TotalAmountPurchase)
+                    </td>
+                    <td> @Html.DisplayFor(modelItem => item.ReceivedDate)</td>
+                    @if (item.Status == 1)
+                    {
+                        <td style="text-align: center">
+                            <span class="label labels-primary" style="font-size: 0.8rem; font-weight: bolder">Chờ phê duyệt</span>
+                        </td>
+                    }
+                    else if (item.Status == 2)
+                    {
+                        <td style="text-align: center">
+                            <span class="label label-warning" style="font-size: 0.8rem; font-weight: bolder">Đang giao đơn</span>
+                        </td>
+                    }
+                    else if (item.Status == 3)
+                    {
+                        <td style="text-align: center">
+                            <span class="label label-danger" style="font-size: 0.8rem; font-weight: bolder">Đã bị huỷ</span>
+                        </td>
+                    }
+                    else if (item.Status == 4)
+                    {
+                        <td style="text-align: center">
+                            <span class="label label-success" style="font-size: 0.8rem; font-weight: bolder">Tiếp nhận đơn</span>
+                        </td>
+                    }
+                    else if (item.Status == 5)
+                    {
+                        <td style="text-align: center">
+                            <span class="label label-info" style="font-size: 0.8rem; font-weight: bolder">Lỗi chi tiết đơn</span>
+                        </td>
+                    }
+                    else if (item.Status == 6)
+                    {
+                        <td style="text-align: center">
+                            <span class="label label-info" style="font-size: 0.8rem; font-weight: bolder">Chưa nhận đủ</span>
+                        </td>
+                    }
+                    else if (item.Status == 7)
+                    {
+                        <td style="text-align: center">
+                            <span class="label label-info" style="font-size: 0.8rem; font-weight: bolder">Đã nhận đủ</span>
+                        </td>
+                    }
+
+                    <td><a href="/Administrator/ReturnPO/ReturnPODetails/@item.PurchaseOrderID" data-id="@item.PurchaseOrderID" class="btn-delete"><i class="fa fa-eye"></i></a></td>
+                </tr>
+
+                }
+
+            </tbody>
+        </table>
+    </div>
+</div>
+

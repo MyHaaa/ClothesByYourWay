@@ -39,5 +39,14 @@ namespace Models.Dao
         {
             return db.Customers.Where(x => x.CustomerID == id).FirstOrDefault<EF.Customer>();
         }
+
+        public bool ChangeStatus(string id)
+        {
+            var customer = db.Customers.Find(id);
+            customer.Status = !customer.Status;
+            db.SaveChanges();
+            return customer.Status;
+        }
+
     }
 }

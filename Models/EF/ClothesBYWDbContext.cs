@@ -10,6 +10,7 @@ namespace Models.EF
         public ClothesBYWDbContext()
             : base("name=ClothesBYW")
         {
+            
         }
 
         public virtual DbSet<Brand> Brands { get; set; }

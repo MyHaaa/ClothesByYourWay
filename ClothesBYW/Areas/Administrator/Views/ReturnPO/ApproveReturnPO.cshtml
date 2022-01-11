@@ -1,0 +1,23 @@
+﻿@model ClothesBYW.Areas.Administrator.Models.PurchaseOrderIDModel
+
+
+
+<div class="modal-header">
+    <button type="button" class="close" data-dismiss="modal">&times;</button>
+    <h4 class="modal-title" style="text-align: center; font-weight: bold; text-transform:uppercase">Bạn đang xét duyệt đơn đặt hàng @Session["PurchaseOrderID"]</h4>
+</div>
+<div class="modal-body">
+    @using (Html.BeginForm("ApproveReturnPO", "ReturnPO", FormMethod.Post))
+    {
+        <div class="form-group">
+            <h4>Bạn xác nhận đơn nhận hàng này?</h4>
+        </div>
+
+        <button type="submit" class="btn">Xác nhận</button>
+    }
+
+</div>
+<div class="modal-footer">
+    <button type="button" class="btn btn-primary" data-dismiss="modal">Đóng</button>
+</div>
+

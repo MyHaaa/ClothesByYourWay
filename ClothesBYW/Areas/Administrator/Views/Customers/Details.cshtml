@@ -1,0 +1,139 @@
+﻿@model ClothesBYW.Areas.Administrator.Models.CustomerDetails
+
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Areas/Administrator/Views/Shared/_Layout.cshtml";
+}
+<div class="table-agile-info">
+    <div class="panel panel-default">
+        <div class="panel-heading">
+            Detail tài khoản người dùng
+        </div>
+        <div class="row w3-res-tb">
+            <div class="col-sm-5 m-b-xs">
+            </div>
+            <div class="col-sm-5">
+            </div>
+            <div class="col-sm-1">
+                <button class="btn btn-sm btn-info">@Html.ActionLink("Cancel", "Index")</button>
+            </div>
+            <hr style=" width: 880px;text-align: center; height: 1px; padding-top: 10px; " noshade />
+            <div class="row" style="padding-top: 20px"></div>
+            <div class="table-responsive">
+                <div class="row">
+                    <div class="col-sm-2"></div>
+                    <div class="col-sm-3" style="text-align: left; font-weight: bold;">
+                        @Html.DisplayNameFor(model => model.Customer.Username)
+                    </div>
+                    <div class="col-sm-7">
+                        @Html.DisplayFor(model => model.Customer.Username)
+                    </div>
+                </div>
+                <div class="row" style="padding-top: 20px"></div>
+                <div class="row">
+                    <div class="col-sm-2"></div>
+
+                    <div class="col-sm-3" style="text-align: left; font-weight: bold;">
+                        @Html.DisplayNameFor(model => model.Customer.Name)
+                    </div>
+                    <div class="col-sm-7">
+                        @Html.DisplayFor(model => model.Customer.Name)
+                    </div>
+                </div>
+                <div class="row" style="padding-top: 20px"></div>
+
+                <div class="row">
+                    <div class="col-sm-2"></div>
+
+                    <div class="col-sm-3" style="text-align: left; font-weight: bold;">
+                        @Html.DisplayNameFor(model => model.Customer.Address)
+                    </div>
+                    <div class="col-sm-7">
+                        @Html.DisplayFor(model => model.Customer.Address)
+                    </div>
+                </div>
+                <div class="row" style="padding-top: 20px"></div>
+                <div class="row">
+                    <div class="col-sm-2"></div>
+
+                    <div class="col-sm-3" style="text-align: left; font-weight: bold;">
+                        @Html.DisplayNameFor(model => model.Customer.Phone)
+                    </div>
+                    <div class="col-sm-7">
+                        @Html.DisplayFor(model => model.Customer.Phone)
+                    </div>
+                </div>
+                <div class="row" style="padding-top: 20px"></div>
+                <div class="row">
+                    <div class="col-sm-2"></div>
+
+                    <div class="col-sm-3" style="text-align: left; font-weight: bold;">
+                        @Html.DisplayNameFor(model => model.Customer.Email)
+                    </div>
+                    <div class="col-sm-7">
+                        @Html.DisplayFor(model => model.Customer.Email)
+                    </div>
+                </div>
+                <div class="row" style="padding-top: 20px"></div>
+                <div class="row">
+                    <div class="col-sm-2"></div>
+
+                    <div class="col-sm-3" style="text-align: left; font-weight: bold;">
+                        @Html.DisplayNameFor(model => model.Customer.CreateDated)
+                    </div>
+                    <div class="col-sm-7">
+                        @Html.DisplayFor(model => model.Customer.CreateDated)
+                    </div>
+                </div>
+                <div class="row" style="padding-top: 20px"></div>
+                <div class="row">
+                    <div class="col-sm-2"></div>
+
+                    <div class="col-sm-3" style="text-align: left; font-weight: bold;">
+                        @Html.DisplayNameFor(model => model.Customer.Status)
+                    </div>
+                    <div class="col-sm-7">
+                        @Html.DisplayFor(model => model.Customer.Status)
+                    </div>
+                </div>
+                <div class="row" style="padding-top: 30px"></div>
+
+            </div>
+
+        </div>
+
+        <div class="row w3-res-tb">
+            <h4 style="margin-top: 5px; text-align: center; font-weight: bolder; color: red">CÁC ĐƠN HÀNG ĐÃ ĐẶT</h4>
+            <table class="table table-striped b-t b-light" id="PromotionTable" style="margin: 10px 0;">
+                <thead>
+                    <tr>
+                        <th style="text-align: center; color: black">Mã đơn hàng</th>
+                        <th style="text-align: center; color: black">Tổng tiền</th>
+                        <th style="text-align: center; color: black">Ngày tạo</th>
+                        <th style="text-align: center; color: black">Trạng thái</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var order in Model.Orders)
+                    {
+                        <tr title="Địa chỉ giao hàng: @order.AddressShip &#013; Ghi chú: @order.Note">
+                             <td style="text-align: center; color: black">
+                                @order.OrderID
+                             </td>
+                            <td style="text-align: center; color: black">
+                                @order.Total
+                            </td>
+                            <td style="text-align: center; color: black">
+                                @order.CreateDate
+                            </td>
+                            <td style="text-align: center; color: black">
+                                @order.Status
+                            </td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+
+        </div>
+    </div>
+</div>

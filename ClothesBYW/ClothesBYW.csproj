@@ -193,6 +193,7 @@
     <Compile Include="Areas\Administrator\Controllers\CustomerCategoriesController.cs" />
     <Compile Include="Areas\Administrator\Controllers\CustomersController.cs" />
     <Compile Include="Areas\Administrator\Controllers\DashboardController.cs" />
+    <Compile Include="Areas\Administrator\Controllers\DeliveryUnitsController.cs" />
     <Compile Include="Areas\Administrator\Controllers\EmployeesController.cs" />
     <Compile Include="Areas\Administrator\Controllers\LoginController.cs" />
     <Compile Include="Areas\Administrator\Controllers\ProductCategoriesController.cs" />
@@ -200,17 +201,21 @@
     <Compile Include="Areas\Administrator\Controllers\ProfileController.cs" />
     <Compile Include="Areas\Administrator\Controllers\PromotionProductsController.cs" />
     <Compile Include="Areas\Administrator\Controllers\PurchaseOrdersController.cs" />
+    <Compile Include="Areas\Administrator\Controllers\ReturnPOController.cs" />
+    <Compile Include="Areas\Administrator\Controllers\ShippersController.cs" />
     <Compile Include="Areas\Administrator\Controllers\SuppliersController.cs" />
     <Compile Include="Areas\Administrator\Controllers\UserGroupsController.cs" />
     <Compile Include="Areas\Administrator\Models\AddPLToPO.cs" />
     <Compile Include="Areas\Administrator\Models\ChangePasswordModel.cs" />
     <Compile Include="Areas\Administrator\Models\ChangeStatusPO.cs" />
+    <Compile Include="Areas\Administrator\Models\CustomerDetails.cs" />
     <Compile Include="Areas\Administrator\Models\LoginModel.cs" />
     <Compile Include="Areas\Administrator\Models\PictureUpdate.cs" />
     <Compile Include="Areas\Administrator\Models\POCartItem.cs" />
     <Compile Include="Areas\Administrator\Models\ProductDetails.cs" />
     <Compile Include="Areas\Administrator\Models\ProductLineDetails.cs" />
     <Compile Include="Areas\Administrator\Models\PurchaseOrderDetails.cs" />
+    <Compile Include="Areas\Administrator\Models\PurchaseOrderIDModel.cs" />
     <Compile Include="Base\IRepository.cs" />
     <Compile Include="Base\Repository.cs" />
     <Compile Include="Commands\AddColorCommand.cs" />
@@ -275,6 +280,7 @@
     <Content Include="Assets\Admin\images\3.png" />
     <Content Include="Assets\Admin\images\bg.jpg" />
     <Content Include="Assets\Admin\images\close.png" />
+    <Content Include="Assets\Admin\images\logo.jpg" />
     <Content Include="Assets\Admin\images\g1.jpg" />
     <Content Include="Assets\Admin\images\g2.jpg" />
     <Content Include="Assets\Admin\images\g3.jpg" />
@@ -294,6 +300,8 @@
     <Content Include="Assets\Admin\js\bootstrap.js" />
     <Content Include="Assets\Admin\js\Controller\cartController.js" />
     <Content Include="Assets\Admin\js\Controller\csController.js" />
+    <Content Include="Assets\Admin\js\Controller\customerController.js" />
+    <Content Include="Assets\Admin\js\Controller\employeeController.js" />
     <Content Include="Assets\Admin\js\jquery.dcjqaccordion.2.7.js" />
     <Content Include="Assets\Admin\js\jquery.fileupload.js" />
     <Content Include="Assets\Admin\js\jquery.min.js" />
@@ -533,6 +541,22 @@
     <Content Include="Areas\Administrator\Views\CustomerCategories\Index.cshtml" />
     <Content Include="Areas\Administrator\Views\CustomerCategories\ViewAll.cshtml" />
     <Content Include="Areas\Administrator\Views\CustomerCategories\AddOrEdit.cshtml" />
+    <Content Include="Areas\Administrator\Views\PurchaseOrders\POInvoice.cshtml" />
+    <Content Include="Areas\Administrator\Views\ReturnPO\Index.cshtml" />
+    <Content Include="Areas\Administrator\Views\ReturnPO\ReturnPODetails.cshtml" />
+    <Content Include="Areas\Administrator\Views\ReturnPO\ChangeStatus.cshtml" />
+    <Content Include="Areas\Administrator\Views\ReturnPO\ReceivedItems.cshtml" />
+    <Content Include="Areas\Administrator\Views\ReturnPO\ApproveReturnPO.cshtml" />
+    <Content Include="Areas\Administrator\Views\DeliveryUnits\Index.cshtml" />
+    <Content Include="Areas\Administrator\Views\DeliveryUnits\ViewAll.cshtml" />
+    <Content Include="Areas\Administrator\Views\DeliveryUnits\AddOrEdit.cshtml" />
+    <Content Include="Areas\Administrator\Views\Customers\Index.cshtml" />
+    <Content Include="Areas\Administrator\Views\Customers\Details.cshtml" />
+    <Content Include="Areas\Administrator\Views\Shippers\Create.cshtml" />
+    <Content Include="Areas\Administrator\Views\Shippers\Delete.cshtml" />
+    <Content Include="Areas\Administrator\Views\Shippers\Details.cshtml" />
+    <Content Include="Areas\Administrator\Views\Shippers\Edit.cshtml" />
+    <Content Include="Areas\Administrator\Views\Shippers\Index.cshtml" />
     <None Include="Scripts\jquery-3.4.1.intellisense.js" />
     <Content Include="Scripts\jquery-3.4.1.js" />
     <Content Include="Scripts\jquery-3.4.1.min.js" />
@@ -578,7 +602,6 @@
     <Folder Include="App_Data\" />
     <Folder Include="Areas\Administrator\Data\ProductLine\" />
     <Folder Include="Areas\Administrator\Data\ProfileEmp\" />
-    <Folder Include="Areas\Administrator\Views\Customers\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="fonts\glyphicons-halflings-regular.woff2" />

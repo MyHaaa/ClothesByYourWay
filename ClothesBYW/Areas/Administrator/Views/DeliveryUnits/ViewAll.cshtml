@@ -1,0 +1,51 @@
+﻿@model IEnumerable<Models.EF.DeliveryUni>
+
+@{
+    Layout = null;
+}
+
+<div class="table-responsive rounded mb-3" id="deTable">
+    <table class="data-table table mb-0 tbl-server-info">
+        <thead class="bg-white text-uppercase">
+            <tr class="ligth ligth-data">
+                <th style="text-align: center; color: black">
+                    Tên đơn vị giao hàng
+                </th>
+                <th style="text-align: center; color: black">
+                    Email
+                </th>
+                <th style="text-align: center; color: black">
+                    Địa chỉ
+                </th>
+                <th style="text-align: center; color: black">
+                    Người đại diện
+                </th>
+                <th style="text-align: center; color: black">Action Name</th>
+            </tr>
+        </thead>
+        <tbody class="ligth-body">
+            @foreach (var item in Model)
+            {
+                <tr>
+                    <td style="text-align: center; color: black">
+                        @Html.DisplayFor(modelItem => item.Name)
+                    </td>
+                    <td style="text-align: center; color: black">
+                        @Html.DisplayFor(modelItem => item.Email)
+                    </td>
+                    <td style="text-align: center; color: black">
+                        @Html.DisplayFor(modelItem => item.Address)
+                    </td>
+                    <td style="text-align: center; color: black">
+                        @Html.DisplayFor(modelItem => item.ContactPerson)
+                    </td>
+                    <td style="text-align: center; color: black">
+                        <a class="btn btn-primary btn-sm" onclick="Edit('@Url.Action("AddOrEdit", "DeliveryUnits", new { id=@item.DeliveryUnitID})')"><i class="fa fa-pencil"></i></a>
+                        <a class="btn btn-danger btn-sm" onclick="Delete('@Url.Action("Delete", "DeliveryUnits", new { id=@item.DeliveryUnitID})')"><i class="fa fa-trash"></i></a>
+
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+</div>

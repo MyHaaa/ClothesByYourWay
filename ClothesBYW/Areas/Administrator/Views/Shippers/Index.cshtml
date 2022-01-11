@@ -1,0 +1,59 @@
+﻿@model IEnumerable<Models.EF.Shipper>
+
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Areas/Administrator/Views/Shared/_Layout.cshtml";
+}
+
+<div class="alert-success" style="padding:10px">
+    <h2>Quản lý shipper</h2>
+</div>
+
+<div style="padding: 5px; background-color: aliceblue; border-top: 1px solid black; border-bottom: 1px solid black">
+    @Html.ActionLink("Create New", "Create")
+</div>
+<table class="table" style="background-color: white">
+    <tr>
+        <th style="text-align: center; color: black">
+           Tên đơn vị GH
+        </th>
+        <th style="text-align: center; color: black">
+           Tên Shipper
+        </th>
+        <th style="text-align: center; color: black">
+            @Html.DisplayNameFor(model => model.Email)
+        </th>
+        <th style="text-align: center; color: black">
+            Địa chỉ
+        </th>
+        <th style="text-align: center; color: black">
+            Số điện thoại
+        </th>
+        <th style="text-align: center; color: black">Action</th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td style="text-align: center; color: black">
+            @Html.DisplayFor(modelItem => item.DeliveryUni.Name)
+        </td>
+        <td style="text-align: center; color: black">
+            @Html.DisplayFor(modelItem => item.Name)
+        </td>
+        <td style="text-align: center; color: black">
+            @Html.DisplayFor(modelItem => item.Email)
+        </td>
+        <td style="text-align: center; color: black">
+            @Html.DisplayFor(modelItem => item.Address)
+        </td>
+        <td style="text-align: center; color: black">
+            @Html.DisplayFor(modelItem => item.Phone)
+        </td>
+        <td style="text-align: center; color: black">
+            @Html.ActionLink("Edit", "Edit", new { id=item.ShipperID }) |
+            @Html.ActionLink("Details", "Details", new { id=item.ShipperID }) 
+        </td>
+    </tr>
+}
+
+</table>

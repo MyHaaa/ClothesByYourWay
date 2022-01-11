@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Configuration;
 using System.Data;
 using System.Data.Entity;
+using System.IO;
 using System.Linq;
 using System.Net;
 using System.Net.Mail;
@@ -16,6 +17,7 @@ using ClothesBYW.Repos.Implementation;
 using Common;
 using Models.EF;
 using Rotativa;
+
 
 
 namespace ClothesBYW.Areas.Administrator.Controllers
@@ -48,7 +50,8 @@ namespace ClothesBYW.Areas.Administrator.Controllers
         // GET: Administrator/PurchaseOrders
         public ActionResult Index()
         {
-            TempData["POCount"] = purchaseOrderRepository.Count();
+            int count = db.PurchaseOrders.Where(x => x.Status == 1 || x.Status == 5).Count();
+            TempData["POCount"] = count;
             TempData["ProductCount"] = productRepository.Count();
             var cart = Session[PO_CART_SESSION];
             var list = new List<POCartItem>();
@@ -56,7 +59,7 @@ namespace ClothesBYW.Areas.Administrator.Controllers
             {
                 list = (List<POCartItem>)cart;
             }
-            return View(purchaseOrderRepository.GetAllOrder());
+            return View(db.PurchaseOrders.Where(x=> x.Status == 1 || x.Status == 5).ToList());
         }
 
         public void SetViewBag(int? selectedid = null)
@@ -229,6 +232,7 @@ namespace ClothesBYW.Areas.Administrator.Controllers
                 status = true
             });
         }
+        
         public JsonResult Update(string cartModel)
         {
             var jsonCart = new JavaScriptSerializer().Deserialize<List<POCartItem>>(cartModel);
@@ -352,13 +356,37 @@ namespace ClothesBYW.Areas.Administrator.Controllers
 
             if (po.Status == 2)
             {
-                var q = new ActionAsPdf("PODetails", new { id = poID });
-                return q;
+                //var q = new ActionAsPdf("PODetails", new { id = poID });
+                //return q;
+                return RedirectToAction("POInvoice", new { id = poID });
             }
 
             return RedirectToAction("PODetails", new { id = poID });
         }
 
+        public ActionResult POInvoice(string id)
+        {
+            var po = purchaseOrderRepository.GetById(id);
+            var poDetail = db.PurchaseOrderDetails.Where(d => d.PurchaseOrderID == id).ToList();
+            var supplier = db.Suppliers.Find(po.SupplierID);
+
+
+            PurchaseOrderDetails detail = new PurchaseOrderDetails();
+            detail.PurchaseOrder = po;
+            detail.POProduct = poDetail;
+            detail.Supplier = supplier;
+
+            return View(detail);
+        }
+
+        public ActionResult ExportPDF(string id)
+        {
+            string poID = Session["PurchaseOrderID"].ToString();
+            var po = purchaseOrderRepository.GetById(poID);
+
+            var q = new ActionAsPdf("POInvoice", new { id = po.PurchaseOrderID });
+            return q;
+        }
 
         [NonAction]
         public void SendVerificationLinkEmail(string id)
@@ -392,7 +420,8 @@ namespace ClothesBYW.Areas.Administrator.Controllers
                 IsBodyHtml = true
             })
                 smtp.Send(message);
-        }
+        }     
+
         protected override void Dispose(bool disposing)
         {
             if (disposing)
