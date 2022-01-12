@@ -15,12 +15,12 @@ namespace Models.Dao
         {
             db = new ClothesBYWDbContext();
         }
-        public bool ChangeStatus(string id)
+        public bool ChangeStatus(long id)
         {
-            var employee = db.Feedbacks.Find(id);
-            employee.Status = !employee.Status;
+            var feedback = db.Feedbacks.Find(id);
+            feedback.Status = !feedback.Status;
             db.SaveChanges();
-            return employee.Status;
+            return feedback.Status;
         }
     }
 }

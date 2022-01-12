@@ -127,7 +127,22 @@
                                 @order.CreateDate
                             </td>
                             <td style="text-align: center; color: black">
-                                @order.Status
+                                @if (order.Status == 1)
+                                {
+                                    <span>Chờ xử lý</span>
+                                }
+                                else if (order.Status == 2)
+                                {
+                                    <span>Vận đơn</span>
+                                }
+                                else if (order.Status == 3)
+                                {
+                                    <span>Đã giao hàng</span>
+                                }
+                                else if(order.Status == 4)
+                                {
+                                    <span>Đã huỷ</span>
+                                }
                             </td>
                         </tr>
                     }

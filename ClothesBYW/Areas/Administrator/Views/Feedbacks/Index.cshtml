@@ -6,7 +6,7 @@
 }
 
 @section jsFooter{
-    <script src="~/Assets/Admin/js/Controller/feedbackController.js"></script>
+    <script src="/Assets/Admin/js/Controller/feedbackController.js"></script>
 }
 <div class="table-agile-info">
     <div class="panel panel-default">
@@ -35,12 +35,7 @@
                         <th>
                             @Html.DisplayNameFor(model => model.Star)
                         </th>
-                        <th>
-                            @Html.DisplayNameFor(model => model.Title)
-                        </th>
-                        <th>
-                            @Html.DisplayNameFor(model => model.Content)
-                        </th>
+                       
                         <th>
                             @Html.DisplayNameFor(model => model.CreateDate)
                         </th>
@@ -63,13 +58,7 @@
                             </td>
                             <td>
                                 @Html.DisplayFor(modelItem => item.Star)
-                            </td>
-                            <td>
-                                @Html.DisplayFor(modelItem => item.Title)
-                            </td>
-                            <td>
-                                @Html.DisplayFor(modelItem => item.Content)
-                            </td>
+                            </td>                         
                             <td>
                                 @Html.DisplayFor(modelItem => item.CreateDate)
                             </td>

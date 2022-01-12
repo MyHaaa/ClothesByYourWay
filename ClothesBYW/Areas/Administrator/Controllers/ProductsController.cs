@@ -34,6 +34,7 @@ namespace ClothesBYW.Areas.Administrator.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
+            Session["PRODUCT_LINE_SESSION"] = null;
             Product product = db.Products.Find(id);
             var productSession = new ProductModel();
             productSession.ProductID = product.ProductID;

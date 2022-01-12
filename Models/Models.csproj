@@ -104,6 +104,10 @@
     <Compile Include="Migrations\202201031201099_init-db-2.designer.cs">
       <DependentUpon>202201031201099_init-db-2.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\202201111723418_update-db.cs" />
+    <Compile Include="Migrations\202201111723418_update-db.designer.cs">
+      <DependentUpon>202201111723418_update-db.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="ViewModels\Customer\Product\ProductDetailModel.cs" />
@@ -127,6 +131,9 @@
   <ItemGroup>
     <EmbeddedResource Include="Migrations\202201031201099_init-db-2.resx">
       <DependentUpon>202201031201099_init-db-2.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202201111723418_update-db.resx">
+      <DependentUpon>202201111723418_update-db.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

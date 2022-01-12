@@ -50,6 +50,8 @@ namespace ClothesBYW.Areas.Administrator.Controllers
         // GET: Administrator/PurchaseOrders
         public ActionResult Index()
         {
+            Session["PurchaseOrderID"] = null;
+            Session["SupplierID"] = null;
             int count = db.PurchaseOrders.Where(x => x.Status == 1 || x.Status == 5).Count();
             TempData["POCount"] = count;
             TempData["ProductCount"] = productRepository.Count();

@@ -1,10 +1,5 @@
 ﻿@model Models.EF.Feedback
 
-@{
-    ViewBag.Title = "Details";
-    Layout = "~/Areas/Administrator/Views/Shared/_Layout.cshtml";
-}
-
 
 <div class="modal-header">
     <button type="button" class="close" data-dismiss="modal">&times;</button>
@@ -13,29 +8,9 @@
 <div class="modal-body">
 
     <dl class="dl-horizontal">
-        <dt>
-            @Html.DisplayNameFor(model => model.Customer.Name)
-        </dt>
+        
 
-        <dd>
-            @Html.DisplayFor(model => model.Customer.Name)
-        </dd>
 
-        <dt>
-            @Html.DisplayNameFor(model => model.Product.ProductName)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.Product.ProductName)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.Star)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.Star)
-        </dd>
 
         <dt>
             @Html.DisplayNameFor(model => model.Title)
@@ -53,21 +28,7 @@
             @Html.DisplayFor(model => model.Content)
         </dd>
 
-        <dt>
-            @Html.DisplayNameFor(model => model.CreateDate)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.CreateDate)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.Status)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.Status)
-        </dd>
+       
 
     </dl>
 

@@ -3,30 +3,27 @@
 
 <script>
     $(function () {
+            $("#@Html.IdFor(s => s.MinimumQuantityAvailable)")
+            .on("input",function () {
+               
+                if ($(this).val() <= 0) {
+                    alert("Không được nhỏ hơn hoặc bằng 0 ");
+                    $(this).val("");
+                }
+            });
+        });
+    $(function () {
             $("#@Html.IdFor(s => s.QuantityInStock)")
             .on("input",function () {
 
-                if ($(this).val() < 0) {
-                    alert("Cannot be less than 0 ");
+                if ($(this).val() <= 0) {
+                    alert("Không được nhỏ hơn hoặc bằng 0 ");
                     $(this).val("");
                 }
             });
         });
 
-    $(function () {
-            $("#@Html.IdFor(s => s.MinimumQuantityAvailable)")
-            .on("input",function () {
 
-                if ($(this).val() > "#@Html.IdFor(s => s.QuantityInStock)") {
-                    alert("Không được lớn hơn số hàng hiện có ");
-                    $(this).val("");
-                }
-                else if ($(this).val() < 0) {
-                    alert("Không được nhỏ hơn 0");
-                    $(this).val("");
-                }
-            });
-        });
 </script>
 
 

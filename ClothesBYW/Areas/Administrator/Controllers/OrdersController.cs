@@ -67,9 +67,18 @@ namespace ClothesBYW.Areas.Administrator.Controllers
             //string username = Session["Username"].ToString();
 
             order.Status = model.StatusID;
-            //purchaseOrderRepository.ModifiedInfor(po.PurchaseOrderID, username, DateTime.Now);
             db.SaveChanges();
-
+            if (order.Status == 4)
+            {
+                var orderItems = db.OrderDetails.Where(x => x.OrderID == order.OrderID).ToList();
+                foreach(var item in orderItems)
+                {
+                    int? quantity = item.QuantitySold;
+                    var pl = db.ProductLines.Find(item.ProductLineID);
+                    pl.QuantityInStock -= (long)quantity;
+                    db.SaveChanges();
+                }
+            }
             return RedirectToAction("Details", new { id = order.OrderID });
         }
 

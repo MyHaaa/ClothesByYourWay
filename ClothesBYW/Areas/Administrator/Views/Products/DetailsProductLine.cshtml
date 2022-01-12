@@ -10,6 +10,22 @@
         <div class="panel-heading">
             Chi tiết dòng sản phẩm @Model.ProductLine.ProductLineID
         </div>
+        <div>
+            <div class=" btn-product-detail" style="display: flex; justify-content: flex-end">
+                <button style="background-color: whitesmoke;
+                                backdrop-filter: blur(6px);
+                                -webkit-backdrop-filter: blur(6px);
+                                border: 1px solid black;
+                                box-shadow: rgba(142, 142, 142, 0.19) 0px 6px 15px 0px;
+                                -webkit-box-shadow: rgba(142, 142, 142, 0.19) 0px 6px 15px 0px;
+                                border-radius: 12px;
+                                -webkit-border-radius: 12px;
+                                color: black;
+                                    padding: 5px 10px;">
+                    @Html.ActionLink("Quay về danh sách sản phẩm", "Details", new { id = Model.ProductLine.ProductID })
+                </button>
+            </div>
+        </div>
     </div>
     <div class="row w3-res-tb">
         <!--Thông tin dòng sản phẩm-->
@@ -73,7 +89,7 @@
                                            -webkit-border-radius: 12px;
                                            position: relative;
                                             margin-left: 10px;">
-            <h3 style="position: absolute; top: -15px; color: green">Các khuyến mãi từng áp dụng cho sản phẩm</h3>
+            <h3 style="position: absolute; top: -15px; color: green">Lịch sử các đợt nhập hàng từ nhà cung cấp</h3>
             <div class="product-right" style="margin: 10px 0;">
                 <table class="table table-striped b-t b-light" id="PromotionTable">
                     <thead>

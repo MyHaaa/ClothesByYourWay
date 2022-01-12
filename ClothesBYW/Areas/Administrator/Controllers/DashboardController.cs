@@ -7,7 +7,7 @@ using System.Web.Mvc;
 
 namespace ClothesBYW.Areas.Administrator.Controllers
 {
-    public class DashboardController : BaseController
+    public class DashboardController : Controller
     {
         private ClothesBYWDbContext db = new ClothesBYWDbContext();
 
